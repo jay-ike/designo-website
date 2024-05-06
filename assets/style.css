@@ -1,0 +1,142 @@
+@layer resets, layout, typography, utilities, theme;
+
+@layer resets {
+    :is(*, ::before, ::after) {
+        box-sizing: border-box;
+    }
+
+    :is(h2, h3, h4, h5) {
+        line-height: 1.2;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        letter-spacing: -0.01em;
+    }
+
+    h1 {
+        line-height: 1.1;
+        letter-spacing: 0.04em;
+    }
+
+    :is(body, h1, h2, h3, h4, h5, dl, dt, dd, p) {
+        margin: 0;
+    }
+
+    :is(img, svg) {
+        max-inline-size: 100%;
+        height: auto;
+        display: block;
+    }
+
+    :is(ul, ol, fieldset, legend, menu) {
+        margin: 0;
+        padding: 0;
+    }
+
+    :is(summary, ul):where([class]) {
+        list-style: none;
+    }
+
+    :is(button, fieldset) {
+        border: none;
+    }
+
+    dialog {
+        position: fixed;
+        inset: 0;
+        margin: auto;
+        container: dialog / inline-size;
+        inline-size: min(540px, 90vi);
+        border: none;
+    }
+
+    dialog[open] {
+        transform: scale(1);
+    }
+
+    dialog::backdrop {
+        background-color: hsla(0, 0%, 0%, 0.8);
+    }
+
+    a {
+        --outline-style: dashed;
+        text-transform: uppercase;
+        font-weight: 700;
+        display: inline-block;
+
+        &:not([class]) {
+            --outline-style: dashed;
+            text-decoration-thickness: max(0.08em, 1px);
+            text-underline-offset: 0.15em;
+            color: var(--link-clr, inherit);
+
+            &:enabled:where(:focus-visible, :hover) {
+                color: var(--system-color-paleOrange);
+                text-decoration: currentColor wavy underline;
+            }
+        }
+        &:where([class]) {
+            text-decoration: none;
+            color: var(--link-clr, var(--icon-fill, inherit));
+        }
+    }
+
+    button:not(.reset-btn) {
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        touch-action: manipulation;
+        user-select: none;
+    }
+
+    button:not([data-icon], .reset-btn) {
+        min-block-size: 2rem;
+        min-inline-size: 2rem;
+    }
+
+    :focus-visible {
+        --outline-size: max(2px, .3em);
+        outline: var(--outline-width, var(--outline-size)) var(--outline-style, solid) var(--outline-clr, currentColor);
+        outline-offset: var(--outline-offset, var(--outline-size));
+    }
+
+    :target {
+        scroll-margin-block-start: 2rem;
+    }
+
+    :focus {
+        scroll-margin-block-end: 8vh;
+    }
+
+    input:where([type="text"], [type="email"], [type="tel"]) {
+        --outline-offset: .05em;
+        padding: 0.75em;
+        line-height: inherit;
+        caret-color: var(--system-color-orange, currentColor);
+        border-radius: .5rem;
+        border: .1em solid var(--bdr-clr, hsl(0, 0%, 81%));
+        inline-size: 100%;
+        font-weight: 500;
+
+        &:hover {
+            --bdr-clr: var(--system-color-paleOrange);
+        }
+
+        &:focus-visible:not(:is(:invalid):not([data-new])) {
+            --bdr-clr: var(--system-color-orange);
+            --outline-clr: var(--system-color-orange);
+        }
+    }
+
+    :is(a, button, input):focus:not(:focus-visible) {
+        outline: none;
+    }
+
+    p:where(:not([class])) {
+        text-wrap: balance;
+        max-inline-size: var(--p-width, 50em);
+    }
+
+    main:where(body > *) {
+        min-block-size: 71lvb;
+    }
+}

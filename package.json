@@ -1,0 +1,21 @@
+{
+  "name": "designo-website",
+  "version": "1.0.0",
+  "description": "a solution to the Designo agency website challenge on Frontend Mentor.",
+  "main": "index.js",
+  "scripts": {
+      "serve": "eleventy --serve --port 6060",
+      "build": "eleventy"
+  },
+  "keywords": [
+    "11ty",
+    "a11y",
+    "vanilla-javascript",
+    "css"
+  ],
+  "author": "Ndimah Tchougoua",
+  "license": "ISC",
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}
