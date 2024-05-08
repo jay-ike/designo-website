@@ -1,9 +1,9 @@
 <nav class="segragator">
     <a href="/" class="logo">designo</a>
     <ul>
-        <li>our company</li>
-        <li>locations</li>
-        <li>contact</li>
+        {% for item in site.links %}
+            <li><a href="{{item.path}}">{{ item.title }}</a></li>
+        {% endfor %}
     </ul>
     <div>
         <button popovertarget="mobile-menu">

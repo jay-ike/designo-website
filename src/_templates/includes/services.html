@@ -1,0 +1,9 @@
+<section class="services">
+    {% for item in site.services %}
+        {% if item.topic != pageTopic %}
+            {% card item.title %}
+                <a href="{{ item.link }}"> view content </a>
+            {% endcard %}
+        {% endif %}
+    {% endfor %}
+</section>

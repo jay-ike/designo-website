@@ -1,9 +1,9 @@
 <footer>
     <h2 class="logo">designo</h2>
     <ul class="row">
-        <li>our company</li>
-        <li>locations</li>
-        <li>contact</li>
+        {% for item in site.links %}
+            <li><a href="{{ item.path }}">{{ item.title }}</a></li>
+        {% endfor %}
     </ul>
     <dl>
         <dt>Designo Central Office </dt>
