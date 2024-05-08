@@ -2,3 +2,16 @@
 layout: "layouts/base.html"
 pageTitle: "Designo Digital Agency"
 ---
+<header>
+    {% card heading.title 1 "stack" %}
+        <p>{{ heading.description }}</p>
+        <a href=""> learn more </a>
+    {% endcard %}
+</header>
+<section class="services">
+    {% for item in services %}
+    {% card item.title %}
+        <a href="{{ item.link }}"> view content </a>
+    {% endcard %}
+    {% endfor %}
+</section>

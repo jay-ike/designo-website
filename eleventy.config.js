@@ -1,11 +1,22 @@
 /*jslint node*/
-module.exports = function(config) {
+function flatten(data) {
+    let result = "";
+    if (data) {
+        result = Object.entries(data, function (acc, [key, val]) {
+            return acc + " " + key + "=" + val;
+        }, "");
+    }
+    return result;
+}
+module.exports = function (config) {
     config.addPassthroughCopy("assets");
+    config.addShortcode("flatten", flatten);
     config.addPairedShortcode(
-        "feature",
-        function(content, imgData, style = "center") {
-            let markup = `<div class="${style}">
-
+        "card",
+        function (content, title, headingLevel = 2, style = "center") {
+            return `<div class="${style}">
+                <h${headingLevel}>${title}</h${headingLevel}>
+                ${content}
             </div>`;
         }
     );

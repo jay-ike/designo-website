@@ -1,0 +1,9 @@
+<article>
+    <div class={%if style %} card.style {% else %} "center" {% endif %}>
+        <h2>{{ title }}</h2>
+        {{ content }}
+    </div>
+    {% if imgData %}
+     <img {% flatten imgData %} >
+    {% endif %}
+</article>
