@@ -1,9 +1,13 @@
 <section class="services">
-    {% for item in site.services %}
+    {% for item in services %}
         {% if item.topic != pageTopic %}
+        <div>
             {% card item.title %}
                 <a href="{{ item.link }}"> view content </a>
             {% endcard %}
+            {% image item.path item.alt "280,541" %}
+        </div>
         {% endif %}
     {% endfor %}
+    {{ val }}
 </section>

@@ -1,16 +1,24 @@
 /*jslint node*/
-function flatten(data) {
-    let result = "";
-    if (data) {
-        result = Object.entries(data, function (acc, [key, val]) {
-            return acc + " " + key + "=" + val;
-        }, "");
-    }
-    return result;
+const Image = require("@11ty/eleventy-img");
+async function parseImage(src, alt, sizes="300,600") {
+    const metadata = await Image(src, {
+        formats: ["webp", "auto"],
+        outputDir: "./_site/img",
+        widths: sizes.split(",").map((val) => parseInt(val, 10)).filter(
+            (val) => Number.isFinite(val)
+        )
+    });
+    const imageAttributes = {
+        alt,
+        decoding: "async",
+        loading: "lazy",
+        sizes
+    };
+    return Image.generateHTML(metadata, imageAttributes);
 }
 module.exports = function (config) {
     config.addPassthroughCopy("assets");
-    config.addShortcode("flatten", flatten);
+    config.addShortcode("image", parseImage);
     config.addPairedShortcode(
         "card",
         function (content, title, headingLevel = 2, style = "center") {
