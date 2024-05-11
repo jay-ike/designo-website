@@ -1,16 +1,16 @@
 <footer>
     <h2 class="logo">designo</h2>
-    <ul class="row">
+    <ul class="column">
         {% for item in site.links %}
             <li><a href="{{ item.path }}">{{ item.title }}</a></li>
         {% endfor %}
     </ul>
-    <dl>
+    <dl class="column">
         <dt>Designo Central Office </dt>
         <dd>3886 Wellington Street</dd>
         <dd>Toronto, Ontario M9C 3J5</dd>
     </dl>
-    <dl>
+    <dl class="column">
         <dt>Contact Us (Central Office)</dt>
         <dd>P : +1 253-863-8967</dd>
         <dd>M : contact@designo.co</dd>

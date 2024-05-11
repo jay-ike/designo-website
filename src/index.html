@@ -8,17 +8,23 @@ permalink: /
         <p>{{ heading.description }}</p>
         <a href=""> learn more </a>
     {% endcard %}
+    nav
     {%image hero heading.heroAlt "284" %}
 </header>
-
-{% include "includes/services.html" %}
-
-<section class="features column">
-    {% for feat in features %}
+<main>
+    {% include "includes/services.html" %}
+    <section class="features column">
+        {% for feat in features %}
+        <svg width="202" height="202">
+            <title>{{ feat.alt }}</title>
+            <use href="/assets/sprites.svg#{{ feat.tag }}" />
+        </svg>
         {% card feat.title 2 "stack" %}
-            <p>{{ feat.description }}</p>
+        <p>{{ feat.description }}</p>
         {% endcard %}
-    {% endfor %}
+        {% endfor %}
 
-</section>
+    </section>
+</main>
+
 

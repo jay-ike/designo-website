@@ -1,6 +1,6 @@
 <nav class="segragator">
     <a href="/" class="logo">designo</a>
-    <ul>
+    <ul class="row xl-show">
         {% for item in site.links %}
             <li><a href="{{item.path}}">{{ item.title }}</a></li>
         {% endfor %}
@@ -9,6 +9,6 @@
         <button popovertarget="mobile-menu">
             <svg width="24" height="24"></svg>
         </button>
-        <div id="mobile-menu" popover></div>
+        <div id="mobile-menu" role="dialog" popover></div>
     </div>
 </nav>
