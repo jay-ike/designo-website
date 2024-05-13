@@ -1,13 +1,16 @@
-<nav class="segragator">
+<nav class="segragator box">
     <a href="/" class="logo">designo</a>
-    <ul class="row xl-show">
+    <ul class="row md-show">
         {% for item in site.links %}
             <li><a href="{{item.path}}">{{ item.title }}</a></li>
         {% endfor %}
     </ul>
-    <div>
-        <button popovertarget="mobile-menu">
-            <svg width="24" height="24"></svg>
+    <div class="md-remove">
+        <button popovertarget="mobile-menu" aria-label="page menu trigger">
+            <svg width="24" height="24">
+                <title>page menu trigger</title>
+                <use href="/assets/sprites.svg#hamburger">
+            </svg>
         </button>
         <div id="mobile-menu" role="dialog" popover></div>
     </div>

@@ -74,6 +74,7 @@
                 text-decoration: currentColor wavy underline;
             }
         }
+
         &:where([class]) {
             text-decoration: none;
             color: var(--link-clr, var(--icon-fill, inherit));
@@ -81,6 +82,9 @@
     }
 
     button:not(.reset-btn) {
+        --min-padding: .75em;
+        min-inline-size: 3rem;
+        min-block-size: 3rem;
         font-weight: bold;
         letter-spacing: 1px;
         text-transform: uppercase;
@@ -185,6 +189,14 @@
         align-items: center;
     }
 
+    .banner {
+        --alignment: center;
+        text-align: center;
+        clip-path: var(--b-clip, none);
+        max-block-size: var(--m-height, 800px);
+        overflow-y: clip;
+    }
+
     :where(.reset-btn) {
         text-decoration: underline;
     }
@@ -247,7 +259,7 @@
         align-items: center;
     }
 
-    :where([aria-hidden="true"], .visually-hidden, .xl-show, .pm-grid input[type="radio"]) {
+    :where([aria-hidden="true"], .visually-hidden, .md-show, .pm-grid input[type="radio"]) {
         position: absolute;
         clip-path: inset(50%);
     }
@@ -256,7 +268,7 @@
         max-inline-size: 1px;
     }
 
-    .xl-show {
+    .md-show {
         --wrap: wrap;
         visibility: hidden;
     }
@@ -285,62 +297,6 @@
         inset-inline-end: var(--right-x, auto);
     }
 
-    [data-menu-opened="true"] .menu {
-        --translation: none;
-        --modal-size: 100vi;
-        opacity: 1;
-        z-index: 2;
-        inset: 4.7rem 0 auto;
-        visibility: visible;
-        clip-path: inset(0 round 0 0 .5rem .5rem);
-        max-block-size: 80lvb;
-        overflow-y: auto;
-    }
-
-    :is([data-cart-active="true"], [data-menu-opened="true"]) nav::before {
-        content: "";
-        position: fixed;
-        inset: 3.5rem 0 0;
-        background-color: hsla(0, 0%, 0%, 0.65);
-        z-index: 1;
-    }
-
-    .cart-modal {
-        --y: 129px;
-        --right-x: clamp(5vi, calc(1110px - 100vi), 5vi);
-        --color-fill: var(--system-color-white);
-        --radius: .5rem;
-        --modal-size: min(88vi, 480px);
-        --translation: translateY(-50vb);
-        --c-space: 1rem;
-
-        & ul {
-            max-block-size: 35vb;
-            overflow-y: auto;
-        }
-    }
-
-    .m-backdrop:not([data-cart-active] *),
-    .menu:not([data-menu-opened="true"] *) {
-        clip-path: inset(50%);
-        visibility: hidden;
-    }
-
-    .m-backdrop:where([data-cart-active="true"] *),
-    .menu-backdrop:where([data-menu-opened="true"] *) {
-        position: fixed;
-        inset: 0;
-        display: block;
-        z-index: 4;
-    }
-
-    [data-cart-active="true"] :is(.cart-modal, m-backdrop) {
-        --translation: none;
-        opacity: 1;
-        visibility: visible;
-        z-index: 2;
-    }
-
     .branding>img {
         border-radius: .5rem;
         align-self: stretch;
@@ -354,12 +310,6 @@
         --r-space: 0;
     }
 
-    .back-btn {
-        --min-padding: 1.5em 0;
-        font-weight: 200;
-        color: var(--link-clr);
-    }
-
     :is(.no-padding, .reset-btn) {
         --min-padding: 0;
         --radius: 0;
@@ -369,19 +319,28 @@
         .pm-grid {
             --g-template: "area1 area1" "area2 area3";
         }
-    }
 
-    @media screen and (min-width: 768px) {
-        .categories {
-            --c-space: 2.5rem;
-        }
-
-        .xl-show {
+        .md-show {
             position: static;
             clip-path: none;
             visibility: visible;
         }
     }
+
+    @media screen and (min-width: 768px) {
+        .banner {
+            --min-padding: 8rem 1.5rem 0;
+            --m-height: 30rem;
+            --col-dir: row;
+            text-align: start;
+
+            img:where(&  *) {
+                min-inline-size: 284px;
+            }
+        }
+
+    }
+
 }
 
 @layer layout {
@@ -416,14 +375,14 @@
         margin-inline-start: auto;
     }
 
-    :is(.center, .img-box, .banner) {
+    :is(.center, .img-box) {
         display: grid;
         place-items: center;
         place-content: center;
         gap: var(--s-space, var(--c-space, 1.5em));
     }
 
-    :is(header, footer, main, .box, .img-box, button, .btn-primary, .cart-modal, .main-content) {
+    :where(header, footer, main, .box, button, .btn-primary) {
         padding: var(--min-padding, 1.5em);
         background-color: var(--color-fill, transparent);
         color: var(--color-text, currentColor);
@@ -459,55 +418,44 @@
     }
 
     :is(footer, header) {
-        --color-text: var(--system-color-white);
         --color-fill: var(--system-color-dark);
     }
 
     footer {
         --min-padding: 2em 1.5em 1.5em;
+        --color-text: var(--system-color-white);
         --g-template: ". area1 ." ". area2 ." "area3 area3 area3" "area4 area4 area4" "area5 area5 area5";
         --c-space: .75rem;
         border-image: linear-gradient(var(--system-color-dark), var(--system-color-dark)) 1 fill / 50%/ 0 100vi;
     }
 
-    :where(nav, .banner) {
-        --min-padding: 1.5em 0;
-        --color-text: var(--system-color-pale);
-        border-image: var(--section-bdr-img);
-    }
-
-    .banner {
-        min-block-size: 7rem;
-    }
-
     nav {
-
         position: sticky;
         inset-block-start: 0;
         z-index: 1;
         isolation: isolate;
-        max-block-size: 4.7rem;
         background-color: canvas;
     }
 
     @media screen and (min-width: 480px) {
-        nav {
-            --deco-outset: 1px;
-        }
-
         footer {
-            --deco-pos: 0;
             --min-padding: 1.5em 0;
             --col-dir: row;
             --g-template: "area1 area1 area1" "area2 area2 area2" "area3 area3 area3" "area4 area4 area5" / 1fr 1fr max-content;
 
         }
+
+        :is(main, footer, header, nav, .main-content) {
+            max-inline-size: min(95vi, 1110px);
+            margin-inline: auto;
+        }
+
+        .md-remove {
+            display: none;
+        }
     }
 
     @media screen and (min-width: 768px) {
-        .xl-remove {
-            display: none;
-        }
 
         footer {
             --g-template: "area1 area2 area2" "area3 area3 ." "area3 area3 area5" "area4 area4 ." / 1fr 1fr;
@@ -522,144 +470,8 @@
             --cart-margin: 0;
         }
 
-        .banner {
-            min-block-size: 10rem;
-        }
-
-    }
-}
-
-@layer layout {
-    .stack>*+* {
-        margin-block-start: var(--s-space, 1.5em);
-    }
-
-    :is(.row, .column, .segragator, .cart-modal) {
-        display: flex;
-        align-items: var(--alignment, center);
-        gap: var(--r-space, var(--c-space, 1.5em));
-        justify-content: var(--i-alignment, start);
-    }
-
-    .segragator {
-        --i-alignment: space-between;
-        flex-flow: var(--direction, row) var(--wrap, nowrap);
-    }
-
-    .row {
-        --alignment: var(--row-align, center);
-        flex-flow: var(--row-dir, row) var(--wrap, nowrap);
-    }
-
-    :where(.column, .cart-modal) {
-        --alignment: var(--col-align, stretch);
-        flex-flow: var(--col-dir, column) var(--wrap, nowrap);
-    }
-
-    .self-end {
-        align-self: end;
-        margin-inline-start: auto;
-    }
-
-    :is(.center, .img-box, .banner) {
-        display: grid;
-        place-items: center;
-        place-content: center;
-        gap: var(--s-space, var(--c-space, 1.5em));
-    }
-
-    :is(header, footer, main, .box, .img-box, button, .btn-primary, .cart-modal, .main-content) {
-        padding: var(--min-padding, 1.5em);
-        background-color: var(--color-fill, transparent);
-        color: var(--color-text, currentColor);
-        border-radius: var(--radius, 0);
-    }
-
-    :is([class$="grid"], footer) {
-        --col-align: center;
-        display: grid;
-        grid-template: var(--g-template);
-        container: var(--container-name, grid) / inline-size;
-        gap: var(--g-gap, 1rem);
-
-        &> :first-child {
-            grid-area: area1;
-        }
-
-        &> :nth-child(2) {
-            grid-area: area2;
-        }
-
-        &> :nth-child(3) {
-            grid-area: area3;
-        }
-
-        &> :nth-child(4) {
-            grid-area: area4;
-        }
-
-        &> :nth-child(5) {
-            grid-area: area5;
-        }
-    }
-
-    :is(footer, header) {
-        --color-text: var(--system-color-white);
-        --color-fill: var(--system-color-dark);
-    }
-
-    footer {
-        --min-padding: 2em 1.5em 1.5em;
-        --g-template: ". area1 ." ". area2 ." "area3 area3 area3" "area4 area4 area4" "area5 area5 area5";
-        --c-space: .75rem;
-        border-image: linear-gradient(var(--system-color-dark), var(--system-color-dark)) 1 fill / 50%/ 0 100vi;
-    }
-
-    :where(nav, .banner) {
-        --min-padding: 1.5em 0;
-        --color-text: var(--system-color-pale);
-        border-image: var(--section-bdr-img);
-    }
-
-    .banner {
-        min-block-size: 7rem;
-    }
-
-
-    @media screen and (min-width: 480px) {
-        nav {
-            --deco-outset: 1px;
-        }
-
-        footer {
-            --deco-pos: 0;
-            --min-padding: 1.5em 0;
+        header {
             --col-dir: row;
-            --g-template: "area1 area1 area1" "area2 area2 area2" "area3 area3 area3" "area4 area4 area5" / 1fr 1fr max-content;
-
-        }
-    }
-
-    @media screen and (min-width: 768px) {
-        .xl-remove {
-            display: none;
-        }
-
-        footer {
-            --g-template: "area1 area2 area2" "area3 area3 ." "area3 area3 area5" "area4 area4 ." / 1fr 1fr;
-        }
-
-        footer>ul {
-            justify-self: end;
-        }
-
-        nav {
-            --i-alignment: space-between;
-            --cart-margin: 0;
-        }
-
-        .banner {
-            min-block-size: 10rem;
         }
 
     }
