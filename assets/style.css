@@ -334,7 +334,7 @@
             --col-dir: row;
             text-align: start;
 
-            img:where(&  *) {
+            img:where(& *) {
                 min-inline-size: 284px;
             }
         }
@@ -417,9 +417,42 @@
         }
     }
 
-    :is(footer, header) {
-        --color-fill: var(--system-color-dark);
+    .responsive-grid {
+        --max-col-width: var(--m-col-w, 12rem);
+        --min-row-height: var(--m-row-h, 15rem);
+        --max-cols: var(--m-col-s, 3);
+        --gap: var(--c-gap, 1rem);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, max(var(--max-col-width), 100% / var(--max-cols))),
+                    1fr));
+        grid-auto-rows: minmax(var(--min-row-height), auto);
+        gap: var(--gap);
     }
+
+    .services {
+        --m-col-w: 100%;
+        --c-gap: 2rem 1.5rem;
+
+        & img {
+            block-size: var(--m-row-h, 250px);
+            min-inline-size: 100%;
+            object-fit: cover;
+            object-position: right 10% bottom 0;
+        }
+
+        & > div {
+            display: grid;
+            grid-template: "area1";
+            container: hero / inline-size;
+            clip-path: inset(0 round .5rem);
+
+            & > * {
+                grid-area: area1;
+                place-self: stretch;
+            }
+        }
+    }
+
 
     footer {
         --min-padding: 2em 1.5em 1.5em;
@@ -445,6 +478,10 @@
 
         }
 
+        .services {
+            --m-row-h: 200px;
+        }
+
         :is(main, footer, header, nav, .main-content) {
             max-inline-size: min(95vi, 1110px);
             margin-inline: auto;
@@ -463,6 +500,16 @@
 
         footer>ul {
             justify-self: end;
+        }
+
+        .services {
+            --m-row-h: auto;
+            --m-col-w: 12rem;
+
+            & > :first-child {
+                --m-row-h: 100%;
+                grid-row: span 2;
+            }
         }
 
         nav {

@@ -1,11 +1,11 @@
-<section class="services">
+<section class="responsive-grid services">
     {% for item in services %}
         {% if item.topic != pageTopic %}
         <div>
+            {% image item.path item.alt "280,541" %}
             {% card item.title %}
                 <a href="{{ item.link }}"> view content </a>
             {% endcard %}
-            {% image item.path item.alt "280,541" %}
         </div>
         {% endif %}
     {% endfor %}
