@@ -10,17 +10,19 @@ permalink: /
     {% endcard %}
     {%image hero heading.heroAlt "284" %}
 </header>
-<main>
+<main class="stack">
     {% include "includes/services.html" %}
     <section class="features column">
         {% for feat in features %}
-        <svg width="202" height="202">
-            <title>{{ feat.alt }}</title>
-            <use href="/assets/sprites.svg#{{ feat.tag }}" />
-        </svg>
-        {% card feat.title 2 "stack" %}
-        <p>{{ feat.description }}</p>
-        {% endcard %}
+        <div class="grid">
+            <svg width="202" height="202">
+                <title>{{ feat.alt }}</title>
+                <use href="/assets/sprites.svg#{{ feat.tag }}" />
+            </svg>
+            {% card feat.title 2 "stack" %}
+                <p>{{ feat.description }}</p>
+            {% endcard %}
+        </div>
         {% endfor %}
 
     </section>

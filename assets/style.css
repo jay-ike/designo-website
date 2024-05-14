@@ -150,6 +150,10 @@
         text-transform: capitalize;
     }
 
+    .place-end {
+        place-self: end;
+    }
+
     .relative {
         position: relative;
     }
@@ -175,24 +179,10 @@
         text-align: center;
     }
 
-    :is(.item-grid, .cart-item-grid) {
-        --g-template: "area4 . ." 1px "area4 area1 area3" "area4 area2 ." / max-content 1fr;
-        --g-gap: .4rem 1rem;
-
-        &> :is(p, span) {
-            color: var(--items-clr, hsl(0, 0%, 43%));
-        }
-    }
-
-    .cart-item-grid {
-        --g-template: "area4 . ." 1px "area4 area1 area3" "area4 area2 area3" "area4 . ." 1px / max-content 1fr max-content;
-        align-items: center;
-    }
-
     .banner {
         --alignment: center;
         text-align: center;
-        clip-path: var(--b-clip, none);
+        clip-path: var(--b-clip, inset(0 round .5rem));
         max-block-size: var(--m-height, 800px);
         overflow-y: clip;
     }
@@ -395,6 +385,7 @@
         grid-template: var(--g-template);
         container: var(--container-name, grid) / inline-size;
         gap: var(--g-gap, 1rem);
+        place-items: var(--p-items, initial);
 
         &> :first-child {
             grid-area: area1;
@@ -453,12 +444,29 @@
         }
     }
 
+    .features {
+        --g-template: "area1" "area2";
+        --p-items: stretch center;
+        --g-gap: 1.5em;
+        text-align: center;
+    }
+
+    .contact-grid {
+        --g-template: "area1" "area2" "area3";
+        --p-items: stretch center;
+        text-align: center;
+        container: contact / inline-size;
+        max-inline-size: min(95vi, 1110px);
+        margin-inline: auto;
+    }
 
     footer {
         --min-padding: 2em 1.5em 1.5em;
         --color-text: var(--system-color-white);
-        --g-template: ". area1 ." ". area2 ." "area3 area3 area3" "area4 area4 area4" "area5 area5 area5";
+        --g-template: ". area1 ." ". area2 ." "area3 area3 area3" "area4 area4 area4" ". area5 .";
+        --g-gap: 1.5em;
         --c-space: .75rem;
+        --p-items: center;
         border-image: linear-gradient(var(--system-color-dark), var(--system-color-dark)) 1 fill / 50%/ 0 100vi;
     }
 
@@ -470,16 +478,29 @@
         background-color: canvas;
     }
 
-    @media screen and (min-width: 480px) {
+    @media screen and (min-width: 568px) {
         footer {
             --min-padding: 1.5em 0;
             --col-dir: row;
-            --g-template: "area1 area1 area1" "area2 area2 area2" "area3 area3 area3" "area4 area4 area5" / 1fr 1fr max-content;
+            --g-template: "area1 area1 area2 area2 area2" "area3 area3 area4 . area5" / 1fr 1fr 1.5fr 1fr fit-content(9rem);
+            --s-space: .75rem;
+            --p-items: end start;
 
+            & > ul {
+                place-self: end;
+            }
         }
+    }
+    @media screen and (min-width: 480px) {
 
         .services {
             --m-row-h: 200px;
+        }
+
+        .features {
+            --g-template: "area1 area2";
+            --p-items: center;
+            text-align: start;
         }
 
         :is(main, footer, header, nav, .main-content) {
@@ -493,13 +514,17 @@
     }
 
     @media screen and (min-width: 768px) {
+        .contact-grid {
+            --g-template: "area1 . ." "area2 . area3" "area2 . .";
+            --p-items: start stretch;
+            --min-padding: 1.5em 3em;
+            min-block-size: 12rem;
+            text-align: start;
+            border-radius: .5rem;
 
-        footer {
-            --g-template: "area1 area2 area2" "area3 area3 ." "area3 area3 area5" "area4 area4 ." / 1fr 1fr;
-        }
-
-        footer>ul {
-            justify-self: end;
+            & > :first-child {
+                align-self: end;
+            }
         }
 
         .services {
@@ -512,14 +537,17 @@
             }
         }
 
-        nav {
-            --i-alignment: space-between;
-            --cart-margin: 0;
-        }
-
-        header {
+        :where(header, .features) {
             --col-dir: row;
         }
 
+        .features {
+            --g-template: "area1" "area2";
+            text-align: center;
+
+            & > * {
+                flex: 2 1 auto;
+            }
+        }
     }
 }
