@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{pageTitle}}</title>
     {% if stylePath %}
-        <link rel="stylesheet" href="{{ stylePath }}">
+    <link rel="stylesheet" href="{{ stylePath }}">
     {% else %}
-       <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="/assets/style.css">
     {% endif %}
 </head>
 
@@ -16,10 +16,20 @@
     {% include "includes/navigation.html" %}
     {{ content }}
     {% if pageId != "contact" %}
-      {% include "includes/in-touch.html" %}
+    {% include "includes/in-touch.html" %}
     {% endif %}
 
     {% include "includes/footer.html" %}
+
+    <svg width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1" aria-hidden="true">
+        <defs>
+            <clipPath id="arrow_left" clipPathUnits="objectBoundingBox">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="m.61.27c.01.01.01.03 0 .04l-.15.19.15.19c.01.02.01.04 0 .05-.02.01-.04.01-.05-.01l-.16-.21c-.01-.01-.01-.02 0-.04l.16-.21c.01-.01.03-.01.05 0z"
+                    fill="currentColor" style="fill:var(--icon-fill, currentColor);" />
+            </clipPath>
+        </defs>
+    </svg>
 </body>
 
 </html>

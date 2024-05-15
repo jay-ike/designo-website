@@ -1,5 +1,18 @@
 @layer resets, layout, typography, utilities, theme;
 
+body {
+    --primary-clr: var(--system-color-peach);
+    font-family: "Just", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    line-height: 1.5;
+    letter-spacing: .01em;
+    word-spacing: 0.05em;
+    accent-color: var(--system-color-peach);
+    color: var(--system-color-black);
+    font-size: 100%;
+}
+
 @layer resets {
     :is(*, ::before, ::after) {
         box-sizing: border-box;
@@ -179,12 +192,17 @@
         text-align: center;
     }
 
+    :where(h1, h2):where(:is(.banner, .contact-grid) *) {
+        color: var(--system-color-darkBlue);
+    }
+
     .banner {
         --alignment: center;
         text-align: center;
-        clip-path: var(--b-clip, inset(0 round .5rem));
-        max-block-size: var(--m-height, 800px);
+        max-block-size: var(--m-height, 768px);
         overflow-y: clip;
+        background-color: var(--system-color-peach);
+        clip-path: var(--b-clip, inset(0 round .5rem));
     }
 
     :where(.reset-btn) {
@@ -196,12 +214,16 @@
     }
 
 
+    [data-icon] {
+        display: inline-flex;
+        align-items: center;
+    }
+
     [data-icon-position="start"]::before,
     [data-icon-position="end"]::after {
         content: "";
         min-inline-size: var(--icon-size, 1.5em);
         aspect-ratio: var(--icon-ratio, 1);
-        display: inline-block;
         background-color: var(--icon-fill, currentColor);
         transform: var(--icon-transform, none);
         clip-path: var(--icon-clip, none);
@@ -263,10 +285,11 @@
         visibility: hidden;
     }
 
-    button.xl-remove[aria-pressed="true"] {
+    nav:where(body > *):has(:popover-open) {
         --m: 0 70;
         --so: -41;
         --c: 53, 42;
+        --translation: none;
     }
 
     button:not(:enabled) {
@@ -282,7 +305,7 @@
     }
 
     [role="dialog"] {
-        --outline-clr: var(--system-color-dark);
+        --outline-clr: var(--system-color-black);
         inset-block-start: var(--y, auto);
         inset-inline-end: var(--right-x, auto);
     }
@@ -319,7 +342,7 @@
 
     @media screen and (min-width: 768px) {
         .banner {
-            --min-padding: 8rem 1.5rem 0;
+            --min-padding: 5rem 1.5rem 0;
             --m-height: 30rem;
             --col-dir: row;
             text-align: start;
@@ -331,6 +354,17 @@
 
     }
 
+}
+
+@layer theme {
+    :root {
+        --system-color-black: oklch(8% 6% 10);
+        --system-color-white: oklch(95% 1% 10);
+        --system-color-darkBlue: hsl(222, 31%, 19%);
+        --system-color-orange: hsl(10, 64%, 48%);
+        --system-color-lightOrange: hsl(14, 76%, 97%);
+        --system-color-peach: oklch(75% 51% 31);
+    }
 }
 
 @layer layout {
@@ -420,27 +454,40 @@
         gap: var(--gap);
     }
 
+    .service_content {
+        background-color: var(--bg-clr, transparent);
+        border-image: linear-gradient(#0005, #0005) 1 fill;
+    }
+
     .services {
         --m-col-w: 100%;
         --c-gap: 2rem 1.5rem;
 
-        & img {
+
+        img {
             block-size: var(--m-row-h, 250px);
             min-inline-size: 100%;
             object-fit: cover;
             object-position: right 10% bottom 0;
         }
 
-        & > div {
+        &>div {
+            --icon-fill: var(--system-color-peach);
             display: grid;
             grid-template: "area1";
             container: hero / inline-size;
             clip-path: inset(0 round .5rem);
+            place-items: stretch;
+            color: var(--system-color-white);
 
-            & > * {
-                grid-area: area1;
-                place-self: stretch;
+            &:where(:focus-within, :hover) {
+                --bg-clr: oklch(75% 59% 31 / 0.5);
             }
+
+            &>* {
+                grid-area: area1;
+            }
+
         }
     }
 
@@ -458,6 +505,9 @@
         container: contact / inline-size;
         max-inline-size: min(95vi, 1110px);
         margin-inline: auto;
+        background-color: var(--system-color-peach);
+        z-index: 2;
+        border-radius: .5rem;
     }
 
     footer {
@@ -467,7 +517,8 @@
         --g-gap: 1.5em;
         --c-space: .75rem;
         --p-items: center;
-        border-image: linear-gradient(var(--system-color-dark), var(--system-color-dark)) 1 fill / 50%/ 0 100vi;
+        --icon-fill: var(--system-color-peach);
+        border-image: linear-gradient(var(--system-color-black), var(--system-color-black)) 1 fill / 50%/ 4rem 100vi 0;
     }
 
     nav {
@@ -486,11 +537,12 @@
             --s-space: .75rem;
             --p-items: end start;
 
-            & > ul {
+            &>ul {
                 place-self: end;
             }
         }
     }
+
     @media screen and (min-width: 480px) {
 
         .services {
@@ -520,9 +572,8 @@
             --min-padding: 1.5em 3em;
             min-block-size: 12rem;
             text-align: start;
-            border-radius: .5rem;
 
-            & > :first-child {
+            &> :first-child {
                 align-self: end;
             }
         }
@@ -531,7 +582,7 @@
             --m-row-h: auto;
             --m-col-w: 12rem;
 
-            & > :first-child {
+            &> :first-child {
                 --m-row-h: 100%;
                 grid-row: span 2;
             }
@@ -545,7 +596,7 @@
             --g-template: "area1" "area2";
             text-align: center;
 
-            & > * {
+            &>* {
                 flex: 2 1 auto;
             }
         }
