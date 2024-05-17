@@ -532,12 +532,25 @@ body {
 
     .contact-grid {
         --g-template: "area1" "area2" "area3";
+        --deco-size: 192px;
         --p-items: stretch center;
+        --y: calc(-1 * var(--s) / 2);
+        --bg: linear-gradient(45deg, #0000, var(--c1)) right 0 top var(--y) / var(--s) no-repeat,
+            linear-gradient(to right, #0000, var(--c1)) right var(--s) top var(--y) / var(--s) no-repeat,
+            linear-gradient(171deg, #0000, var(--c1)) right var(--s) bottom var(--y) / var(--s) no-repeat,
+            linear-gradient(-90deg, #0000, var(--c1)) right calc(2 * var(--s)) bottom var(--y) / var(--s) no-repeat,
+            linear-gradient(25deg, #0000, var(--c1)) right 0 bottom var(--y) / var(--s) no-repeat;
+        --mask: var(--rounding) right 0 top var(--y) / var(--s) no-repeat,
+            var(--rounding) right var(--s) top var(--y) / var(--s) no-repeat,
+            var(--rounding) right var(--s) bottom var(--y) / var(--s) no-repeat,
+            var(--rounding) right calc(2 * var(--s)) bottom var(--y) / var(--s) no-repeat,
+            var(--rounding) right 0 bottom var(--y) / var(--s) no-repeat;
         text-align: center;
         container: contact / inline-size;
         background-color: var(--system-color-peach);
         z-index: 2;
         border-radius: .5rem;
+        min-block-size: var(--deco-size);
     }
 
     footer {
@@ -600,7 +613,6 @@ body {
             --g-template: "area1 . ." "area2 . area3" "area2 . .";
             --p-items: start stretch;
             --min-padding: 1.5em 3em;
-            min-block-size: 12rem;
             text-align: start;
 
             &> :first-child {
