@@ -82,8 +82,9 @@ body {
             text-underline-offset: 0.15em;
             color: var(--link-clr, inherit);
 
-            &:enabled:where(:focus-visible, :hover) {
-                color: var(--system-color-paleOrange);
+            &:not(:disabled):where(:focus-visible, :hover) {
+                --icon-fill: oklch(92% 48% 35);
+                color: var(--fill-hover, var(--icon-fill));
                 text-decoration: currentColor wavy underline;
             }
         }
@@ -167,7 +168,7 @@ body {
         place-self: end;
     }
 
-    .relative {
+    :is(.decorated, .relative) {
         position: relative;
     }
 
@@ -179,25 +180,33 @@ body {
         --s-space: 8rem;
     }
 
-    :is(.not-empty:empty, .not-empty-sibling:where(.not-empty:empty ~ *, form:has(.not-empty:empty) *)) {
-        display: none;
-    }
-
-    .not-empty:not(:empty)~.empty {
-        display: none;
-    }
-
-    .empty {
-        container: empty-state / inline-size;
-        text-align: center;
+    :is(.decorated, .extend-zone-start)::before,
+    .extend-zone-end::after {
+        content: "";
+        position: absolute;
+        inset: 0;
     }
 
     :where(h1, h2):where(:is(.banner, .contact-grid) *) {
         color: var(--system-color-darkBlue);
     }
 
+    .decorated {
+        --c1: var(--deco-clr, hsla(0, 95%, 19%, .1));
+        --s: var(--deco-size, 640px);
+        --rounding: radial-gradient(calc(var(--s) / 2), #000 99%, #0000);
+
+        &::before {
+            background: var(--bg, linear-gradient(15deg, #0000, var(--c1)) right 0 top 5rem / var(--s) var(--s) no-repeat);
+            mask: var(--mask, var(--rounding) left 0 top 5rem / var(--s) var(--s) no-repeat);
+            z-index: -1;
+        }
+    }
+
     .banner {
+        --min-padding: 60px 1.5em 0;
         --alignment: center;
+        --deco-size: var(--m-height);
         text-align: center;
         max-block-size: var(--m-height, 768px);
         overflow-y: clip;
@@ -213,10 +222,15 @@ body {
         transform: scale(0);
     }
 
+    .btn-primary {
+        --min-padding: .75em 1.5em;
+        --color-fill: var(--system-color-white);
+        --radius: .5rem;
 
-    [data-icon] {
-        display: inline-flex;
-        align-items: center;
+        &:where(:focus-visible, :hover) {
+            --color-text: var(--system-color-darkBlue);
+            --color-fill: oklch(78% 32% 35);
+        }
     }
 
     [data-icon-position="start"]::before,
@@ -265,13 +279,13 @@ body {
         --icon-clip: url(#check-circle);
     }
 
-    a:where(:is(.categories, nav) *) {
+    a:where(:is(.decorated, .services, nav) *) {
         text-decoration: none;
         display: inline-flex;
         align-items: center;
     }
 
-    :where([aria-hidden="true"], .visually-hidden, .md-show, .pm-grid input[type="radio"]) {
+    :where([aria-hidden="true"], .visually-hidden, .md-show) {
         position: absolute;
         clip-path: inset(50%);
     }
@@ -329,8 +343,11 @@ body {
     }
 
     @media screen and (min-width: 480px) {
-        .pm-grid {
-            --g-template: "area1 area1" "area2 area3";
+        .banner {
+            --x: right calc(-1 * (var(--s) / 4));
+            --y: top 2rem;
+            --bg: linear-gradient(15deg, #0000, var(--c1)) var(--x) var(--y) / var(--s) no-repeat;
+            --mask: var(--rounding) var(--x) var(--y) / var(--s) no-repeat;
         }
 
         .md-show {
@@ -343,8 +360,11 @@ body {
     @media screen and (min-width: 768px) {
         .banner {
             --min-padding: 5rem 1.5rem 0;
-            --m-height: 30rem;
+            --m-height: 480px;
             --col-dir: row;
+            --x: right 0;
+            --y: top 0;
+            --s: 480px;
             text-align: start;
 
             img:where(& *) {
@@ -406,7 +426,7 @@ body {
         gap: var(--s-space, var(--c-space, 1.5em));
     }
 
-    :where(header, footer, main, .box, button, .btn-primary) {
+    :where(header, footer, .box, button, .btn) {
         padding: var(--min-padding, 1.5em);
         background-color: var(--color-fill, transparent);
         color: var(--color-text, currentColor);
@@ -460,8 +480,10 @@ body {
     }
 
     .services {
+        --min-padding: 0;
         --m-col-w: 100%;
         --c-gap: 2rem 1.5rem;
+        --f: 1.3;
 
 
         img {
@@ -469,9 +491,11 @@ body {
             min-inline-size: 100%;
             object-fit: cover;
             object-position: right 10% bottom 0;
+            transform: var(--_img-transform, none);
+            clip-path: var(--_img-clip, none);
         }
 
-        &>div {
+        &>li {
             --icon-fill: var(--system-color-peach);
             display: grid;
             grid-template: "area1";
@@ -482,10 +506,13 @@ body {
 
             &:where(:focus-within, :hover) {
                 --bg-clr: oklch(75% 59% 31 / 0.5);
+                --_img-clip: inset((1 - 1 / var(--f)) * 50%);
+                --_img-transform: scale(var(--f));
             }
 
             &>* {
                 grid-area: area1;
+                isolation: isolate;
             }
 
         }
@@ -498,13 +525,16 @@ body {
         text-align: center;
     }
 
+    :is(.contact-grid, main) {
+        max-inline-size: min(95vi, 1110px);
+        margin-inline: auto;
+    }
+
     .contact-grid {
         --g-template: "area1" "area2" "area3";
         --p-items: stretch center;
         text-align: center;
         container: contact / inline-size;
-        max-inline-size: min(95vi, 1110px);
-        margin-inline: auto;
         background-color: var(--system-color-peach);
         z-index: 2;
         border-radius: .5rem;
@@ -533,7 +563,7 @@ body {
         footer {
             --min-padding: 1.5em 0;
             --col-dir: row;
-            --g-template: "area1 area1 area2 area2 area2" "area3 area3 area4 . area5" / 1fr 1fr 1.5fr 1fr fit-content(9rem);
+            --g-template: "area1 area1 area2 area2 area2" "area3 area3 area4 area4 area5" / 1fr 1fr 1.5fr 1fr fit-content(9rem);
             --s-space: .75rem;
             --p-items: end start;
 
@@ -600,5 +630,19 @@ body {
                 flex: 2 1 auto;
             }
         }
+    }
+}
+
+@media screen and (prefers-reduced-motion: no-preference) {
+
+    :is(a, img, .service_content),
+    [data-icon-position="start"]::before,
+    [data-icon-position="end"]::after {
+        transition: all .35s ease-out;
+    }
+
+    nav {
+        --h-transition: stroke-dasharray .6s cubic-bezier(.25, .1, .3, 1.5),
+            stroke-dashoffset .6s cubic-bezier(.25, .1, .3, 1.5);
     }
 }
