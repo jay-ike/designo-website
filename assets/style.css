@@ -40,7 +40,7 @@ body {
         display: block;
     }
 
-    :is(ul, ol, fieldset, legend, menu) {
+    :is(ul, ol, fieldset, legend, menu, [popover]) {
         margin: 0;
         padding: 0;
     }
@@ -66,7 +66,7 @@ body {
         transform: scale(1);
     }
 
-    dialog::backdrop {
+    :is(dialog, [popover])::backdrop {
         background-color: hsla(0, 0%, 0%, 0.8);
     }
 
@@ -164,6 +164,10 @@ body {
         text-transform: capitalize;
     }
 
+    .ml-max {
+        margin-inline-start: auto;
+    }
+
     .place-end {
         place-self: end;
     }
@@ -172,12 +176,9 @@ body {
         position: relative;
     }
 
-    .no-shrink {
-        flex-shrink: 0;
-    }
-
-    .s-gap-xl {
-        --s-space: 8rem;
+    .xl-stack>*+*,
+    .mt-xl {
+        margin-block-start: 8rem;
     }
 
     :is(.decorated, .extend-zone-start)::before,
@@ -212,14 +213,6 @@ body {
         overflow-y: clip;
         background-color: var(--system-color-peach);
         clip-path: var(--b-clip, inset(0 round .5rem));
-    }
-
-    :where(.reset-btn) {
-        text-decoration: underline;
-    }
-
-    dialog:not([open]) {
-        transform: scale(0);
     }
 
     .btn-primary {
@@ -267,35 +260,27 @@ body {
         --icon-fill-hover: var(--system-color-softRed);
     }
 
-    [data-icon="plus"] {
-        --icon-clip: url(#plus);
-    }
-
-    [data-icon="minus"] {
-        --icon-clip: url(#minus);
-    }
-
-    [data-icon="check-circle"] {
-        --icon-clip: url(#check-circle);
-    }
-
-    a:where(:is(.decorated, .services, nav) *) {
+    a:where(:is(.decorated, .services, nav) *),
+    .links {
         text-decoration: none;
         display: inline-flex;
         align-items: center;
     }
 
+    .links {
+        font-weight: 400;
+        gap: var(--gap, 16px);
+    }
+
     :where([aria-hidden="true"], .visually-hidden, .md-show) {
+        max-inline-size: 1px;
         position: absolute;
         clip-path: inset(50%);
     }
 
-    .visually-hidden {
-        max-inline-size: 1px;
-    }
 
     .md-show {
-        --wrap: wrap;
+        overflow: hidden;
         visibility: hidden;
     }
 
@@ -306,6 +291,24 @@ body {
         --translation: none;
     }
 
+    [popover] {
+        border: none;
+        isolation: isolate;
+
+        &::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+        }
+    }
+
+    #mobile-menu {
+        --y: 0;
+        --s-space: 2em;
+        inline-size: 100vi;
+    }
+
     button:not(:enabled) {
         color: hsl(0, 0%, 75%);
     }
@@ -313,9 +316,6 @@ body {
     :where(.menu, [role="dialog"]) {
         position: fixed;
         transform: var(--translation, translateX(-50vmax));
-        opacity: 0;
-        inline-size: var(--modal-size, auto);
-        visibility: hidden;
     }
 
     [role="dialog"] {
@@ -351,6 +351,7 @@ body {
         }
 
         .md-show {
+            max-inline-size: max-content;
             position: static;
             clip-path: none;
             visibility: visible;
@@ -384,6 +385,7 @@ body {
         --system-color-orange: hsl(10, 64%, 48%);
         --system-color-lightOrange: hsl(14, 76%, 97%);
         --system-color-peach: oklch(75% 51% 31);
+        color-scheme: light;
     }
 }
 
@@ -414,11 +416,6 @@ body {
         flex-flow: var(--col-dir, column) var(--wrap, nowrap);
     }
 
-    .self-end {
-        align-self: end;
-        margin-inline-start: auto;
-    }
-
     :is(.center, .img-box) {
         display: grid;
         place-items: center;
@@ -431,6 +428,11 @@ body {
         background-color: var(--color-fill, transparent);
         color: var(--color-text, currentColor);
         border-radius: var(--radius, 0);
+    }
+
+    .box-dark {
+        --color-fill: var(--system-color-black);
+        --color-text: var(--system-color-white);
     }
 
     :is([class$="grid"], footer) {
@@ -523,6 +525,7 @@ body {
         --p-items: stretch center;
         --g-gap: 1.5em;
         text-align: center;
+
     }
 
     :is(.contact-grid, main) {
@@ -532,7 +535,7 @@ body {
 
     .contact-grid {
         --g-template: "area1" "area2" "area3";
-        --deco-size: 192px;
+        --deco-size: 292px;
         --p-items: stretch center;
         --y: calc(-1 * var(--s) / 2);
         --bg: linear-gradient(45deg, #0000, var(--c1)) right 0 top var(--y) / var(--s) no-repeat,
@@ -545,12 +548,11 @@ body {
             var(--rounding) right var(--s) bottom var(--y) / var(--s) no-repeat,
             var(--rounding) right calc(2 * var(--s)) bottom var(--y) / var(--s) no-repeat,
             var(--rounding) right 0 bottom var(--y) / var(--s) no-repeat;
+        --color-fill: var(--system-color-peach);
+        --radius: .5rem;
         text-align: center;
         container: contact / inline-size;
-        background-color: var(--system-color-peach);
-        z-index: 2;
-        border-radius: .5rem;
-        min-block-size: var(--deco-size);
+        block-size: var(--deco-size);
     }
 
     footer {
@@ -561,6 +563,8 @@ body {
         --c-space: .75rem;
         --p-items: center;
         --icon-fill: var(--system-color-peach);
+        position: relative;
+        z-index: -1;
         border-image: linear-gradient(var(--system-color-black), var(--system-color-black)) 1 fill / 50%/ 4rem 100vi 0;
     }
 
@@ -570,6 +574,10 @@ body {
         z-index: 1;
         isolation: isolate;
         background-color: canvas;
+
+        &:where(body > *) {
+            min-block-size: 96px;
+        }
     }
 
     @media screen and (min-width: 568px) {
@@ -598,7 +606,7 @@ body {
             text-align: start;
         }
 
-        :is(main, footer, header, nav, .main-content) {
+        :is(footer, header, nav, .main-content) {
             max-inline-size: min(95vi, 1110px);
             margin-inline: auto;
         }
@@ -624,7 +632,7 @@ body {
             --m-row-h: auto;
             --m-col-w: 12rem;
 
-            &> :first-child {
+            &> :first-of-type:nth-last-of-type(3) {
                 --m-row-h: 100%;
                 grid-row: span 2;
             }
@@ -647,7 +655,7 @@ body {
 
 @media screen and (prefers-reduced-motion: no-preference) {
 
-    :is(a, img, .service_content),
+    :is(a, img, .service_content, [popover]),
     [data-icon-position="start"]::before,
     [data-icon-position="end"]::after {
         transition: all .35s ease-out;

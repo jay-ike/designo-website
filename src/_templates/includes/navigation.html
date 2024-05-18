@@ -1,17 +1,32 @@
-<nav class="segragator box">
+<nav class="row box">
     <a href="/" class="logo">designo</a>
-    <ul class="row md-show">
+    <ul class="links ml-max md-show">
         {% for item in site.links %}
             <li><a href="{{item.path}}">{{ item.title }}</a></li>
         {% endfor %}
     </ul>
-    <div class="md-remove">
-        <button popovertarget="mobile-menu" aria-label="page menu trigger">
+    <div class="ml-max md-remove">
+        <button popovertarget="mobile-menu" aria-label="open page menu">
             <svg width="24" height="24">
-                <title>page menu trigger</title>
+                <title>open page menu</title>
                 <use href="/assets/sprites.svg#hamburger">
             </svg>
         </button>
-        <div id="mobile-menu" role="dialog" popover></div>
+        <section id="mobile-menu" role="dialog" aria-label="page menu" popover="manual">
+            <header class="segragator">
+                <a class="logo">designo</a>
+                <button popovertarget="mobile-menu" aria-label="close page menu">
+                    <svg width="24" height="24">
+                       <title>close page menu</title>
+                       <use href="/assets/sprites.svg#hamburger">
+                    </svg>
+                </button>
+            </header>
+            <ul class="box stack box-dark">
+                 {% for item in site.links %}
+                    <li><a href="{{item.path}}">{{item.title}}</a></li>
+                 {% endfor %}
+            </ul>
+        </section>
     </div>
 </nav>
