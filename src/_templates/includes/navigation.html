@@ -1,8 +1,8 @@
-<nav class="row box">
+<nav class="row box contain">
     <a href="/" class="logo" aria-label="go to designo home page" >designo</a>
     <ul class="links ml-max md-show">
         {% for item in site.links %}
-            <li><a href="{{item.path}}">{{ item.title }}</a></li>
+            <li class="fluid-type"><a href="{{item.path}}">{{ item.title }}</a></li>
         {% endfor %}
     </ul>
     <div class="ml-max md-remove">

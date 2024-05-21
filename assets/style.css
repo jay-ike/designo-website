@@ -1,12 +1,21 @@
 @layer resets, layout, typography, utilities, theme;
 
+
+@font-face {
+    font-family: "Just";
+    src: url("/assets/just-vf.ttf Sans Variable.ttf") format("truetype");
+    font-weight: 300 900;
+    font-feature-settings: "dlig" on, "ordn" on, "ss02" on;
+    font-display: swap;
+}
+
 body {
     --primary-clr: var(--system-color-peach);
     font-family: "Just", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
         'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
         sans-serif;
     line-height: 1.5;
-    letter-spacing: .01em;
+    letter-spacing: .035em;
     word-spacing: 0.05em;
     accent-color: var(--system-color-peach);
     color: var(--system-color-black);
@@ -37,7 +46,6 @@ body {
 
     :is(img, svg) {
         max-inline-size: 100%;
-        height: auto;
         display: block;
     }
 
@@ -181,6 +189,9 @@ body {
     .mt-xl {
         margin-block-start: 8rem;
     }
+    :where(header, .contain) {
+        container: section / inline-size;
+    }
 
     :is(.decorated, .extend-zone-start)::before,
     .extend-zone-end::after {
@@ -277,6 +288,7 @@ body {
 
     a:where(:is(.decorated, .services, nav, footer) *),
     .links {
+        --f-size-fluid: 2.5cqi;
         text-decoration: none;
         display: inline-flex;
         align-items: center;
@@ -381,10 +393,15 @@ body {
             --x: right 0;
             --y: top 0;
             --s: 480px;
+            --p-width: 30em;
+            --i-alignment: space-between;
             text-align: start;
 
             img:where(& *) {
                 min-inline-size: 284px;
+            }
+            div:where(& > *) {
+                max-inline-size: 40em;
             }
         }
 
@@ -401,6 +418,46 @@ body {
         --system-color-lightOrange: hsl(14, 76%, 97%);
         --system-color-peach: oklch(75% 51% 31);
         color-scheme: light;
+    }
+}
+
+
+@layer typography {
+    :is(h1, h2, h3, h4, h5, p, dt, dd, legend, .fluid-type) {
+        font-size: clamp(var(--f-size, 1rem) * clamp(0.5, 1 - var(--f-size-diff, 0.3), 0.9),
+                var(--f-size-fluid, var(--default-fluid, 3vw)),
+                var(--f-size, 1rem));
+    }
+
+    :is(h2, h3, h4, h5) {
+        text-transform: var(--t-transform, uppercase);
+    }
+
+    h1 {
+        --f-size: 3rem;
+        --f-size-diff: 0.4;
+    }
+
+    h2 {
+        --f-size: 2.5rem;
+        --f-size-diff: 0.45;
+    }
+
+    h3 {
+        --f-size: 1.5rem;
+    }
+    h4 {
+        --f-size: 1.25rem;
+    }
+
+    h5 {
+        --f-size: 1.125rem;
+    }
+
+    @supports (font-size: 1cqi) {
+        :is(h1, h2, h3, h4, p, dt, dd, .fluid-type, footer a) {
+            --default-fluid: 5cqi;
+        }
     }
 }
 
@@ -493,7 +550,7 @@ body {
 
     .service_content {
         background-color: var(--bg-clr, transparent);
-        border-image: linear-gradient(#0005, #0005) 1 fill;
+        border-image: linear-gradient(#0009, #0009) 1 fill;
     }
 
     .services {
@@ -550,6 +607,7 @@ body {
     }
 
     .contact-grid {
+        --t-transform: none;
         --g-template: "area1" "area2" "area3";
         --deco-size: 292px;
         --p-items: stretch center;
@@ -574,8 +632,8 @@ body {
     footer {
         --min-padding: 2em 1.5em 1.5em;
         --color-text: var(--system-color-white);
-        --g-template: ". area1 ." ". area2 ." "area3 area3 area3" "area4 area4 area4" ". area5 .";
-        --g-gap: 1.5em;
+        --g-template: "area1" "area2" "area3" "area4" "area5";
+        --g-gap: 2.5em 1.5em;
         --c-space: .75rem;
         --p-items: center;
         --icon-fill: var(--system-color-peach);
@@ -583,6 +641,14 @@ body {
         position: relative;
         z-index: -1;
         border-image: linear-gradient(var(--system-color-black), var(--system-color-black)) 1 fill / 50%/ 4rem 100vi 0;
+
+        dt {
+            font-weight: bold;
+        }
+        & > a:first-of-type {
+            --c: oklch(95% 1% 10 / 0.15);
+            border-image: linear-gradient(var(--c), var(--c)) 0 0 1 / 2px / var(--outset, 0 calc((min(95vi, 1110px) / 2) - 5em) 1.25em);
+        }
     }
 
     nav {
@@ -604,6 +670,7 @@ body {
             --g-template: "area1 area1 area2 area2 area2" "area3 area3 area4 area4 area5" / 1fr 1fr 1.5fr 1fr fit-content(9rem);
             --s-space: .75rem;
             --p-items: end start;
+            --outset: 0 calc(min(95vi, 1110px) - 9em) 1.25em 0;
             text-align: start;
 
             &>ul {
@@ -651,11 +718,10 @@ body {
         }
 
         .services {
-            --m-row-h: auto;
             --m-col-w: 12rem;
 
             &> :first-of-type:nth-last-of-type(3) {
-                --m-row-h: 100%;
+                --m-row-h: calc(400px + 2rem);
                 grid-row: span 2;
             }
         }
