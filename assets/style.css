@@ -11,6 +11,7 @@ body {
     accent-color: var(--system-color-peach);
     color: var(--system-color-black);
     font-size: 100%;
+    isolation: isolate;
 }
 
 @layer resets {
@@ -192,15 +193,29 @@ body {
         color: var(--system-color-darkBlue);
     }
 
-    .decorated {
+    :is(.decorated, .logo) {
         --c1: var(--deco-clr, hsla(0, 95%, 19%, .1));
         --s: var(--deco-size, 640px);
-        --rounding: radial-gradient(calc(var(--s) / 2), #000 99%, #0000);
+        --rounding: radial-gradient(calc(var(--s) / 2), #000 98%, #0000);
 
         &::before {
             background: var(--bg, linear-gradient(15deg, #0000, var(--c1)) right 0 top 5rem / var(--s) var(--s) no-repeat);
             mask: var(--mask, var(--rounding) left 0 top 5rem / var(--s) var(--s) no-repeat);
             z-index: -1;
+        }
+    }
+
+    .logo {
+        --deco-size: 24px;
+        --bg: conic-gradient(var(--system-color-peach), #0000) 0 / var(--s) no-repeat;
+        --mask: var(--rounding) 0 / var(--s) no-repeat;
+        letter-spacing: 5px;
+        color: inherit;
+
+        &::before {
+            content: "";
+            inline-size: var(--s);
+            aspect-ratio: 1;
         }
     }
 
@@ -260,16 +275,16 @@ body {
         --icon-fill-hover: var(--system-color-softRed);
     }
 
-    a:where(:is(.decorated, .services, nav) *),
+    a:where(:is(.decorated, .services, nav, footer) *),
     .links {
         text-decoration: none;
         display: inline-flex;
         align-items: center;
+        gap: var(--i-gap, 16px);
     }
 
     .links {
         font-weight: 400;
-        gap: var(--gap, 16px);
     }
 
     :where([aria-hidden="true"], .visually-hidden, .md-show) {
@@ -482,6 +497,7 @@ body {
     }
 
     .services {
+        --i-gap: 0;
         --min-padding: 0;
         --m-col-w: 100%;
         --c-gap: 2rem 1.5rem;
@@ -563,6 +579,7 @@ body {
         --c-space: .75rem;
         --p-items: center;
         --icon-fill: var(--system-color-peach);
+        text-align: center;
         position: relative;
         z-index: -1;
         border-image: linear-gradient(var(--system-color-black), var(--system-color-black)) 1 fill / 50%/ 4rem 100vi 0;
@@ -587,6 +604,7 @@ body {
             --g-template: "area1 area1 area2 area2 area2" "area3 area3 area4 area4 area5" / 1fr 1fr 1.5fr 1fr fit-content(9rem);
             --s-space: .75rem;
             --p-items: end start;
+            text-align: start;
 
             &>ul {
                 place-self: end;
@@ -598,6 +616,10 @@ body {
 
         .services {
             --m-row-h: 200px;
+        }
+
+        nav:where(body > *) {
+            --min-padding: 1.5em 0;
         }
 
         .features {

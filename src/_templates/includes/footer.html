@@ -1,5 +1,5 @@
 <footer>
-    <h2 class="logo">designo</h2>
+    <a href="/" class="logo" aria-label="go to designo home page" >designo</a>
     <ul class="column">
         {% for item in site.links %}
             <li><a href="{{ item.path }}">{{ item.title }}</a></li>
@@ -17,7 +17,7 @@
     </dl>
     <ul class="row">
         {% for item in site.socials %}
-            <li><a href="{{ item.link }}"><svg width="24" height="24"><title>{{ item.title }}</title><use href="/assets/sprites.svg#{{ item.tag }}"></svg></a></li>
+        <li><a href="{{ item.link }}" aria-label="{{ item.title }}"><svg width="24" height="24"><title>{{ item.title }}</title><use href="/assets/sprites.svg#{{ item.tag }}"></svg></a></li>
         {% endfor %}
     </ul>
 </footer>
