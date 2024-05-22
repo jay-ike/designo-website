@@ -3,17 +3,17 @@ const { basename, getFilePaths } = require("../../utils");
 const services = {
     "web-design": {
         alt: "screen of an engineer's laptop crafting a website",
-		link: "",
+		link: "/services/web",
         title: "web design",
     },
     "app-design": {
         alt: "showcasing a mobile app in the launch phase",
-		link: "",
+		link: "/services/app",
         title: "app design",
     },
     "graphic-design": {
         alt: "an artwork with black and white drawings looking original",
-		link: "",
+		link: "/services/graphic",
         title: "graphic design",
     }
 }

@@ -1,5 +1,5 @@
 ---
-layout: "layouts/base.html"
+layout: "layouts/services.html"
 pageTitle: "Designo web design projects"
 pageTopic: "web-design"
 ---
@@ -7,16 +7,4 @@ pageTopic: "web-design"
     <h1>Web Design</h1>
     <p>We build websites that serve as powerful marketing tools and bring memorable brand experiences.</p>
 </header>
-<main class="xl-stack mt-xl">
-    <ul class="responsive-grid projects">
-        {% for item in getProjects %}
-            <li class="project-grid">
-                {% image item.path item.alt "327" %}
-                {% card item.title 3 "box stack" %}
-                    <p>{{ item.description }}</p>
-                {% endcard %}
-            </li>
-        {% endfor %}
-    </ul>
-    {% include "includes/services.html" %}
-</main>
+

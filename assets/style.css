@@ -296,7 +296,7 @@ body {
         gap: var(--i-gap, 16px);
     }
 
-    .links {
+    .links a {
         font-weight: 400;
     }
 

@@ -80,3 +80,9 @@
     }
 
 }
+
+@media screen and (prefers-reduced-motion: no-preference) {
+   :where(.project-grid) {
+       transition: all .35s ease-out;
+   }
+}

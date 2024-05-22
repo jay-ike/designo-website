@@ -3,36 +3,44 @@ const metadatas = {
     app: {
 
         airfilter: {
+            alt: "a screenshot of the airfilter app showcasing the type 2021 air conditioner",
             description: "Solving the problem of poor indoor air quality by filtering the air",
             title: "Airfilter"
         },
         eyecam: {
+            alt: "a screenshot of the eyecam app in which we can see a small camera with two lenses",
             description: "Product that lets you edit your favorite photos and videos at any time",
             title: "Eyecam"
         },
         faceit: {
+            alt: "a screenshot of the faceit app in the registration page where we can meet a talent across the globe",
             description: "Get to meet your favorite internet superstar with the faceit app",
             title: "Faceit"
         },
         loopstudios: {
+            alt: "a screenshot of the loopstudios app showcasing the user experience with Virtual reality",
             description: "A VR experience app made for Loopstudios",
             title: "Loopstudios"
         },
         todo: {
+            alt: "a screenshot of the todo app when a task is completed",
             description: "A todo app that features cloud sync with light and dark mode",
             title: "Todo"
         }
     },
     graphic: {
         "tim brown": {
+            alt: "the design of a book cover with a yellow background with the title 'change by design' written by tim brown",
             description: "A book cover designed for Tim Brown’s new release, ‘Change’",
             title: "Tim Brown"
         },
-        "box water": {
+        "boxed water": {
+            alt: "the design of a drink package with the caption 'boxed water is better'",
             description: "A simple packaging concept made for Boxed Water",
             title: "Boxed water"
         },
         science: {
+            alt: "a poster of an artwork captioned 'keeping up'",
             description: "A poster made in collaboration with the Federal Art Project",
             title: "Science!"
         }
