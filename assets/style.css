@@ -415,8 +415,7 @@ body {
         --system-color-black: oklch(8% 6% 10);
         --system-color-white: oklch(95% 1% 10);
         --system-color-darkBlue: hsl(222, 31%, 19%);
-        --system-color-orange: hsl(10, 64%, 48%);
-        --system-color-lightOrange: hsl(14, 76%, 97%);
+
         --system-color-peach: oklch(75% 51% 31);
         color-scheme: light;
     }

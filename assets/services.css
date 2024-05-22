@@ -1,18 +1,82 @@
 @import url("/assets/style.css") layer(foundation);
 
+:root {
+    --system-color-orange: oklch(44% 86% 12);
+    --system-color-lightOrange: hsl(14, 76%, 97%);
+}
+
 .projects {
     --g-template: "area1" "area2";
     --m-col-w: 327px;
+    --p-width: 20em;
 
     img {
         inline-size: 100%;
         max-block-size: 310px;
         object-fit: cover;
-        object-position: 0 0;
+        object-position: 0 bottom 0;
+    }
+
+    h3 {
+        font-weight: 500;
+        color: var(--h-clr, var(--system-color-orange));
     }
 }
 
 .project-grid {
     --container-name: project;
+    --p-items: stretch;
+    --s-space: 1em;
+    background-color: var(--system-color-lightOrange);
     clip-path: inset(0 round .75rem);
+
+    div:last-of-type {
+        place-self: center stretch;
+    }
+
+    &:hover {
+        --h-clr: var(--system-color-darkBlue);
+        background-color: oklch(92% 48% 35);
+    }
+}
+
+.banner {
+    --min-padding: 0;
+    --s: 292px;
+    --bg: linear-gradient(to top right, var(--c1), #0000) right 0 top 0 / var(--s) no-repeat;
+    --mask: var(--rounding) right 0 top 0 / var(--s) no-repeat;
+    --p-width: 30em;
+    min-block-size: 320px;
+    text-align: center;
+}
+
+@media screen and (min-width: 480px) {
+    .projects {
+        --m-col-s: 1;
+        --g-template: "area1 area2" / fit-content(327px) minmax(232px, 1fr);
+    }
+
+    .banner {
+        --s: 320px;
+        --y: calc(-1 * var(--s) / 2);
+        --bg: linear-gradient(-45deg, #0000, var(--c1)) right var(--y) top var(--y) / var(--s) no-repeat,
+            linear-gradient(to left, #0000, var(--c1)) right calc(-1 * var(--y)) top var(--y) / var(--s) no-repeat,
+            linear-gradient(to left, #0000, var(--c1)) right calc(-1 * var(--y)) bottom var(--y) / var(--s) no-repeat,
+            linear-gradient(to top right, #0000, var(--c1)) right calc(1.5 * var(--s)) top var(--y) / var(--s) no-repeat,
+            linear-gradient(to bottom right, #0000, var(--c1)) right var(--y) bottom var(--y) / var(--s) no-repeat;
+        --mask: var(--rounding) right var(--y) top var(--y) / var(--s) no-repeat,
+            var(--rounding) right calc(-1 * var(--y)) top var(--y) / var(--s) no-repeat,
+            var(--rounding) right calc(-1 * var(--y)) bottom var(--y) / var(--s) no-repeat,
+            var(--rounding) right calc(1.5 * var(--s)) top var(--y) / var(--s) no-repeat,
+            var(--rounding) right var(--y) bottom var(--y) / var(--s) no-repeat;
+
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .projects {
+        --m-col-s: 3;
+        --g-template: "area1" "area2";
+    }
+
 }
