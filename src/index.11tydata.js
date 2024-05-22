@@ -33,10 +33,5 @@ module.exports = Object.freeze({
         heroAlt: "a mobile phone with furnitures wallpaper image having the text 'frame'",
         description: "With over 10 years in the industry, we are experienced in creating fully responsive websites, app design, and engaging brand experiences. Find out more about our services.",
         title: "Award-winning custom designs and digital branding solutions"
-    },
-    images: {
-        header: "src/images",
-        services: [
-        ]
     }
 });

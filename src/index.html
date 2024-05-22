@@ -1,7 +1,6 @@
 ---
 layout: "layouts/base.html"
 pageTitle: "Designo Digital Agency"
-permalink: /
 ---
 <header class="column banner decorated">
     {% card heading.title 1 "stack" %}
@@ -11,7 +10,7 @@ permalink: /
     {%image hero heading.heroAlt "284" %}
 </header>
 <main class="xl-stack">
-    {% include "includes/services.html" %}
+    {% include "includes/services.html" "view our services" %}
     <section class="features column">
         {% for feat in features %}
         <div class="grid">

@@ -1,0 +1,18 @@
+---
+layout: "layouts/base.html"
+pageTitle: "Designo web design projects"
+pageTopic: "web-design"
+---
+<main class="xl-stack">
+    <ul class="responsive-grid projects">
+        {% for item in getProjects %}
+            <li class="project-grid">
+                {% image item.path item.alt "327" %}
+                {% card item.title 3 "stack" %}
+                    <p>{{ item.description }}</p>
+                {% endcard %}
+            </li>
+        {% endfor %}
+    </ul>
+    {% include "includes/services.html" %}
+</main>

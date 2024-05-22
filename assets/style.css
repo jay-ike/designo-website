@@ -3,9 +3,9 @@
 
 @font-face {
     font-family: "Just";
-    src: url("/assets/just-vf.ttf Sans Variable.ttf") format("truetype");
+    src: url("/assets/just-vf.ttf") format("truetype");
     font-weight: 300 900;
-    font-feature-settings: "dlig" on, "ordn" on, "ss02" on;
+    font-feature-settings: "dlig" on, "ordn" on, "ss02" on, "zero" on;
     font-display: swap;
 }
 
@@ -21,6 +21,7 @@ body {
     color: var(--system-color-black);
     font-size: 100%;
     isolation: isolate;
+    font-feature-settings: "zero" on, "dlig" on, "ss02" on, "ordn" on;
 }
 
 @layer resets {
@@ -542,7 +543,7 @@ body {
         --max-cols: var(--m-col-s, 3);
         --gap: var(--c-gap, 1rem);
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(min(100%, max(var(--max-col-width), 100% / var(--max-cols))),
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, max(var(--max-col-width), (100% / var(--max-cols)) - var(--gap))),
                     1fr));
         grid-auto-rows: minmax(var(--min-row-height), auto);
         gap: var(--gap);
@@ -557,7 +558,8 @@ body {
         --i-gap: 0;
         --min-padding: 0;
         --m-col-w: 100%;
-        --c-gap: 2rem 1.5rem;
+        --c-gap: 1.5rem;
+        --m-col-s: 2;
         --f: 1.3;
 
 
@@ -707,7 +709,7 @@ body {
 
     @media screen and (min-width: 768px) {
         .contact-grid {
-            --g-template: "area1 . ." "area2 . area3" "area2 . .";
+            --g-template: "area1 . ." "area2 . area3" "area2 . ." / fit-content(30em) 1fr max-content;
             --p-items: start stretch;
             --min-padding: 1.5em 3em;
             text-align: start;
@@ -721,7 +723,7 @@ body {
             --m-col-w: 12rem;
 
             &> :first-of-type:nth-last-of-type(3) {
-                --m-row-h: calc(400px + 2rem);
+                --m-row-h: calc(400px + var(--gap));
                 grid-row: span 2;
             }
         }

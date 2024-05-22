@@ -39,5 +39,4 @@ module.exports = {
         });
         return result;
     },
-    hello: "world",
 }

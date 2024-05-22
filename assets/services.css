@@ -1,0 +1,18 @@
+@import url("/assets/style.css") layer(foundation);
+
+.projects {
+    --g-template: "area1" "area2";
+    --m-col-w: 327px;
+
+    img {
+        inline-size: 100%;
+        max-block-size: 310px;
+        object-fit: cover;
+        object-position: 0 0;
+    }
+}
+
+.project-grid {
+    --container-name: project;
+    clip-path: inset(0 round .75rem);
+}
