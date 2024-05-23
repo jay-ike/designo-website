@@ -1,4 +1,4 @@
-const { getFilePaths, basename } = require("../../utils");
+const { getImages } = require("../../utils");
 const metadatas = {
     app: {
 
@@ -79,24 +79,10 @@ const metadatas = {
     }
 
 };
-async function getProjects(data) {
-    const images = await getFilePaths("src" + data.page.url);
-    const projects = metadatas[data.page.fileSlug];
-    if (projects === undefined) {
-        return [];
-    }
-    return images.map(function(path) {
-        const tag = basename(path);
-        if (projects[tag] === undefined) {
-            return undefined;
-        }
-        return Object.assign({path}, projects[tag]);
-    }).filter((val) => val !== undefined);
-}
 
 module.exports = Object.freeze({
     eleventyComputed: {
-        getProjects
+        getProjects: getImages(metadatas)
     },
     stylePath: "/assets/services.css"
 });
