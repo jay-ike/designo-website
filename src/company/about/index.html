@@ -2,6 +2,48 @@
 layout: "layouts/base.html"
 pageTitle: "About Designo Digital agency"
 ---
-{% assign img = images %}
+{% assign data = images %}
 
-{{ img.hero.path }}
+<header class="column no-gap">
+    {% image data.hero.path data.hero.alt "375,480" %}
+    <div class="stack decorated banner">
+        <h1>{{ data.hero.title }}</h1>
+        {% for paragraph in data.hero.paragraphs %}
+            <p>{{ paragraph }}</p>
+        {% endfor %}
+    </div>
+</header>
+<main>
+    <section class="column no-gap">
+        {% image data.talent.path data.talent.alt "375,480" %}
+        <div class="stack decorated">
+            <h3>{{ data.talent.title }}</h3>
+            {% for paragraph in data.talent.paragraphs %}
+                <p>{{ paragraph }}</p>
+            {% endfor %}
+
+        </div>
+    </section>
+    <section class="column locations contain">
+        {% for location in locations %}
+            <div class="center">
+                <svg width="202" height="202">
+                    <title>{{ location.alt }}</title>
+                    <use href="/assets/sprites.svg#{{ location.tag }}">
+                </svg>
+                <h3>{{location.title}}</h2>
+                <a href="">see location</a>
+            </div>
+        {% endfor %}
+    </section>
+    <section class="column no-gap">
+        {% image data.deal.path data.deal.alt "375,480" %}
+        <div class="stack decorated">
+            <h3>{{ data.deal.title }}</h3>
+            {% for paragraph in data.deal.paragraphs %}
+                <p>{{ paragraph }}</p>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+

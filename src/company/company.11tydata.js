@@ -49,5 +49,6 @@ module.exports = Object.freeze({
             tag: "london",
             title: "united kingdom"
         }
-    ]
+    ],
+    stylePath: "/assets/company.css"
 });
