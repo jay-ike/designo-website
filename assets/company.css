@@ -1,7 +1,12 @@
 @import url("/assets/style.css") layer(foundation);
 
-:where(header, .banner) {
+:where(header:not(nav *), .banner) {
+    --deco-size: 292px;
     --min-padding: 0;
+    --posx: var(--x, right 0);
+    --posy: var(--y, top calc(-0.5 * var(--s) - 1.5em));
+    --bg: linear-gradient(to top, var(--c1), #0000)  var(--posx) var(--posy) / var(--s) no-repeat;
+    --mask: var(--rounding) var(--posx) var(--posy) / var(--s) no-repeat;
     clip-path: none;
     text-align: start;
 }
@@ -12,6 +17,9 @@ h1:where(header *) {
 
 h3:where(.decorated *) {
     color: var(--system-color-orange);
+}
+.mb-xl {
+    margin-block: 8rem;
 }
 h3:where(.locations *) {
     font-weight: 500;
@@ -31,6 +39,12 @@ a:where(.locations :only-of-type) {
 }
 
 .decorated:where(section *) {
+    --deco-clr: oklch(75% 45% 15 / .1);
+    --deco-size: 292px;
+    --bg: linear-gradient(var(--c1), #0000) right .75rem top 3rem / var(--s) no-repeat,
+          linear-gradient(var(--c1), #0000) right calc(var(--s) + .75rem) top 3rem / var(--s) no-repeat;
+    --mask: var(--rounding) right .75rem top 3rem / var(--s) no-repeat,
+            var(--rounding) right calc(var(--s) + .75rem) top 3rem / var(--s) no-repeat;
     background-color: var(--system-color-lightOrange);
 }
 
@@ -44,6 +58,7 @@ div:where(header > .banner, section > .stack) {
 }
 
 main {
+    --icon-fill: var(--system-color-peach);
     margin: 0;
     min-inline-size: 100vi;
 }
@@ -56,6 +71,11 @@ img:where(:is(header, section) *) {
 }
 
 @media screen and (min-width: 480px) {
+    .banner {
+        --deco-size: 380px;
+        --x: left calc(var(--s) * -0.25);
+        --y: top calc(var(--s) * -0.55);
+    }
     :is(header, header + main) {
         min-inline-size: min(95vi, 1110px);
         margin-inline: auto;
@@ -75,9 +95,16 @@ img:where(:is(header, section) *) {
 }
 
 @media screen and (min-width: 768px) {
+    header {
+        --col-dir: row-reverse;
+    }
     main>section {
         --col-dir: row;
         --p-width: 50em;
+
+        &:last-of-type {
+            --col-dir: row-reverse;
+        }
     }
 
     img:where(.column *) {
@@ -94,6 +121,11 @@ img:where(:is(header, section) *) {
     }
     :where(header, main > section:not(.locations)) {
         max-block-size: 640px;
+    }
+    .banner {
+        --deco-size: 640px;
+        --x: left 0;
+        --y: bottom 0;
     }
 
 }

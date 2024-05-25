@@ -666,6 +666,7 @@ body {
 
         &:where(body > *) {
             min-block-size: 96px;
+            border-image: linear-gradient(canvas, canvas) 1 fill / 1 /  0 50vi;
         }
     }
 
