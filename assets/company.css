@@ -73,13 +73,11 @@ main {
     --p-content: stretch start;
 
     & > section {
+        --row-align: stretch;
         --row-dir: column;
         --c-space: 0;
     }
 
-    dt {
-        font-weight: 700;
-    }
     dd {
         --s-space: .75em;
     }
@@ -96,6 +94,10 @@ img:where(:is(header, section) *) {
     object-position: var(--img-pos, bottom 0 left 0);
 }
 
+.contact-banner {
+    --min-padding: min(5vi, 3rem);
+}
+
 @media screen and (min-width: 480px) {
     .cpy-locations {
         --p-content: center start;
@@ -104,11 +106,6 @@ img:where(:is(header, section) *) {
         & > section {
             --c-space: 1.5em;
             --row-dir: row;
-            --col-dir: row-reverse;
-
-            &:nth-of-type(even) {
-                --col-dir: row;
-            }
         }
     }
     .banner {
@@ -122,6 +119,7 @@ img:where(:is(header, section) *) {
     }
 
     :is(main, main > * + *) {
+        --img-pos: 15px;
         margin-block-start: var(--xl-gap, 8rem);
     }
 
@@ -141,9 +139,16 @@ img:where(:is(header, section) *) {
     main>section {
         --col-dir: row;
         --p-width: 50em;
+        --img-pos: 0;
 
         &:last-of-type {
             --col-dir: row-reverse;
+        }
+    }
+    section:is(.cpy-locations > *) {
+        --col-dir: row-reverse;
+        &:nth-of-type(even) {
+            --col-dir: row;
         }
     }
 
@@ -167,5 +172,4 @@ img:where(:is(header, section) *) {
         --x: left 0;
         --y: bottom 0;
     }
-
 }

@@ -36,7 +36,7 @@ function mapedImages(map) {
         }
         return images.reduce(function (acc, path) {
             const tag = basename(path);
-            if (meta[tag]) {
+            if (meta !== undefined && meta[tag]) {
                 acc[tag] = Object.assign({path}, meta[tag]);
             }
             return acc;

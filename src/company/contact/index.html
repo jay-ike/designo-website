@@ -1,0 +1,32 @@
+---
+layout: "layouts/base"
+pageTitle: "Contact Designo Digital Agency"
+pageId: "contact"
+---
+<header class="column banner decorated contact-banner">
+    <div class="stack">
+        <h1>Contact Us</h1>
+        <p>
+            Ready to take it to the next level? Let’s talk about your project or idea and find out how we can help your business grow. If you are looking for unique digital experiences that’s relatable to your users, drop us a line.
+        </p>
+    </div>
+    <form action="/contact/new" method="post" class="stack">
+        <div class="row"><label for=""></label><input type="text"></div>
+        <div class="row"><label for=""></label><input type="text"></div>
+        <div class="row"><label for=""></label><input type="text"></div>
+    </form>
+</header>
+<main>
+    <section class="column locations mb-xl">
+        {% for location in locations %}
+            <div class="center">
+                <svg width="202" height="202">
+                    <title>{{ location.alt }}</title>
+                    <use href="/assets/sprites.svg#{{ location.tag }}">
+                </svg>
+                <h3>{{location.title}}</h2>
+                <a href="{{location.url}}">see location</a>
+            </div>
+        {% endfor %}
+    </section>
+</main>

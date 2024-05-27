@@ -63,21 +63,12 @@ body {
         border: none;
     }
 
-    dialog {
-        position: fixed;
-        inset: 0;
-        margin: auto;
-        container: dialog / inline-size;
-        inline-size: min(540px, 90vi);
-        border: none;
-    }
-
-    dialog[open] {
-        transform: scale(1);
-    }
-
     :is(dialog, [popover])::backdrop {
         background-color: hsla(0, 0%, 0%, 0.8);
+    }
+
+    dt {
+        font-weight: bold;
     }
 
     a {
@@ -364,6 +355,7 @@ body {
 
     .no-gap {
         --r-space: 0;
+        --c-space: 0;
     }
 
     :is(.no-padding, .reset-btn) {
@@ -649,10 +641,10 @@ body {
         text-align: center;
         position: relative;
         z-index: -1;
-        border-image: linear-gradient(var(--system-color-black), var(--system-color-black)) 1 fill / 50%/ 4rem 100vi 0;
+        border-image: linear-gradient(var(--system-color-black), var(--system-color-black)) 1 fill / 50%/ var(--top-outset, 4rem) 100vi 0;
 
-        dt {
-            font-weight: bold;
+        &:not(.contact-grid + *) {
+            --top-outset: 0;
         }
 
         &>a:first-of-type {
@@ -670,7 +662,7 @@ body {
 
         &:where(body > *) {
             min-block-size: 96px;
-            border-image: linear-gradient(canvas, canvas) 1 fill / 1 /  0 50vi;
+            border-image: linear-gradient(canvas, canvas) 1 fill / 1 / 0 50vi;
         }
     }
 
