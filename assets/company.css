@@ -15,7 +15,7 @@ h1:where(header *) {
     text-transform: capitalize;
 }
 
-h3:where(.decorated *) {
+.text-primary {
     color: var(--system-color-orange);
 }
 .mb-xl {
@@ -54,35 +54,60 @@ div:where(header > .banner, section > .stack) {
     min-block-size: 380px;
     padding: min(5vb, 3em) min(5vi, 1.5em);
     display: grid;
-    place-content: center;
+    place-content: var(--p-content, center);
 }
 
 main {
     --icon-fill: var(--system-color-peach);
     margin: 0;
     min-inline-size: 100vi;
+
+    & > section:not(.locations) {
+        --heading-clr: var(--system-color-orange);
+    }
+}
+
+.cpy-locations {
+    --clip: none;
+    --xl-gap: 1.5rem;
+    --row-dir: column;
+    --p-content: stretch start;
+
+    & > section {
+        --c-space: 0;
+        --s-space: .75em;
+    }
+
+    dt {
+        font-weight: 700;
+    }
+
 }
 
 img:where(:is(header, section) *) {
-    inline-size: 100%;
+    min-inline-size: 100%;
     max-block-size: 320px;
     object-fit: cover;
     object-position: var(--img-pos, bottom 0 left 0);
 }
 
 @media screen and (min-width: 480px) {
+    .cpy-locations {
+        --row-dir: row;
+        --p-content: center start;
+    }
     .banner {
         --deco-size: 380px;
         --x: left calc(var(--s) * -0.25);
         --y: top calc(var(--s) * -0.55);
     }
-    :is(header, header + main) {
+    :is(header, main) {
         min-inline-size: min(95vi, 1110px);
         margin-inline: auto;
     }
 
     :is(main, main > * + *) {
-        margin-block-start: 8rem;
+        margin-block-start: var(--xl-gap, 8rem);
     }
 
     .locations {
@@ -90,7 +115,7 @@ img:where(:is(header, section) *) {
     }
 
     :where(header, main > section:not(.locations)) {
-        clip-path: inset(0 round .5rem);
+        clip-path: var(--clip, inset(0 round .5rem));
     }
 }
 
@@ -108,7 +133,7 @@ img:where(:is(header, section) *) {
     }
 
     img:where(.column *) {
-        max-block-size: 100%;
+        min-block-size: 100%;
     }
 
     .locations {

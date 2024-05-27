@@ -434,6 +434,7 @@ body {
 
     :is(h2, h3, h4, h5) {
         text-transform: var(--t-transform, uppercase);
+        color: var(--heading-clr, currentColor);
     }
 
     h1 {
@@ -473,7 +474,7 @@ body {
     :is(.row, .column, .segragator, .cart-modal) {
         display: flex;
         align-items: var(--alignment, center);
-        gap: var(--r-space, var(--c-space, 1.5em));
+        gap: var(--spacing, 1.5em);
         justify-content: var(--i-alignment, start);
     }
 
@@ -484,11 +485,13 @@ body {
 
     .row {
         --alignment: var(--row-align, center);
+        --spacing: var(--r-space);
         flex-flow: var(--row-dir, row) var(--wrap, nowrap);
     }
 
-    :where(.column, .cart-modal) {
+    .column {
         --alignment: var(--col-align, stretch);
+        --spacing: var(--c-space);
         flex-flow: var(--col-dir, column) var(--wrap, nowrap);
     }
 
@@ -583,6 +586,7 @@ body {
             clip-path: inset(0 round .5rem);
             place-items: stretch;
             color: var(--system-color-white);
+            overflow: clip;
 
             &:where(:focus-within, :hover) {
                 --bg-clr: oklch(75% 59% 31 / 0.5);

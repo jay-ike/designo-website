@@ -1,0 +1,26 @@
+---
+layout: "layouts/base.html"
+pageTitle: "Designo Digital Agency Locations"
+---
+{% assign data = images %}
+
+<main class="cpy-locations column">
+    <section class="column">
+        {% image data.canada.path data.canada.alt "375,480" %}
+        <div class="stack decorated">
+            <h2>Canada</h2>
+            <div class="row">
+                {% for detail in data.canada.details %}
+                <dl class="stack">
+                    <dt>{{detail.term}}</dt>
+                    {% for desc in detail.descriptions %}
+                    <dd>{{desc}}</dd>
+                    {% endfor %}
+                </dl>
+               {% endfor %}
+            </div>
+
+        </div>
+    </section>
+
+</main>

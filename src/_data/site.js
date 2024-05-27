@@ -1,7 +1,7 @@
 
 module.exports = Object.freeze({
     links: [
-        { title: "our company", path: "" },
+        { title: "our company", path: "/company/about" },
         { title: "locations", path: "" },
         { title: "contact", path: "" }
     ],

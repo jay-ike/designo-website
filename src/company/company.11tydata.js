@@ -1,4 +1,4 @@
-const {mapedImages} = require("../../utils");
+const { mapedImages } = require("../../utils");
 
 const metadatas = {
     about: {
@@ -25,6 +25,48 @@ const metadatas = {
             ],
             title: "The real deal"
         }
+    },
+    locations: {
+        "australia": {
+            alt: "a screen shot of the address '19 Balonne Street' of our australian office in a map",
+            details: [
+                {
+                    term: "Designo AU Office",
+                    descriptions: ["19 Balonne Street", "New South Wales 2443"]
+                },
+                {
+                    term: "Contact",
+                    descriptions: ["Phone : (02) 6720 9092", "Email : contact@designo.au"]
+                }
+            ]
+        },
+        "canada": {
+            alt: "a screenshot of the address '3886 Wellington Street' of our central office in a map",
+            details: [
+                {
+                    term: "Designo Central Office",
+                    descriptions: ["3886 Wellington Street", "Toronto, Ontario M9C 3J5"]
+                },
+                {
+                    term: "Contact",
+                    descriptions: ["Phone : +1 253-863-8967", "Email : contact@designo.co"]
+                }
+            ]
+        },
+        "uk": {
+            alt: "a screenshot of the address '13 Colorado Way' of our UK office in a map",
+            details: [
+                {
+                    term: "Designo UK Office",
+                    descriptions: ["13 Colorado Way", "Rhyd-y-fro SA8 9GA"]
+                },
+                {
+                    term: "Contact",
+                    descriptions: ["Phone : 078 3115 1400", "Email : contact@designo.co.uk"]
+                }
+            ]
+        }
+
     }
 };
 
