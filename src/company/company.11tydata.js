@@ -79,17 +79,20 @@ module.exports = Object.freeze({
         {
             alt: "illustration of the city of toronto in canada",
             tag: "toronto",
-            title: "canada"
+            title: "canada",
+            url: "/company/locations#canada-infos"
         },
         {
             alt: "illustration of the city of sydney in australia",
             tag: "sydney",
-            title: "australia"
+            title: "australia",
+            url: "/company/locations#australia-infos"
         },
         {
             alt: "illustration of the city of london in england",
             tag: "london",
-            title: "united kingdom"
+            title: "united kingdom",
+            url: "/company/locations#uk-infos"
         }
     ],
     stylePath: "/assets/company.css"

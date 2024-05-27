@@ -70,18 +70,23 @@ main {
 .cpy-locations {
     --clip: none;
     --xl-gap: 1.5rem;
-    --row-dir: column;
     --p-content: stretch start;
 
     & > section {
+        --row-dir: column;
         --c-space: 0;
-        --s-space: .75em;
     }
 
     dt {
         font-weight: 700;
     }
+    dd {
+        --s-space: .75em;
+    }
 
+}
+.content-clip > * {
+    clip-path: var(--cc-path, none);
 }
 
 img:where(:is(header, section) *) {
@@ -93,8 +98,18 @@ img:where(:is(header, section) *) {
 
 @media screen and (min-width: 480px) {
     .cpy-locations {
-        --row-dir: row;
         --p-content: center start;
+        --cc-path: inset(0 round .5rem);
+
+        & > section {
+            --c-space: 1.5em;
+            --row-dir: row;
+            --col-dir: row-reverse;
+
+            &:nth-of-type(even) {
+                --col-dir: row;
+            }
+        }
     }
     .banner {
         --deco-size: 380px;
