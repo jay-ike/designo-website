@@ -7,26 +7,40 @@ pageId: "contact"
     <div class="stack">
         <h1>Contact Us</h1>
         <p>
-            Ready to take it to the next level? Let’s talk about your project or idea and find out how we can help your business grow. If you are looking for unique digital experiences that’s relatable to your users, drop us a line.
+            Ready to take it to the next level? Let’s talk about your project or idea and find out how we can help your
+            business grow. If you are looking for unique digital experiences that’s relatable to your users, drop us a
+            line.
         </p>
     </div>
-    <form action="/contact/new" method="post" class="stack">
-        <div class="row"><label for=""></label><input type="text"></div>
-        <div class="row"><label for=""></label><input type="text"></div>
-        <div class="row"><label for=""></label><input type="text"></div>
+    <form action="/" method="get">
+        <div class="row"><label for="name">name</label><input type="text" id="name" name="clientName"></div>
+        <div class="row">
+            <label for="email">email address</label>
+            <input type="email" required name="clientEmail" id="email " aria-describedby="email-error" placeholder="Ex: hello@me.com" autocomplete="off">
+            <span id="email-error" class="visually-hidden">please enter a valid address</span>
+        </div>
+        <div class="row">
+            <label for="phone">phone</label>
+            <input type="tel" id="phone" name="clientPhone" placeholder="Ex: +2376xxxxxxxxx">
+        </div>
+        <div class="row">
+            <label for="msg">your message</label>
+            <textarea name="clientMsg" id="msg" cols="30" rows="10"></textarea>
+        </div>
+        <button class="btn-primary"> submit</button>
     </form>
 </header>
 <main>
     <section class="column locations mb-xl">
         {% for location in locations %}
-            <div class="center">
-                <svg width="202" height="202">
-                    <title>{{ location.alt }}</title>
-                    <use href="/assets/sprites.svg#{{ location.tag }}">
-                </svg>
-                <h3>{{location.title}}</h2>
+        <div class="center">
+            <svg width="202" height="202">
+                <title>{{ location.alt }}</title>
+                <use href="/assets/sprites.svg#{{ location.tag }}">
+            </svg>
+            <h3>{{location.title}}</h2>
                 <a href="{{location.url}}">see location</a>
-            </div>
+        </div>
         {% endfor %}
     </section>
 </main>

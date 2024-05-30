@@ -18,6 +18,7 @@ body {
     letter-spacing: .035em;
     word-spacing: 0.05em;
     accent-color: var(--system-color-peach);
+    caret-color: var(--system-color-orange, currentColor);
     color: var(--system-color-black);
     font-size: 100%;
     isolation: isolate;
@@ -126,15 +127,16 @@ body {
         scroll-margin-block-end: 8vh;
     }
 
-    input:where([type="text"], [type="email"], [type="tel"]) {
+    input:where([type="text"], [type="email"], [type="tel"]),
+    textarea {
         --outline-offset: .05em;
         padding: 0.75em;
         line-height: inherit;
-        caret-color: var(--system-color-orange, currentColor);
         border-radius: .5rem;
         border: .1em solid var(--bdr-clr, hsl(0, 0%, 81%));
         inline-size: 100%;
         font-weight: 500;
+        font-size: inherit;
 
         &:hover {
             --bdr-clr: var(--system-color-paleOrange);

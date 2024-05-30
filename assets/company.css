@@ -1,5 +1,11 @@
 @import url("/assets/style.css") layer(foundation);
 
+input:invalid:not(:placeholder-shown) + .visually-hidden {
+    clip-path: none;
+    position: static;
+    max-inline-size: max-content;
+    color: var(--system-color-darkBlue);
+}
 :where(header:not(nav *), .banner) {
     --deco-size: 292px;
     --min-padding: 0;
@@ -96,6 +102,27 @@ img:where(:is(header, section) *) {
 
 .contact-banner {
     --min-padding: min(5vi, 3rem);
+    --row-dir: column;
+    --row-align: stretch;
+    --r-space: .5em;
+    --alignment: stretch;
+    max-block-size: max-content;
+
+    form {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: .75rem;
+    }
+    label {
+        text-transform: capitalize;
+    }
+    textarea {
+        resize: none;
+    }
+    button {
+        align-self: var(--button-align, center);
+        padding: .75rem 1.5rem;
+    }
 }
 
 @media screen and (min-width: 480px) {
@@ -135,6 +162,11 @@ img:where(:is(header, section) *) {
 @media screen and (min-width: 768px) {
     header {
         --col-dir: row-reverse;
+    }
+    .contact-banner {
+        --col-dir: row;
+        --alignment: center;
+        --button-align: end;
     }
     main>section {
         --col-dir: row;
