@@ -6,9 +6,9 @@ module.exports = Object.freeze({
         { title: "contact", path: "/company/contact" }
     ],
     socials: [
-        { title: "github account", tag: "github", link: ""},
-        { title: "mastodon account", tag: "mastodon", link: ""},
-        { title: "X formerly twitter account", tag: "twitter", link: ""}
+        { title: "github account", tag: "github", link: "https://github.com/jay-ike"},
+        { title: "mastodon account", tag: "mastodon", link: "https://mastodon.social/@ndimah22"},
+        { title: "X formerly twitter account", tag: "twitter", link: "https://twitter.com/jospinEvans"}
     ]
 });
 
