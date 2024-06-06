@@ -16,8 +16,6 @@ This is a solution to the [Designo agency website challenge on Frontend Mentor](
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
-
 ## Overview
 
 ### The challenge
@@ -60,6 +58,7 @@ we can use more vivid color with oklch colorspace
 .proud-of-this-css {
   color: oklch(60% 38% 210);
 }
+```
 
 ### Continued development
 
