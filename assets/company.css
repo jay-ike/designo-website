@@ -93,6 +93,10 @@ main {
     clip-path: var(--cc-path, none);
 }
 
+.map-view:not(.no-js *) + picture {
+    display: none;
+}
+
 img:where(:is(header, section) *) {
     min-inline-size: 100%;
     max-block-size: 320px;
