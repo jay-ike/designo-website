@@ -1,6 +1,7 @@
 @import url("/assets/style.css") layer(foundation);
 
-input:invalid:not(:placeholder-shown) + .visually-hidden {
+input:invalid:not(:placeholder-shown) + .visually-hidden,
+[aria-hidden="true"]:where([class^="leaflet"] > *) {
     clip-path: none;
     position: static;
     max-inline-size: max-content;
@@ -80,7 +81,6 @@ main {
 
     & > section {
         --row-align: stretch;
-        --row-dir: column;
         --c-space: 0;
     }
 
@@ -93,8 +93,14 @@ main {
     clip-path: var(--cc-path, none);
 }
 
-.map-view:not(.no-js *) + picture {
-    display: none;
+.map-view:not(.no-js *) {
+    min-block-size: 320px;
+    min-inline-size: min(475px, 100%);
+    border-radius: var(--map-radius, 0);
+
+    & + picture {
+        display: none;
+    }
 }
 
 img:where(:is(header, section) *) {
@@ -129,6 +135,12 @@ img:where(:is(header, section) *) {
     }
 }
 
+@container section_content not (min-width: 500px) {
+    .stack > .row {
+        --row-dir: column;
+    }
+}
+
 @media screen and (min-width: 480px) {
     .cpy-locations {
         --p-content: center start;
@@ -136,7 +148,6 @@ img:where(:is(header, section) *) {
 
         & > section {
             --c-space: 1.5em;
-            --row-dir: row;
         }
     }
     .banner {

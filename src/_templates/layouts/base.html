@@ -17,6 +17,9 @@
     {% else %}
     <link rel="stylesheet" href="/assets/style.css">
     {% endif %}
+    {% for path in extraStyles %}
+        <link rel="stylesheet" href="{{ path }}">
+    {% endfor %}
 </head>
 
 <body>
