@@ -30,9 +30,7 @@ Users should be able to:
 - **Bonus**: View actual locations on the locations page maps (we recommend [Leaflet JS](https://leafletjs.com/) for this)
 
 ### Screenshot
-
-- ![mobile view of the project](./mobile-view.png)
-- ![mobile view of the project](./mobile-view.png)
+![desktop view of the project](./desktop-view.png) &nbsp; ![mobile view of the project](./mobile-view.png)
 
 ### Links
 
@@ -71,5 +69,5 @@ to make this website evolve we can make available offline with serviceworkers
 ## Author
 
 - Frontend Mentor - [@jay-ike](https://www.frontendmentor.io/profile/jay-ike)
-- Twitter - [@jospinEvans](https://www.twitter.com/jospinEvans)
+- Mastodon - [@ndimah22](https://mastodon.social/@ndimah22)
 
