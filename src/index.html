@@ -10,10 +10,14 @@ pageTitle: "Designo Digital Agency"
     {%image hero heading.heroAlt "284" %}
 </header>
 <main class="xl-stack">
+    <style>
+        {% include "includes/home.css" %}
+    </style>
+    <link rel="stylesheet" href="/assets/styles/home.css">
     {% include "includes/services.html" "view our services" %}
-    <section class="features column">
+    <section class="contain features column">
         {% for feat in features %}
-        <div class="grid">
+        <article class="grid">
             <svg width="202" height="202">
                 <title>{{ feat.alt }}</title>
                 <use href="/assets/sprites.svg#{{ feat.tag }}" />
@@ -21,7 +25,7 @@ pageTitle: "Designo Digital Agency"
             {% card feat.title 3 "stack" %}
                 <p>{{ feat.description }}</p>
             {% endcard %}
-        </div>
+        </article>
         {% endfor %}
 
     </section>

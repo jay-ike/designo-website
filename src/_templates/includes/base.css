@@ -1,13 +1,10 @@
 @layer resets, layout, typography, utilities, theme;
-
-
 @font-face {
     font-family: "Just";
     src: url("/assets/just-vf.woff2") format("woff2");
     font-weight: 300 900;
     font-feature-settings: "dlig" on, "ordn" on, "ss02" on, "zero" on;
 }
-
 body {
     --primary-clr: var(--system-color-peach);
     font-family: "Just", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

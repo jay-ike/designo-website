@@ -1,0 +1,86 @@
+ .features {
+     --g-template: "area1" "area2";
+     --p-items: stretch center;
+     --g-gap: 1.5em;
+     --container-name: features;
+     text-align: center;
+ }
+
+ .service_content {
+     background-color: var(--bg-clr, transparent);
+     border-image: linear-gradient(#0009, #0009) 1 fill;
+ }
+
+ img:where(.services *) {
+     block-size: var(--m-row-h, 250px);
+     min-inline-size: 100%;
+     object-fit: cover;
+     object-position: right 10% bottom 0;
+     transform: var(--_img-transform, none);
+     clip-path: var(--_img-clip, none);
+ }
+
+ li:where(.services > *) {
+     --icon-fill: var(--system-color-peach);
+     --f: 1.3;
+     display: grid;
+     grid-template: "area1";
+     container: hero / inline-size;
+     clip-path: inset(0 round .5rem);
+     place-items: stretch;
+     color: var(--system-color-white);
+     overflow: clip;
+     &>* {
+         grid-area: area1;
+         isolation: isolate;
+     }
+     &:where(:focus-within, :hover) {
+         --bg-clr: oklch(75% 59% 31 / 0.5);
+         --_img-clip: inset((1 - 1 / var(--f)) * 50%);
+         --_img-transform: scale(var(--f));
+     }
+ }
+
+ .services {
+     --i-gap: 0;
+     --min-padding: 0;
+     --m-col-w: 100%;
+     --c-gap: 1.5rem;
+     --m-col-s: 2;
+     --container-name: services;
+ }
+
+
+
+ @container features (inline-size > 456px) and (inline-size < 729px) {
+     .grid:where(.features > *) {
+         --g-template: "area1 area2";
+         --p-items: center;
+         text-align: start;
+     }
+ }
+
+ @container (inline-size > 729px) {
+     .grid:where(.features > *) {
+         flex: 2 1 auto;
+     }
+     li:first-of-type:nth-last-of-type(3):where( .services > *) {
+         --m-row-h: calc(400px +  var(--gap));
+         grid-row: span 2;
+     }
+ }
+
+ @media screen and (min-width: 480px) {
+     .services {
+         --m-row-h: 200px;
+     }
+ }
+
+ @media screen and (min-width: 768px) {
+     .services {
+         --m-col-w: 12rem;
+     }
+     .features {
+         --col-dir: row;
+     }
+ }

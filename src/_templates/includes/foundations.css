@@ -1,9 +1,8 @@
 @layer resets, layout, typography, utilities, theme;
 
-
 @font-face {
     font-family: "Just";
-    src: url("/assets/just-vf.ttf") format("truetype");
+    src: url("/assets/just-vf.woff2") format("woff2");
     font-weight: 300 900;
     font-feature-settings: "dlig" on, "ordn" on, "ss02" on, "zero" on;
     font-display: swap;
@@ -23,143 +22,6 @@ body {
     font-size: 100%;
     isolation: isolate;
     font-feature-settings: "zero" on, "dlig" on, "ss02" on, "ordn" on;
-}
-
-@layer resets {
-    :is(*, ::before, ::after) {
-        box-sizing: border-box;
-    }
-
-    :is(h2, h3, h4, h5) {
-        line-height: 1.2;
-        overflow-wrap: break-word;
-        hyphens: auto;
-        letter-spacing: -0.01em;
-    }
-
-    h1 {
-        line-height: 1.1;
-        letter-spacing: 0.04em;
-    }
-
-    :is(body, h1, h2, h3, h4, h5, dl, dt, dd, p) {
-        margin: 0;
-    }
-
-    :is(img, svg) {
-        max-inline-size: 100%;
-        display: block;
-    }
-
-    :is(ul, ol, fieldset, legend, menu, [popover]) {
-        margin: 0;
-        padding: 0;
-    }
-
-    :is(summary, ul):where([class]) {
-        list-style: none;
-    }
-
-    :is(button, fieldset) {
-        border: none;
-    }
-
-    :is(dialog, [popover])::backdrop {
-        background-color: hsla(0, 0%, 0%, 0.8);
-    }
-
-    dt {
-        font-weight: bold;
-    }
-
-    a {
-        --outline-style: dashed;
-        text-transform: uppercase;
-        font-weight: 700;
-        display: inline-block;
-
-        &:not([class]) {
-            --outline-style: dashed;
-            text-decoration-thickness: max(0.08em, 1px);
-            text-underline-offset: 0.15em;
-            color: var(--link-clr, inherit);
-
-            &:not(:disabled):where(:focus-visible, :hover) {
-                --icon-fill: oklch(92% 48% 35);
-                color: var(--fill-hover, var(--icon-fill));
-                text-decoration: currentColor wavy underline;
-            }
-        }
-
-        &:where([class]) {
-            text-decoration: none;
-            color: var(--link-clr, var(--icon-fill, inherit));
-        }
-    }
-
-    button:not(.reset-btn) {
-        --min-padding: .75em;
-        min-inline-size: 3rem;
-        min-block-size: 3rem;
-        font-weight: bold;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        touch-action: manipulation;
-        user-select: none;
-    }
-
-    button:not([data-icon], .reset-btn) {
-        min-block-size: 2rem;
-        min-inline-size: 2rem;
-    }
-
-    :focus-visible {
-        --outline-size: max(2px, .3em);
-        outline: var(--outline-width, var(--outline-size)) var(--outline-style, solid) var(--outline-clr, currentColor);
-        outline-offset: var(--outline-offset, var(--outline-size));
-    }
-
-    :target {
-        scroll-margin-block-start: 2rem;
-    }
-
-    :focus {
-        scroll-margin-block-end: 8vh;
-    }
-
-    input:where([type="text"], [type="email"], [type="tel"]),
-    textarea {
-        --outline-offset: .05em;
-        padding: 0.75em;
-        line-height: inherit;
-        border-radius: .5rem;
-        border: .1em solid var(--bdr-clr, hsl(0, 0%, 81%));
-        inline-size: 100%;
-        font-weight: 500;
-        font-size: inherit;
-
-        &:hover {
-            --bdr-clr: var(--system-color-paleOrange);
-        }
-
-        &:focus-visible:not(:is(:invalid):not([data-new])) {
-            --bdr-clr: var(--system-color-orange);
-            --outline-clr: var(--system-color-orange);
-        }
-    }
-
-    :is(a, button, input):focus:not(:focus-visible) {
-        outline: none;
-    }
-
-    p:where(:not([class])) {
-        text-wrap: balance;
-        max-inline-size: var(--p-width, 50em);
-    }
-
-    main:where(body > *) {
-        min-block-size: 71lvb;
-    }
 }
 
 @layer utilities {
@@ -184,10 +46,6 @@ body {
         margin-block-start: 8rem;
     }
 
-    :where(header, .contain) {
-        container: section / inline-size;
-    }
-
     :is(.decorated, .extend-zone-start)::before,
     .extend-zone-end::after {
         content: "";
@@ -195,8 +53,17 @@ body {
         inset: 0;
     }
 
+    :where(header, .contain) {
+        container: var(--container-name, section) / inline-size;
+    }
+
     :where(h1, h2):where(:is(.banner, .contact-grid) *) {
         color: var(--system-color-darkBlue);
+    }
+
+    :is(.contact-grid, main:where(body > *)) {
+        max-inline-size: min(95vi, 1110px);
+        margin-inline: auto;
     }
 
     :is(.decorated, .logo) {
@@ -225,15 +92,42 @@ body {
         }
     }
 
+    .contact-grid {
+        --t-transform: none;
+        --g-template: "area1" "area2" "area3";
+        --deco-size: 292px;
+        --p-items: stretch center;
+        --y: calc(-1 * var(--s) / 2);
+        --bg: linear-gradient(45deg, #0000, var(--c1)) right 0 top var(--y) / var(--s) no-repeat,
+            linear-gradient(to right, #0000, var(--c1)) right var(--s) top var(--y) / var(--s) no-repeat,
+            linear-gradient(171deg, #0000, var(--c1)) right var(--s) bottom var(--y) / var(--s) no-repeat,
+            linear-gradient(-90deg, #0000, var(--c1)) right calc(2 * var(--s)) bottom var(--y) / var(--s) no-repeat,
+            linear-gradient(25deg, #0000, var(--c1)) right 0 bottom var(--y) / var(--s) no-repeat;
+        --mask: var(--rounding) right 0 top var(--y) / var(--s) no-repeat,
+            var(--rounding) right var(--s) top var(--y) / var(--s) no-repeat,
+            var(--rounding) right var(--s) bottom var(--y) / var(--s) no-repeat,
+            var(--rounding) right calc(2 * var(--s)) bottom var(--y) / var(--s) no-repeat,
+            var(--rounding) right 0 bottom var(--y) / var(--s) no-repeat;
+        --color-fill: var(--system-color-peach);
+        --radius: .5rem;
+        --container-name: contact;
+        block-size: var(--deco-size);
+    }
+
     .banner {
         --min-padding: 60px 1.5em 0;
         --alignment: center;
         --deco-size: var(--m-height);
-        text-align: center;
+        --p-width: 30em;
         max-block-size: var(--m-height, 768px);
         overflow-y: clip;
         background-color: var(--system-color-peach);
         clip-path: var(--b-clip, inset(0 round .5rem));
+    }
+
+    .banner,
+    .contact-grid {
+        text-align: center;
     }
 
     .btn-primary {
@@ -281,7 +175,7 @@ body {
         --icon-fill-hover: var(--system-color-softRed);
     }
 
-    a:where(:is(.decorated, .services, nav, footer) *),
+    a:where(:is(.decorated, nav, footer) *),
     .links {
         --f-size-fluid: 2.5cqi;
         text-decoration: none;
@@ -346,30 +240,16 @@ body {
         inset-inline-end: var(--right-x, auto);
     }
 
-    .branding>img {
-        border-radius: .5rem;
-        align-self: stretch;
-        max-block-size: var(--img-h, 300px);
-        min-inline-size: var(--img-w, 100%);
-        object-fit: cover;
-        object-position: top 2% left 5%;
-    }
-
     .no-gap {
         --r-space: 0;
         --c-space: 0;
     }
 
-    :is(.no-padding, .reset-btn) {
-        --min-padding: 0;
-        --radius: 0;
-    }
-
     @media screen and (min-width: 480px) {
         .banner {
-            --x: right calc(-1 * (var(--s) / 4));
-            --y: top 2rem;
-            --bg: linear-gradient(15deg, #0000, var(--c1)) var(--x) var(--y) / var(--s) no-repeat;
+            --x: var(--b-md-x, right calc(-1 * (var(--s) / 4)));
+            --y: var(--b-md-y, top 2rem);
+            --bg: var(--b-md-bg, linear-gradient(15deg, #0000, var(--c1)) var(--x) var(--y) / var(--s) no-repeat);
             --mask: var(--rounding) var(--x) var(--y) / var(--s) no-repeat;
         }
 
@@ -382,16 +262,20 @@ body {
     }
 
     @media screen and (min-width: 768px) {
+
+        .banner,
+        .contact-grid {
+            text-align: start;
+        }
+
         .banner {
             --min-padding: 5rem 1.5rem 0;
             --m-height: 480px;
             --col-dir: row;
-            --x: right 0;
-            --y: top 0;
-            --s: 480px;
-            --p-width: 30em;
+            --x: var(--b-xl-x, right 0);
+            --y: var(--b-xl-y, top 0);
+            --s: var(--m-height);
             --i-alignment: space-between;
-            text-align: start;
 
             img:where(& *) {
                 min-inline-size: 284px;
@@ -402,61 +286,16 @@ body {
             }
         }
 
-    }
+        .contact-grid {
+            --g-template: "area1 . ." "area2 . area3" "area2 . ." / fit-content(30em) 1fr max-content;
+            --p-items: start stretch;
+            --min-padding: 1.5em 3em;
 
-}
-
-@layer theme {
-    :root {
-        --system-color-black: oklch(8% 6% 10);
-        --system-color-white: oklch(95% 1% 10);
-        --system-color-darkBlue: hsl(222, 31%, 19%);
-        --system-color-orange: oklch(44% 86% 12);
-        --system-color-lightOrange: oklch(96% 15% 35);
-        --system-color-peach: oklch(75% 51% 31);
-        color-scheme: light;
-    }
-}
-
-
-@layer typography {
-    :is(h1, h2, h3, h4, h5, p, dt, dd, legend, .fluid-type) {
-        font-size: clamp(var(--f-size, 1rem) * clamp(0.5, 1 - var(--f-size-diff, 0.3), 0.9),
-                var(--f-size-fluid, var(--default-fluid, 3vw)),
-                var(--f-size, 1rem));
-    }
-
-    :is(h2, h3, h4, h5) {
-        text-transform: var(--t-transform, uppercase);
-        color: var(--heading-clr, currentColor);
-    }
-
-    h1 {
-        --f-size: 3rem;
-        --f-size-diff: 0.4;
-    }
-
-    h2 {
-        --f-size: 2.5rem;
-        --f-size-diff: 0.45;
-    }
-
-    h3 {
-        --f-size: 1.5rem;
-    }
-
-    h4 {
-        --f-size: 1.25rem;
-    }
-
-    h5 {
-        --f-size: 1.125rem;
-    }
-
-    @supports (font-size: 1cqi) {
-        :is(h1, h2, h3, h4, p, dt, dd, .fluid-type, footer a) {
-            --default-fluid: 5cqi;
+            &> :first-child {
+                align-self: end;
+            }
         }
+
     }
 }
 
@@ -496,7 +335,7 @@ body {
         gap: var(--c-gap, 1.5em);
     }
 
-    :where(header, footer, .box, button, .btn) {
+    :where(header, footer, [class*="box-"], .box, button, .btn) {
         padding: var(--min-padding, 1.5em);
         background-color: var(--color-fill, transparent);
         color: var(--color-text, currentColor);
@@ -537,7 +376,7 @@ body {
         }
     }
 
-    .responsive-grid {
+    .responsive-grid:not([class$="grid"]) {
         --max-col-width: var(--m-col-w, 12rem);
         --min-row-height: var(--m-row-h, 15rem);
         --max-cols: var(--m-col-s, 3);
@@ -548,90 +387,6 @@ body {
         grid-auto-rows: minmax(var(--min-row-height), auto);
         gap: var(--gap);
     }
-
-    .service_content {
-        background-color: var(--bg-clr, transparent);
-        border-image: linear-gradient(#0009, #0009) 1 fill;
-    }
-
-    .services {
-        --i-gap: 0;
-        --min-padding: 0;
-        --m-col-w: 100%;
-        --c-gap: 1.5rem;
-        --m-col-s: 2;
-        --f: 1.3;
-
-
-        img {
-            block-size: var(--m-row-h, 250px);
-            min-inline-size: 100%;
-            object-fit: cover;
-            object-position: right 10% bottom 0;
-            transform: var(--_img-transform, none);
-            clip-path: var(--_img-clip, none);
-        }
-
-        &>li {
-            --icon-fill: var(--system-color-peach);
-            display: grid;
-            grid-template: "area1";
-            container: hero / inline-size;
-            clip-path: inset(0 round .5rem);
-            place-items: stretch;
-            color: var(--system-color-white);
-            overflow: clip;
-
-            &:where(:focus-within, :hover) {
-                --bg-clr: oklch(75% 59% 31 / 0.5);
-                --_img-clip: inset((1 - 1 / var(--f)) * 50%);
-                --_img-transform: scale(var(--f));
-            }
-
-            &>* {
-                grid-area: area1;
-                isolation: isolate;
-            }
-
-        }
-    }
-
-    .features {
-        --g-template: "area1" "area2";
-        --p-items: stretch center;
-        --g-gap: 1.5em;
-        text-align: center;
-
-    }
-
-    :is(.contact-grid, main) {
-        max-inline-size: min(95vi, 1110px);
-        margin-inline: auto;
-    }
-
-    .contact-grid {
-        --t-transform: none;
-        --g-template: "area1" "area2" "area3";
-        --deco-size: 292px;
-        --p-items: stretch center;
-        --y: calc(-1 * var(--s) / 2);
-        --bg: linear-gradient(45deg, #0000, var(--c1)) right 0 top var(--y) / var(--s) no-repeat,
-            linear-gradient(to right, #0000, var(--c1)) right var(--s) top var(--y) / var(--s) no-repeat,
-            linear-gradient(171deg, #0000, var(--c1)) right var(--s) bottom var(--y) / var(--s) no-repeat,
-            linear-gradient(-90deg, #0000, var(--c1)) right calc(2 * var(--s)) bottom var(--y) / var(--s) no-repeat,
-            linear-gradient(25deg, #0000, var(--c1)) right 0 bottom var(--y) / var(--s) no-repeat;
-        --mask: var(--rounding) right 0 top var(--y) / var(--s) no-repeat,
-            var(--rounding) right var(--s) top var(--y) / var(--s) no-repeat,
-            var(--rounding) right var(--s) bottom var(--y) / var(--s) no-repeat,
-            var(--rounding) right calc(2 * var(--s)) bottom var(--y) / var(--s) no-repeat,
-            var(--rounding) right 0 bottom var(--y) / var(--s) no-repeat;
-        --color-fill: var(--system-color-peach);
-        --radius: .5rem;
-        text-align: center;
-        container: contact / inline-size;
-        block-size: var(--deco-size);
-    }
-
     footer {
         --min-padding: 2em 1.5em 1.5em;
         --color-text: var(--system-color-white);
@@ -685,70 +440,216 @@ body {
     }
 
     @media screen and (min-width: 480px) {
-
-        .services {
-            --m-row-h: 200px;
-        }
-
         nav:where(body > *) {
             --min-padding: 1.5em 0;
         }
-
-        .features {
-            --g-template: "area1 area2";
-            --p-items: center;
-            text-align: start;
-        }
-
         :is(footer, header, nav, .main-content) {
             max-inline-size: min(95vi, 1110px);
             margin-inline: auto;
         }
-
         .md-remove {
             display: none;
         }
     }
+}
 
-    @media screen and (min-width: 768px) {
-        .contact-grid {
-            --g-template: "area1 . ." "area2 . area3" "area2 . ." / fit-content(30em) 1fr max-content;
-            --p-items: start stretch;
-            --min-padding: 1.5em 3em;
-            text-align: start;
 
-            &> :first-child {
-                align-self: end;
+@layer resets {
+    :is(*, ::before, ::after) {
+        box-sizing: border-box;
+    }
+
+    :is(h2, h3, h4, h5) {
+        line-height: 1.2;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        letter-spacing: -0.01em;
+    }
+
+    h1 {
+        line-height: 1.1;
+        letter-spacing: 0.04em;
+    }
+
+    :is(body, h1, h2, h3, h4, h5, dl, dt, dd, p) {
+        margin: 0;
+    }
+
+    :is(img, svg) {
+        max-inline-size: 100%;
+        display: block;
+    }
+
+    :is(ul, ol, fieldset, legend, menu, [popover]) {
+        margin: 0;
+        padding: 0;
+    }
+
+    :is(summary, ul):where([class]) {
+        list-style: none;
+    }
+
+    :is(button, fieldset) {
+        border: none;
+    }
+
+    :is(dialog, [popover])::backdrop {
+        background-color: hsla(0, 0%, 0%, 0.8);
+    }
+
+    a {
+        --outline-style: dashed;
+        display: inline-block;
+
+        &:not([class]) {
+            --outline-style: dashed;
+            text-decoration-thickness: max(0.08em, 1px);
+            text-underline-offset: 0.15em;
+            color: var(--link-clr, inherit);
+
+            &:not(:disabled):where(:focus-visible, :hover) {
+                --icon-fill: oklch(92% 48% 35);
+                color: var(--fill-hover, var(--icon-fill));
+                text-decoration: currentColor wavy underline;
             }
         }
 
-        .services {
-            --m-col-w: 12rem;
+        &:where([class]) {
+            text-decoration: none;
+            color: var(--link-clr, var(--icon-fill, inherit));
+        }
+    }
 
-            &> :first-of-type:nth-last-of-type(3) {
-                --m-row-h: calc(400px + var(--gap));
-                grid-row: span 2;
-            }
+    button,
+    a,
+    dt {
+        font-weight: 700;
+    }
+
+    button,
+    a {
+        text-transform: uppercase;
+    }
+
+    button {
+        --min-padding: .75em;
+        min-inline-size: 3rem;
+        min-block-size: 3rem;
+        letter-spacing: 1px;
+        touch-action: manipulation;
+        user-select: none;
+    }
+
+    button:not([data-icon]) {
+        min-block-size: 2rem;
+        min-inline-size: 2rem;
+    }
+
+    :focus-visible {
+        --outline-size: max(2px, .3em);
+        outline: var(--outline-width, var(--outline-size)) var(--outline-style, solid) var(--outline-clr, currentColor);
+        outline-offset: var(--outline-offset, var(--outline-size));
+    }
+
+    :target {
+        scroll-margin-block-start: 2rem;
+    }
+
+    :focus {
+        scroll-margin-block-end: 8vh;
+    }
+
+    input:where([type="text"], [type="email"], [type="tel"]),
+    textarea {
+        --outline-offset: .05em;
+        padding: 0.75em;
+        line-height: inherit;
+        border-radius: .5rem;
+        border: .1em solid var(--bdr-clr, hsl(0, 0%, 81%));
+        inline-size: 100%;
+        font-weight: 500;
+        font-size: inherit;
+
+        &:hover {
+            --bdr-clr: var(--system-color-paleOrange);
         }
 
-        :where(header, .features) {
-            --col-dir: row;
+        &:focus-visible:not(:is(:invalid):not([data-new])) {
+            --bdr-clr: var(--system-color-orange);
+            --outline-clr: var(--system-color-orange);
         }
+    }
 
-        .features {
-            --g-template: "area1" "area2";
-            text-align: center;
+    :is(a, button, input):focus:not(:focus-visible) {
+        outline: none;
+    }
 
-            &>* {
-                flex: 2 1 auto;
-            }
+    p:where(:not([class])) {
+        text-wrap: balance;
+        max-inline-size: var(--p-width, 50em);
+    }
+
+    main:where(body > *) {
+        min-block-size: 71lvb;
+    }
+}
+
+@layer theme {
+    :root {
+        --system-color-black: oklch(8% 6% 10);
+        --system-color-white: oklch(95% 1% 10);
+        --system-color-darkBlue: hsl(222, 31%, 19%);
+        --system-color-orange: oklch(44% 86% 12);
+        --system-color-lightOrange: oklch(96% 15% 35);
+        --system-color-peach: oklch(75% 51% 31);
+        color-scheme: light;
+    }
+}
+
+@layer typography {
+    :is(h1, h2, h3, h4, h5, p, dt, dd, legend, .fluid-type) {
+        font-size: clamp(var(--f-size, 1rem) * clamp(0.5, 1 - var(--f-size-diff, 0.3), 0.9),
+                var(--f-size-fluid, var(--default-fluid, 3vw)),
+                var(--f-size, 1rem));
+    }
+
+    :is(h2, h3, h4, h5) {
+        text-transform: var(--t-transform, uppercase);
+        color: var(--heading-clr, currentColor);
+    }
+
+    h1 {
+        --f-size: 3rem;
+        --f-size-diff: 0.4;
+    }
+
+    h2 {
+        --f-size: 2.5rem;
+        --f-size-diff: 0.45;
+    }
+
+    h3 {
+        --f-size: 1.5rem;
+    }
+
+    h4 {
+        --f-size: 1.25rem;
+    }
+
+    h5 {
+        --f-size: 1.125rem;
+    }
+
+    @supports (font-size: 1cqi) {
+        :is(h1, h2, h3, h4, p, dt, dd, .fluid-type, footer a) {
+            --default-fluid: 5cqi;
         }
     }
 }
 
 @media screen and (prefers-reduced-motion: no-preference) {
 
-    :is(a, img, .service_content, [popover]),
+    :is(a, img, .transition-all, [popover]),
     [data-icon-position="start"]::before,
     [data-icon-position="end"]::after {
         transition: all .35s ease-out;

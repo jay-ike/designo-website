@@ -1,10 +1,9 @@
-<p class="visually-hidden" id="services-description">view our services</p>
-<ul class="responsive-grid services" aria-labelledby="services-description">
+<ul class="responsive-grid contain services" aria-label="view our services">
     {% for item in services %}
         {% if item.topic != pageTopic %}
         <li>
             {% image item.path item.alt "280,541" %}
-            {% card item.title 2 "center service_content" %}
+            {% card item.title 2 "center transition-all service_content" %}
                 <a class="box extend-zone-start" href="{{ item.link }}" data-icon="arrow_right" data-icon-position="end"> view content </a>
             {% endcard %}
         </li>
