@@ -3,28 +3,33 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Ndimah Tchougoua">
-    <meta name="description" content="a Modern digital agency helping their customers to fullfil their digital dreams">
-    <meta name="color-scheme" content="only light">
+    <title>{{pageTitle}}</title>
+    <link rel="preload" href="/assets/just-vf.woff2" as="font" type="font/woff2" crossorigin="anonymous">
     <link rel="icon" sizes="32x32" href="/assets/favicon.ico">
     <link rel="icon" type="image/svg+xml" href="/assets/icon.svg">
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
-    <title>{{pageTitle}}</title>
+    {% set css %}
+        {%include "includes/base.css" %}
+    {% endset %}
+    <style>
+        {{css | safe}}
+    </style>
     {% if stylePath %}
     <link rel="stylesheet" href="{{ stylePath }}">
-    {% else %}
-    <link rel="stylesheet" href="/assets/style.css">
     {% endif %}
     {% for path in extraStyles %}
         <link rel="stylesheet" href="{{ path }}">
     {% endfor %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Ndimah Tchougoua">
+    <meta name="description" content="a Modern digital agency helping their customers to fullfil their digital dreams">
+    <meta name="color-scheme" content="only light">
 </head>
 
 <body>
     {% include "includes/navigation.html" %}
-    {{ content }}
+    {{ content | safe }}
     {% if pageId != "contact" %}
     {% include "includes/in-touch.html" %}
     {% endif %}
