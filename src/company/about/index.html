@@ -3,20 +3,22 @@ layout: "layouts/base.njk"
 pageTitle: "About Designo Digital agency"
 ---
 {% assign data = images %}
-
-<header class="column no-gap">
+<style>
+    {%include "includes/company-common.css"%}
+</style>
+<header class="contain column no-gap">
     {% image data.hero.path data.hero.alt "375,480" %}
-    <div class="stack decorated banner">
+    <div class="stack decorated section_content about-deco">
         <h1>{{ data.hero.title }}</h1>
         {% for paragraph in data.hero.paragraphs %}
             <p>{{ paragraph }}</p>
         {% endfor %}
     </div>
 </header>
-<main>
+<main class="contain main-content xl-stack">
     <section class="column no-gap">
         {% image data.talent.path data.talent.alt "375,480" %}
-        <div class="stack decorated">
+        <div class="stack decorated section_content">
             <h3>{{ data.talent.title }}</h3>
             {% for paragraph in data.talent.paragraphs %}
                 <p>{{ paragraph }}</p>
@@ -24,7 +26,7 @@ pageTitle: "About Designo Digital agency"
 
         </div>
     </section>
-    <section class="column locations mb-xl">
+    <section class="column no-clip mb-xl locations">
         {% for location in locations %}
             <div class="center">
                 <svg width="202" height="202">
@@ -38,7 +40,7 @@ pageTitle: "About Designo Digital agency"
     </section>
     <section class="column no-gap">
         {% image data.deal.path data.deal.alt "375,480" %}
-        <div class="stack decorated">
+        <div class="stack decorated section_content">
             <h3>{{ data.deal.title }}</h3>
             {% for paragraph in data.deal.paragraphs %}
                 <p>{{ paragraph }}</p>

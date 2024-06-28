@@ -55,7 +55,7 @@ body {
         color: var(--system-color-darkBlue);
     }
 
-    :is(.contact-grid, main:where(body > *)) {
+    :is(.contact-grid, main:not(.main-content):where(body > *)) {
         max-inline-size: min(95vi, 1110px);
         margin-inline: auto;
     }

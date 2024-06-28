@@ -95,5 +95,4 @@ module.exports = Object.freeze({
             url: "/company/locations#uk-infos"
         }
     ],
-    stylePath: "/assets/company.css"
 });
