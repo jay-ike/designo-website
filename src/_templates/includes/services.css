@@ -1,21 +1,19 @@
-@import url("/assets/style.css") layer(foundation);
-
 .projects {
     --g-template: "area1" "area2";
     --m-col-w: 327px;
     --p-width: 20em;
-
-    img {
-        inline-size: 100%;
-        max-block-size: 310px;
-        object-fit: cover;
-        object-position: 0 bottom 0;
-    }
-
-    h3 {
-        font-weight: 500;
-        color: var(--h-clr, var(--system-color-orange));
-    }
+    --container-name: projects;
+    --s-space: 1.5em;
+}
+img:where(.projects *) {
+    inline-size: 100%;
+    max-block-size: 310px;
+    object-fit: cover;
+    object-position: left 0 bottom 0;
+}
+h3:where(.projects *) {
+    font-weight: 500;
+    color: var(--h-clr, var(--system-color-orange));
 }
 
 .project-grid {
@@ -32,6 +30,12 @@
     &:hover {
         --h-clr: var(--system-color-darkBlue);
         background-color: oklch(92% 48% 35);
+    }
+}
+
+@container projects (inline-size > 456px) and (inline-size < 729px) {
+    .project-grid {
+        --g-template: "area1 area2" / fit-content(327px) minmax(232px, 1fr);
     }
 }
 

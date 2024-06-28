@@ -40,12 +40,6 @@ body {
     :is(.decorated, .relative) {
         position: relative;
     }
-
-    .xl-stack>*+*,
-    .mt-xl {
-        margin-block-start: 8rem;
-    }
-
     :is(.decorated, .extend-zone-start)::before,
     .extend-zone-end::after {
         content: "";
@@ -300,8 +294,11 @@ body {
 }
 
 @layer layout {
-    .stack>*+* {
+    :where(.stack, .xl-stack)>*+*, .mt-xl {
         margin-block-start: var(--s-space, 1.5em);
+    }
+    .mt-xl, .xl-stack {
+        --s-space: 8rem;
     }
 
     :is(.row, .column, .segragator, .cart-modal) {

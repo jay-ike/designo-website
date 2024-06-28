@@ -1,11 +1,3 @@
- .features {
-     --g-template: "area1" "area2";
-     --p-items: stretch center;
-     --g-gap: 1.5em;
-     --container-name: features;
-     text-align: center;
- }
-
  .service_content {
      background-color: var(--bg-clr, transparent);
      border-image: linear-gradient(#0009, #0009) 1 fill;
@@ -40,7 +32,6 @@
          --_img-transform: scale(var(--f));
      }
  }
-
  .services {
      --i-gap: 0;
      --min-padding: 0;
@@ -49,38 +40,19 @@
      --m-col-s: 2;
      --container-name: services;
  }
-
-
-
- @container features (inline-size > 456px) and (inline-size < 729px) {
-     .grid:where(.features > *) {
-         --g-template: "area1 area2";
-         --p-items: center;
-         text-align: start;
-     }
- }
-
  @container (inline-size > 729px) {
-     .grid:where(.features > *) {
-         flex: 2 1 auto;
-     }
      li:first-of-type:nth-last-of-type(3):where( .services > *) {
          --m-row-h: calc(400px +  var(--gap));
          grid-row: span 2;
      }
  }
-
  @media screen and (min-width: 480px) {
      .services {
          --m-row-h: 200px;
      }
  }
-
  @media screen and (min-width: 768px) {
      .services {
          --m-col-w: 12rem;
-     }
-     .features {
-         --col-dir: row;
      }
  }

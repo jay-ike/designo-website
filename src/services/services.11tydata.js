@@ -84,5 +84,4 @@ module.exports = Object.freeze({
     eleventyComputed: {
         getProjects: getImages(metadatas)
     },
-    stylePath: "/assets/services.css"
 });

@@ -2,19 +2,19 @@
 layout: "layouts/base.njk"
 pageTitle: "Designo Digital Agency"
 ---
-<header class="column banner decorated">
-    {% card heading.title 1 "stack" %}
-        <p>{{ heading.description }}</p>
-        <a href="/company/about" class="btn btn-primary"> learn more </a>
-    {% endcard %}
+<header class="column banner decorated" aria-labelledby="heading-title">
+    <div class="stack">
+        <h1 id="heading-title">{{heading.title}}</h1>
+        <p>{{heading.description}}</p>
+        <a href="/company/about" class="btn btn-primary">learn more</a>
+    </div>
     {%image hero heading.heroAlt "284" %}
 </header>
 <main class="xl-stack">
+    {% include "includes/services.html" %}
     <style>
-        {% include "includes/home.css" %}
+        {% include "includes/home-features.css" %}
     </style>
-    <link rel="stylesheet" href="/assets/styles/home.css">
-    {% include "includes/services.html" "view our services" %}
     <section class="contain features column">
         {% for feat in features %}
         <article class="grid">

@@ -1,0 +1,29 @@
+ .features {
+     --g-template: "area1" "area2";
+     --p-items: stretch center;
+     --g-gap: 1.5em;
+     --container-name: features;
+     text-align: center;
+ }
+ .stack:where(.features *) {
+     --s-space: var(--g-gap);
+ }
+ @container features (inline-size > 456px) and (inline-size < 729px) {
+     .grid:where(.features > *) {
+         --g-template: "area1 area2";
+         --p-items: center;
+         text-align: start;
+     }
+ }
+
+ @container (inline-size > 729px) {
+     .grid:where(.features > *) {
+         flex: 2 1 auto;
+     }
+ }
+
+ @media screen and (min-width: 768px) {
+     .features {
+         --col-dir: row;
+     }
+ }

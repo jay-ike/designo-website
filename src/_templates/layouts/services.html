@@ -3,16 +3,25 @@ layout: "layouts/base.njk"
 ---
 
 {{ content }}
-<main class="xl-stack mt-xl">
-    <ul class="responsive-grid projects">
+<style>
+    {%include "includes/services.css"%}
+</style>
+<main class="xl-stack mt-xl" aria-labelledby="service-title">
+    <h2 class="capitalize" id="service-title">our projects</h2>
+    <div class="responsive-grid contain projects">
         {% for item in getProjects %}
-            <li class="project-grid">
+        {% assign projectId= item.title | split: " " | join: "_" %}
+        <article class="project-grid" aria-labelledby="{{projectId}}">
                 {% image item.path item.alt "327" %}
-                {% card item.title 3 "box stack" %}
+                <div class="box stack">
+                    <h3 id="{{projectId}}">{{item.title}}</h3>
                     <p>{{ item.description }}</p>
-                {% endcard %}
-            </li>
+                </div>
+            </article>
         {% endfor %}
-    </ul>
-    {% include "includes/services.html" %}
+    </div>
+    <div class="column">
+        <h2 class="capitalize">other services</h2>
+        {% include "includes/services.html" %}
+    </div>
 </main>
