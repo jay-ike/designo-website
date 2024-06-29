@@ -1,0 +1,48 @@
+.content-clip > * {
+    clip-path: var(--cc-path, none);
+}
+
+.cpy-locations {
+    --clip: none;
+    --xl-gap: 1.5rem;
+    --p-content: center start;
+}
+dd:where(.cpy-locations *) {
+    --s-space: .75em;
+}
+.map-view {
+    position: absolute;
+}
+.map-view:not(.no-js *) {
+    position: static;
+    min-block-size: 320px;
+    min-inline-size: min(475px, 100%);
+    border-radius: var(--map-radius, 0);
+
+    & + picture {
+        display: none;
+    }
+}
+
+@container section_content (inline-size < 500px) {
+    .row:where(.section_content > *) {
+        --row-dir: column;
+        --row-align: start;
+    }
+}
+@container (inline-size > 459px) {
+    section:where(.cpy-locations > *) {
+        --cc-path: inset(0 round .5rem);
+        --img-pos: 15px;
+        --s-space: 8rem;
+    }
+}
+@container (inline-size > 729px) {
+    section:is(.cpy-locations > *) {
+        --col-dir: row-reverse;
+        &:nth-of-type(even) {
+            --col-dir: row;
+        }
+    }
+}
+

@@ -182,7 +182,7 @@ body {
         font-weight: 400;
     }
 
-    :where([aria-hidden="true"], .visually-hidden, .md-show) {
+    :where(.visually-hidden, .md-show) {
         max-inline-size: 1px;
         position: absolute;
         clip-path: inset(50%);

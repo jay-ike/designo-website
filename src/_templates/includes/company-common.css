@@ -103,7 +103,7 @@ a:where(.locations :only-of-type) {
     :where(header, main > section) {
         clip-path: var(--clip, inset(0 round .5rem));
     }
-    main {
+    header + main {
         margin-block-start: 8rem;
     }
 }
