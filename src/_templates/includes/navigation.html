@@ -1,23 +1,23 @@
 <nav class="row box contain">
-    <a href="/" class="logo" aria-label="go to designo home page" >designo</a>
+    <a href="/" class="logo">designo</a>
     <ul class="links ml-max md-show">
         {% for item in site.links %}
             <li class="fluid-type"><a href="{{item.path}}">{{ item.title }}</a></li>
         {% endfor %}
     </ul>
     <div class="ml-max md-remove">
-        <button popovertarget="mobile-menu" aria-label="open page menu">
+        <button popovertarget="mobile-menu" aria-labelledby="menu-open" class="no-padding">
             <svg width="24" height="24">
-                <title>open page menu</title>
+                <title id="menu-open">open page menu</title>
                 <use href="/assets/sprites.svg#hamburger">
             </svg>
         </button>
         <section id="mobile-menu" role="dialog" aria-label="page menu" popover="manual">
             <header class="segragator">
                 <a class="logo">designo</a>
-                <button popovertarget="mobile-menu" aria-label="close page menu">
+                <button popovertarget="mobile-menu" aria-labelledby="menu-close">
                     <svg width="24" height="24">
-                       <title>close page menu</title>
+                       <title id="menu-close">close page menu</title>
                        <use href="/assets/sprites.svg#hamburger">
                     </svg>
                 </button>

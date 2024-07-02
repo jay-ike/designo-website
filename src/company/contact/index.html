@@ -3,9 +3,15 @@ layout: "layouts/base.njk"
 pageTitle: "Contact Designo Digital Agency"
 pageId: "contact"
 ---
-<header class="column banner decorated contact-banner">
+<style>
+    {%include "includes/company-common.css"%}
+</style>
+<style>
+    {% include "includes/company-contact.css" %}
+</style>
+<header class="column banner decorated contact-banner" aria-labelledby="contact-title">
     <div class="stack">
-        <h1>Contact Us</h1>
+        <h1 id="contact-title">Contact Us</h1>
         <p>
             Ready to take it to the next level? Let’s talk about your project or idea and find out how we can help your
             business grow. If you are looking for unique digital experiences that’s relatable to your users, drop us a
@@ -30,13 +36,13 @@ pageId: "contact"
         </div>
         <div class="row">
             <label for="msg">your message</label>
-            <textarea name="clientMsg" id="msg" cols="30" rows="10"></textarea>
+            <textarea name="clientMsg" id="msg" cols="30" rows="6"></textarea>
         </div>
         <button class="btn-primary"> submit</button>
     </form>
 </header>
-<main>
-    <section class="column locations mb-xl">
+<main class="contain mb-xl">
+    <section class="column locations">
         {% for location in locations %}
         <div class="center">
             <svg width="202" height="202">

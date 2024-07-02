@@ -36,6 +36,9 @@ body {
     .place-end {
         place-self: end;
     }
+    .no-padding {
+        padding: 0;
+    }
 
     :is(.decorated, .relative) {
         position: relative;
@@ -408,6 +411,7 @@ body {
     }
 
     nav {
+        --min-padding: 1.5em min(4vi, 1.5em);
         position: sticky;
         inset-block-start: 0;
         z-index: 1;

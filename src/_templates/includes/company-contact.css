@@ -1,0 +1,49 @@
+.contact-banner {
+    --min-padding: min(5vi, 3rem);
+    --row-dir: column;
+    --row-align: stretch;
+    --r-space: .5em;
+    --alignment: stretch;
+    max-block-size: max-content;
+
+}
+form:where(.contact-banner *) {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: .75rem;
+}
+label {
+    text-transform: capitalize;
+}
+textarea {
+    resize: none;
+}
+button:where(.contact-banner *) {
+    align-self: var(--button-align, center);
+    padding: .75rem 1.5rem;
+}
+h1:where(header *) {
+    text-transform: capitalize;
+}
+.text-primary {
+    color: var(--system-color-orange);
+}
+.mb-xl {
+    margin-block: 8rem;
+}
+
+@container (inline-size > 729px) {
+    form {
+        min-inline-size: 380px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .contact-banner {
+        --col-dir: row;
+        --alignment: center;
+        --button-align: end;
+    }
+
+}
+
