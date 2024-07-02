@@ -54,7 +54,7 @@ body {
         container: var(--container-name, section) / inline-size;
     }
 
-    :where(h1, h2):where(:is(.banner, .contact-grid) *) {
+    :where(h1, h2):where(:is(header, .contact-grid) *) {
         color: var(--system-color-darkBlue);
     }
 
@@ -110,19 +110,14 @@ body {
         --container-name: contact;
         block-size: var(--deco-size);
     }
-
-    .banner {
-        --min-padding: 60px 1.5em 0;
-        --alignment: center;
-        --deco-size: var(--m-height);
+    header.decorated {
         --p-width: 30em;
-        max-block-size: var(--m-height, 768px);
-        overflow-y: clip;
         background-color: var(--system-color-peach);
+        max-block-size: var(--m-height, 768px);
         clip-path: var(--b-clip, inset(0 round .5rem));
     }
 
-    .banner,
+    header,
     .contact-grid {
         text-align: center;
     }
@@ -243,7 +238,7 @@ body {
     }
 
     @media screen and (min-width: 480px) {
-        .banner {
+        header {
             --x: var(--b-md-x, right calc(-1 * (var(--s) / 4)));
             --y: var(--b-md-y, top 2rem);
             --bg: var(--b-md-bg, linear-gradient(15deg, #0000, var(--c1)) var(--x) var(--y) / var(--s) no-repeat);
@@ -260,14 +255,13 @@ body {
 
     @media screen and (min-width: 768px) {
 
-        .banner,
+        header,
         .contact-grid {
             text-align: start;
         }
 
-        .banner {
-            --min-padding: 5rem 1.5rem 0;
-            --m-height: 480px;
+        header:where(.decorated) {
+            --m-height: 640px;
             --col-dir: row;
             --x: var(--b-xl-x, right 0);
             --y: var(--b-xl-y, top 0);

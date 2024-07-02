@@ -2,8 +2,11 @@
 layout: "layouts/base.njk"
 pageTitle: "Designo Digital Agency"
 ---
+<style>
+    {% include "includes/home-banner.css" %}
+</style>
 <header class="column banner decorated" aria-labelledby="heading-title">
-    <div class="stack">
+    <div class="column">
         <h1 id="heading-title">{{heading.title}}</h1>
         <p>{{heading.description}}</p>
         <a href="/company/about" class="btn btn-primary">learn more</a>

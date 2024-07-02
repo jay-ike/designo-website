@@ -20,7 +20,8 @@ async function parseImage(src, alt, sizes="300,600") {
         class: "preloaded",
         sizes
     };
-    imageAttributes.style = "background-size: cover;background-image:url(" +
+    imageAttributes.style = "background-size: var(--bg-size, cover); " +
+        "background-image:url(" +
         "data:image/jpeg;base64," + blob.toString("base64") + ");color:" +
         "transparent;";
     return Image.generateHTML(metadata, imageAttributes);
