@@ -1,0 +1,8 @@
+*
+!src
+!assets
+!eleventy.config.js
+!utils.js
+!package.json
+!package-lock.json
+!start_script.sh

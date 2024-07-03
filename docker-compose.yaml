@@ -1,0 +1,12 @@
+services:
+  image:
+    build:
+      context: .
+    environment:
+# this is where you should set the in which eleventy will serve the website
+# note that it should be the same as in the port binding
+      APP_PORT: 6060
+    ports:
+      - 8080:6060
+    volumes:
+      - .:/usr/src/app
