@@ -13,15 +13,15 @@
             </svg>
         </button>
         <section id="mobile-menu" role="dialog" aria-label="page menu" popover="manual">
-            <header class="segragator">
-                <a class="logo">designo</a>
+            <div class="segragator box block-box" role="banner" aria-labelledby="menu-title">
+                <h3 class="logo links" id="menu-title">designo</h3>
                 <button popovertarget="mobile-menu" aria-labelledby="menu-close">
                     <svg width="24" height="24">
                        <title id="menu-close">close page menu</title>
                        <use href="/assets/sprites.svg#hamburger">
                     </svg>
                 </button>
-            </header>
+            </div>
             <ul class="box stack box-dark">
                  {% for item in site.links %}
                     <li><a href="{{item.path}}">{{item.title}}</a></li>

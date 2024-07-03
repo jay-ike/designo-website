@@ -196,34 +196,47 @@ body {
         --m: 0 70;
         --so: -41;
         --c: 53, 42;
-        --translation: none;
     }
 
     [popover] {
         border: none;
         isolation: isolate;
-
         &::before {
             content: "";
             position: fixed;
             inset: 0;
             z-index: -1;
         }
+        &, &::backdrop {
+            transition: display .35s allow-discrete,
+            overlay .35s allow-discrete,
+            transform .35s ease-in,
+            opacity .35s;
+            opacity: 0;
+
+        }
+        &:popover-open, &:popover-open::backdrop {
+            opacity: 1;
+            transform: none;
+            @starting-style {
+                opacity: 0;
+                transform: translateX(50vmax);
+            }
+        }
     }
 
     #mobile-menu {
+        --min-padding: 1.5em min(4vi, 1.5em);
         --y: 0;
         --s-space: 2em;
         inline-size: 100vi;
     }
+    .block-box {
+        block-size: var(--block-size);
+    }
 
     button:not(:enabled) {
         color: hsl(0, 0%, 75%);
-    }
-
-    :where(.menu, [role="dialog"]) {
-        position: fixed;
-        transform: var(--translation, translateX(-50vmax));
     }
 
     [role="dialog"] {
@@ -405,7 +418,7 @@ body {
     }
 
     nav {
-        --min-padding: 1.5em min(4vi, 1.5em);
+        --min-padding: 0 min(4vi, 1.5em);
         position: sticky;
         inset-block-start: 0;
         z-index: 1;
@@ -413,7 +426,8 @@ body {
         background-color: canvas;
 
         &:where(body > *) {
-            min-block-size: 96px;
+            --block-size: min(15lvb, 96px);
+            min-block-size: var(--block-size);
             border-image: linear-gradient(canvas, canvas) 1 fill / 1 / 0 50vi;
         }
     }
@@ -436,7 +450,7 @@ body {
 
     @media screen and (min-width: 480px) {
         nav:where(body > *) {
-            --min-padding: 1.5em 0;
+            --min-padding: 0;
         }
         :is(footer, header, nav, .main-content) {
             max-inline-size: min(95vi, 1110px);
