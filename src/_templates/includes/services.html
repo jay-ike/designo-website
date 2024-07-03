@@ -1,6 +1,4 @@
-<style>
-    {%include "includes/services-preview.css"%}
-</style>
+<style>{%cssmin "includes/services-preview.css"%}</style>
 <ul class="responsive-grid contain services" aria-label="view our services">
     {% for item in services %}
         {% if item.topic != pageTopic %}

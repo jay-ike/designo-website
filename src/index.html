@@ -12,7 +12,7 @@ pageTitle: "Designo Digital Agency"
     {%image hero heading.heroAlt "284" %}
 </header>
 <main class="xl-stack">
-    {% cssmin "includes/services.html" %}
+    {% include "includes/services.html" %}
     <style>{% cssmin "includes/home-features.css" %}</style>
     <section class="contain features column">
         {% for feat in features %}
