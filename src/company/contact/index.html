@@ -3,12 +3,8 @@ layout: "layouts/base.njk"
 pageTitle: "Contact Designo Digital Agency"
 pageId: "contact"
 ---
-<style>
-    {%include "includes/company-common.css"%}
-</style>
-<style>
-    {% include "includes/company-contact.css" %}
-</style>
+<style>{% cssmin "includes/company-common.css"%}</style>
+<style>{% cssmin "includes/company-contact.css" %}</style>
 <header class="column banner decorated contact-banner" aria-labelledby="contact-title">
     <div class="stack">
         <h1 id="contact-title">Contact Us</h1>

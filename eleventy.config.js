@@ -1,4 +1,5 @@
 /*jslint node*/
+const {transform} = require("lightningcss");
 const Image = require("@11ty/eleventy-img");
 const {readFile} = require("node:fs");
 const {promisify} = require("node:util");
@@ -17,7 +18,6 @@ async function parseImage(src, alt, sizes="300,600") {
         alt,
         decoding: "async",
         loading: "lazy",
-        class: "preloaded",
         sizes
     };
     imageAttributes.style = "background-size: var(--bg-size, cover); " +
@@ -26,6 +26,18 @@ async function parseImage(src, alt, sizes="300,600") {
         "transparent;";
     return Image.generateHTML(metadata, imageAttributes);
 }
+async function parseCss({dir}, src) {
+    const blob = await fileReader(path.normalize(
+        `${dir.input}/${dir.includes}/${src}`
+    ));
+    const {code} = transform({
+        filename: "style.css",
+        code: blob,
+        minify:true
+    });
+    return code.toString();
+}
+
 module.exports = function (config) {
     config.addPassthroughCopy("assets");
     config.addShortcode("image", parseImage);
@@ -38,6 +50,9 @@ module.exports = function (config) {
             </div>`;
         }
     );
+    config.addShortcode("cssmin", async function (src) {
+        return parseCss(config, src);
+    });
     return {
         dir: {
             includes: "_templates",

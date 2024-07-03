@@ -3,9 +3,7 @@ layout: "layouts/base.njk"
 pageTitle: "About Designo Digital agency"
 ---
 {% assign data = images %}
-<style>
-    {%include "includes/company-common.css"%}
-</style>
+<style>{%cssmin "includes/company-common.css"%}</style>
 <header class="contain column no-gap">
     {% image data.hero.path data.hero.alt "375,480" %}
     <div class="stack decorated section_content about-deco">

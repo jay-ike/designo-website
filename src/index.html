@@ -2,9 +2,7 @@
 layout: "layouts/base.njk"
 pageTitle: "Designo Digital Agency"
 ---
-<style>
-    {% include "includes/home-banner.css" %}
-</style>
+<style>{% cssmin "includes/home-banner.css" %}</style>
 <header class="column banner decorated" aria-labelledby="heading-title">
     <div class="column">
         <h1 id="heading-title">{{heading.title}}</h1>
@@ -14,10 +12,8 @@ pageTitle: "Designo Digital Agency"
     {%image hero heading.heroAlt "284" %}
 </header>
 <main class="xl-stack">
-    {% include "includes/services.html" %}
-    <style>
-        {% include "includes/home-features.css" %}
-    </style>
+    {% cssmin "includes/services.html" %}
+    <style>{% cssmin "includes/home-features.css" %}</style>
     <section class="contain features column">
         {% for feat in features %}
         <article class="grid">
