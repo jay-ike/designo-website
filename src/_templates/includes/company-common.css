@@ -19,8 +19,8 @@ h1:where(header *) {
     text-transform: capitalize;
     color: var(--h-color, var(--system-color-darkBlue));
 }
-img:where(:is(header, section) *) {
-    min-inline-size: 100%;
+img:where(.img-wrapper > *) {
+    inline-size: 100%;
     max-block-size: var(--img-maxH, 320px);
     object-fit: cover;
     object-position: var(--img-pos, bottom 0 left 0);
@@ -82,10 +82,14 @@ a:where(.locations :only-of-type) {
         --y: bottom 0;
     }
     .section_content {
-        flex: 2 1 65%;
+        flex: 1 1 65%;
     }
-    img:where(.column *) {
+    .img-wrapper {
+        flex: 1 1 30em;
+    }
+    img:where(.img-wrapper > *) {
         min-block-size: 100%;
+        inline-size: 100%;
     }
     section:where(main > *) {
         --col-dir: row;

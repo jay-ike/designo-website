@@ -5,7 +5,9 @@ pageTitle: "About Designo Digital agency"
 {% assign data = images %}
 <style>{%cssmin "includes/company-common.css"%}</style>
 <header class="contain column no-gap">
-    {% image data.hero.path data.hero.alt "375,480" %}
+    <div class="img-wrapper">
+        {% image data.hero.path data.hero.alt "375,480" %}
+    </div>
     <div class="stack decorated section_content about-deco">
         <h1>{{ data.hero.title }}</h1>
         {% for paragraph in data.hero.paragraphs %}
@@ -15,7 +17,9 @@ pageTitle: "About Designo Digital agency"
 </header>
 <main class="contain main-content xl-stack">
     <section class="column no-gap">
-        {% image data.talent.path data.talent.alt "375,480" %}
+        <div class="img-wrapper">
+            {% image data.talent.path data.talent.alt "375,480" %}
+        </div>
         <div class="stack decorated section_content">
             <h3>{{ data.talent.title }}</h3>
             {% for paragraph in data.talent.paragraphs %}
@@ -37,7 +41,9 @@ pageTitle: "About Designo Digital agency"
         {% endfor %}
     </section>
     <section class="column no-gap">
-        {% image data.deal.path data.deal.alt "375,480" %}
+        <div class="img-wrapper">
+            {% image data.deal.path data.deal.alt "375,480" %}
+        </div>
         <div class="stack decorated section_content">
             <h3>{{ data.deal.title }}</h3>
             {% for paragraph in data.deal.paragraphs %}

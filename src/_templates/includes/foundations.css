@@ -281,10 +281,6 @@ body {
             --s: var(--m-height);
             --i-alignment: space-between;
 
-            img:where(& *) {
-                min-inline-size: 284px;
-            }
-
             div:where(& > *) {
                 max-inline-size: 40em;
             }

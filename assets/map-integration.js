@@ -17,6 +17,11 @@ function createMap(element, center) {
     });
     const marker = L.marker([center.lat, center.lng], {
         alt: `The location of our ${element.id} office`,
+        icon: L.icon({
+            iconUrl: window.origin + "/assets/images/marker-icon.png",
+            iconSize: [38, 95],
+            shadowUrl: window.origin + "assets/images/marker-shadow.png",
+        }),
         title: `our ${element.id} office`
     });
     marker.bindPopup(`<p>Here is our ${element.id} company</p>`).addTo(map);

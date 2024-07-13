@@ -15,11 +15,11 @@ dd:where(.cpy-locations *) {
 }
 .map-view:not(.no-js *) {
     position: static;
-    min-block-size: 320px;
+    block-size: 380px;
     min-inline-size: min(475px, 100%);
     border-radius: var(--map-radius, 0);
 
-    & + picture {
+    & + .img-wrapper {
         display: none;
     }
 }

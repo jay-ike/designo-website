@@ -5,10 +5,11 @@
     overflow-y: clip;
 }
 
-picture:where(.banner *) {
+img:where(.banner > *) {
     transform: translateY(2em);
     filter: drop-shadow(8px -24px 35px oklch(35% 51% 31/ 0.5) );
     isolation: isolate;
+    object-fit: contain;
 }
 
 @container (inline-size > 681px) {
@@ -16,7 +17,7 @@ picture:where(.banner *) {
         --col-dir: column;
         --col-align: start;
     }
-    picture:where(.banner *) {
+    img:where(.banner > *) {
         --bg-size: cover;
         transform: translateY(6em);
     }

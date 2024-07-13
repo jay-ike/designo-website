@@ -10,7 +10,9 @@ extraStyles: ["/assets/leaflet.css"]
 <main class="contain main-content cpy-locations stack no-js">
     <section id="canada-infos" class="column content-clip">
         <div id="canada" class="map-view"></div>
-        {% image data.canada.path data.canada.alt "375,480" %}
+        <div class="img-wrapper">
+            {% image data.canada.path data.canada.alt "375,480" %}
+        </div>
         <div class="stack decorated section_content">
             <h2>Canada</h2>
             <div class="row">
@@ -28,7 +30,9 @@ extraStyles: ["/assets/leaflet.css"]
     </section>
     <section id="australia-infos" class="column content-clip">
         <div id="australia" class="map-view"></div>
-        {% image data.australia.path data.australia.alt "375,480" %}
+        <div class="img-wrapper">
+            {% image data.australia.path data.australia.alt "375,480" %}
+        </div>
         <div class="stack decorated section_content">
             <h2>Australia</h2>
             <div class="row">
@@ -46,7 +50,9 @@ extraStyles: ["/assets/leaflet.css"]
     </section>
     <section id="uk-infos" class="column content-clip">
         <div id="uk" class="map-view"></div>
-        {% image data.uk.path data.uk.alt "375,480" %}
+        <div class="img-wrapper">
+            {% image data.uk.path data.uk.alt "375,480" %}
+        </div>
         <div class="stack decorated section_content">
             <h2>United Kingdom</h2>
             <div class="row">
