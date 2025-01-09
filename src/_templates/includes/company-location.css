@@ -12,6 +12,7 @@ dd:where(.cpy-locations *) {
 }
 .map-view {
     position: absolute;
+    overflow: auto;
 }
 .map-view:not(.no-js *) {
     position: static;
