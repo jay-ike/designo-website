@@ -16,7 +16,7 @@ pageTitle: "Designo Digital Agency"
     <style>{% cssmin "includes/home-features.css" %}</style>
     <section class="contain features column">
         {% for feat in features %}
-        <article class="grid">
+        <article class="grid" data-scroll-view="fade-in">
             <svg width="202" height="202">
                 <title>{{ feat.alt }}</title>
                 <use href="/assets/sprites.svg#{{ feat.tag }}" />
