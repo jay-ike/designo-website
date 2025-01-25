@@ -40,6 +40,9 @@
      --m-col-s: 2;
      --container-name: services;
  }
+ a:where(services *) {
+     display: inline-flex;
+ }
  @container (inline-size > 729px) {
      li:first-of-type:nth-last-of-type(3):where( .services > *) {
          --m-row-h: calc(400px +  var(--gap));

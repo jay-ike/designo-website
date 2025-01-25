@@ -2,7 +2,7 @@
     <a href="/" class="logo">designo</a>
     <ul class="links ml-max md-show">
         {% for item in site.links %}
-            <li class="fluid-type"><a href="{{item.path}}">{{ item.title }}</a></li>
+        <li class="fluid-type"><a href="{{item.path}}" {% if pageId == link_tag %} aria-page="current"{% endif %}>{{ item.title }}</a></li>
         {% endfor %}
     </ul>
     <div class="ml-max md-remove">

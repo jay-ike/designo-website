@@ -68,7 +68,7 @@ body {
     :is(.decorated, .logo) {
         --c1: var(--deco-clr, hsla(0, 95%, 19%, .1));
         --s: var(--deco-size, 640px);
-        --rounding: radial-gradient(calc(var(--s) / 2), #000 98%, #0000);
+        --rounding: radial-gradient(circle, #000 calc(var(--s)/2), #0000 0);
 
         &::before {
             background: var(--bg, linear-gradient(15deg, #0000, var(--c1)) right 0 top 5rem / var(--s) var(--s) no-repeat);
@@ -497,7 +497,7 @@ body {
         margin: 0;
     }
 
-    :is(img, svg) {
+    :where(img) {
         max-inline-size: 100%;
         display: block;
     }
@@ -522,11 +522,16 @@ body {
     a {
         --outline-style: dashed;
         display: inline-block;
+        text-underline-offset: 0.15em;
+        text-decoration: underline;
+
+        &:where([aria-current="page"]) {
+            font-weight: bold;
+        }
 
         &:not([class]) {
             --outline-style: dashed;
             text-decoration-thickness: max(0.08em, 1px);
-            text-underline-offset: 0.15em;
             color: var(--link-clr, inherit);
 
             &:not(:disabled):where(:focus-visible, :hover) {

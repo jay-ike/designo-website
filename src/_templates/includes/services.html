@@ -1,12 +1,18 @@
 <style>{%cssmin "includes/services-preview.css"%}</style>
-<ul class="responsive-grid contain services" aria-label="view our services">
+<ul class="responsive-grid contain services">
     {% for item in services %}
         {% if item.topic != pageTopic %}
-        <li data-scroll-view="scale-up">
-            {% image item.path item.alt "280,541" %}
-            {% card item.title 2 "center transition-all service_content" %}
-                <a class="box extend-zone-start" href="{{ item.link }}" data-icon="arrow_right" data-icon-position="end"> view content </a>
-            {% endcard %}
+        <li class="relative" data-scroll-view="scale-up">
+            {% image item.path "" "280,541" %}
+            <div class="center transition-all service_content">
+                <h2 id="{{item.title | replace: ' ', '_'}}">{{item.title}}</h2>
+            <a class="box extend-zone-start" href="{{ item.link }}">
+                view content <span class="visually-hidden">about {{item.title}}</span>
+                <svg aria-hidden="true" width="12" height="12">
+                    <use href="/assets/sprites.svg#right_arrow">
+                </svg>
+            </a>
+            </div>
         </li>
         {% endif %}
     {% endfor %}
