@@ -29,18 +29,7 @@ pageId: "about"
 
         </div>
     </section>
-    <section class="column no-clip mb-xl locations">
-        {% for location in locations %}
-            <div class="center">
-                <svg width="202" height="202">
-                    <title>{{ location.alt }}</title>
-                    <use href="/assets/sprites.svg#{{ location.tag }}">
-                </svg>
-                <h3>{{location.title}}</h2>
-                <a href="{{location.url}}">see location</a>
-            </div>
-        {% endfor %}
-    </section>
+    {% include "includes/locations.html" %}
     <section class="column no-gap">
         <div class="img-wrapper">
             {% image data.deal.path data.deal.alt "375,480" %}

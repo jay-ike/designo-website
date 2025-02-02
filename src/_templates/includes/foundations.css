@@ -633,15 +633,16 @@ body {
 }
 
 @layer typography {
-    :is(h1, h2, h3, h4, h5, p, dt, dd, legend, .fluid-type) {
+    :is(h1, h2, h3, h4, h5, p, dt, dd, legend, .fluid-type, .heading) {
         font-size: clamp(var(--f-size, 1rem) * clamp(0.5, 1 - var(--f-size-diff, 0.3), 0.9),
                 var(--f-size-fluid, var(--default-fluid, 3vw)),
                 var(--f-size, 1rem));
     }
 
-    :is(h2, h3, h4, h5) {
+    :where(h2, h3, h4, h5, .heading) {
         text-transform: var(--t-transform, uppercase);
         color: var(--heading-clr, currentColor);
+        font-weight: bold;
     }
 
     h1 {
@@ -649,25 +650,25 @@ body {
         --f-size-diff: 0.4;
     }
 
-    h2 {
+    h2, .h2 {
         --f-size: 2.5rem;
         --f-size-diff: 0.45;
     }
 
-    h3 {
+    h3, .h3 {
         --f-size: 1.5rem;
     }
 
-    h4 {
+    h4, .h4 {
         --f-size: 1.25rem;
     }
 
-    h5 {
+    h5, .h5 {
         --f-size: 1.125rem;
     }
 
     @supports (font-size: 1cqi) {
-        :is(h1, h2, h3, h4, p, dt, dd, .fluid-type, footer a) {
+        :is(h1, h2, h3, h4, p, dt, dd, .fluid-type, footer a, .heading) {
             --default-fluid: 5cqi;
         }
     }
@@ -723,12 +724,12 @@ body {
 
         [data-scroll-view="scale-up"] {
             animation-name: scale-up;
-            animation-range: var(--range, entry 0% contain 40%);
+            animation-range: var(--range, entry 0% contain 10%);
         }
 
         [data-scroll-view="fade-in"] {
             animation-name: fade-in;
-            animation-range: var(--range, entry 0% contain 40%);
+            animation-range: var(--range, entry 0% contain 30%);
         }
 
         img:where(.banner > *) {

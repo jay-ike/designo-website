@@ -1,0 +1,14 @@
+<section class="column no-clip mb-xl locations" aria-labelledby="lc_head">
+    <p hidden="hidden" id="lc_head">our company locations</p>
+    {% for location in locations %}
+    <div class="center">
+        <svg width="202" height="202">
+            <title>{{ location.alt }}</title>
+            <use href="/assets/sprites.svg#{{ location.tag }}">
+        </svg>
+        {% assign lc_id = location.title | replace: " ", _ %}
+        <p id="{{lc_id}}" class="heading h3" >{{location.title}}</p>
+        <a href="{{location.url}}" id="{{lc_id}}_lnk" aria-labelledby="{{lc_id}}_lnk {{lc_id}}">see location</a>
+    </div>
+    {% endfor %}
+</section>

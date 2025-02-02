@@ -20,8 +20,10 @@ layout: "layouts/base.njk"
             </article>
         {% endfor %}
     </div>
-    <div class="column">
-        <h2 class="capitalize">other services</h2>
-        {% include "includes/services.html" %}
+    <div class="column" aria-labelledby="other_heading">
+        <h2 class="capitalize" id="other_heading">other services</h2>
+        <div class="responsive-grid contain services">
+            {% include "includes/services.html" %}
+        </div>
     </div>
 </main>

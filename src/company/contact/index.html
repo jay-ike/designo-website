@@ -38,16 +38,5 @@ pageId: "contact"
     </form>
 </header>
 <main class="contain mb-xl">
-    <section class="column locations">
-        {% for location in locations %}
-        <div class="center">
-            <svg width="202" height="202">
-                <title>{{ location.alt }}</title>
-                <use href="/assets/sprites.svg#{{ location.tag }}">
-            </svg>
-            <h3>{{location.title}}</h2>
-                <a href="{{location.url}}">see location</a>
-        </div>
-        {% endfor %}
-    </section>
+    {% include "includes/locations.html" %}
 </main>

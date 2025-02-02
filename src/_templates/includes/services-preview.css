@@ -12,7 +12,7 @@
      clip-path: var(--_img-clip, none);
  }
 
- li:where(.services > *) {
+ div:where(.services > *) {
      --icon-fill: var(--system-color-peach);
      --f: 1.3;
      display: grid;
@@ -44,7 +44,7 @@
      display: inline-flex;
  }
  @container (inline-size > 729px) {
-     li:first-of-type:nth-last-of-type(3):where( .services > *) {
+     div:first-of-type:nth-last-of-type(3):where( .services > *) {
          --m-row-h: calc(400px +  var(--gap));
          grid-row: span 2;
      }

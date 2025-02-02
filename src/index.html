@@ -12,21 +12,26 @@ pageTitle: "Designo Digital Agency"
     {%image hero heading.heroAlt "284" %}
 </header>
 <main class="xl-stack">
-    {% include "includes/services.html" %}
+    <section class="responsive-grid contain services mt-xl" aria-labelledby="serv_head">
+        <h2 class="visually-hidden capitalize" id="serv_head">our services</h2>
+        {% include "includes/services.html" %}
+    </section>
     <style>{% cssmin "includes/home-features.css" %}</style>
-    <section class="contain features column">
+    <section class="contain features column" aria-labelledby="feat_head">
+        <h2 class="visually-hidden capitalize" id="feat_head">our core values</h2>
         {% for feat in features %}
-        <article class="grid" data-scroll-view="fade-in">
+        {% assign f_title = feat.title | replace: " ", _ %}
+        <article class="grid" data-scroll-view="fade-in" aria-labelledby="val_{{f_title}}">
             <svg width="202" height="202">
                 <title>{{ feat.alt }}</title>
                 <use href="/assets/sprites.svg#{{ feat.tag }}" />
             </svg>
-            {% card feat.title 3 "stack" %}
+            <div class="stack">
+                <h3 id="val_{{f_title}}">{{feat.title}}</h3>
                 <p>{{ feat.description }}</p>
-            {% endcard %}
+            </div>
         </article>
         {% endfor %}
-
     </section>
 </main>
 
