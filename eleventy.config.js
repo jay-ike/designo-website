@@ -96,6 +96,13 @@ module.exports = function (config) {
     config.addShortcode("cssmin", async function (src) {
         return parseCss(config, src);
     });
+    config.addNunjucksFilter("split", function (value, separator) {
+        return (
+            value
+            ? value.toString().split(separator ?? "")
+            : ""
+        );
+    });
     return {
         dir: {
             includes: "_templates",

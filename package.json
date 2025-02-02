@@ -4,9 +4,9 @@
   "description": "a solution to the Designo agency website challenge on Frontend Mentor.",
   "main": "index.js",
   "scripts": {
-      "build": "eleventy",
-      "lint": "stylelint '**/*.css'",
-      "serve": "eleventy --serve --port 6060"
+    "build": "eleventy",
+    "lint": "stylelint '**/*.css'",
+    "serve": "eleventy --serve --port 6060"
   },
   "keywords": [
     "11ty",
@@ -17,7 +17,7 @@
   "author": "Ndimah Tchougoua",
   "license": "ISC",
   "dependencies": {
-    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy": "^3.0.0",
     "@11ty/eleventy-img": "^4.0.2",
     "lightningcss": "^1.25.1"
   },

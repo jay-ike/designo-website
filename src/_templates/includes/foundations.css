@@ -179,10 +179,6 @@ body {
         gap: var(--i-gap, 16px);
     }
 
-    .links a {
-        font-weight: 400;
-    }
-
     :where(.visually-hidden, .md-show) {
         max-inline-size: 1px;
         position: absolute;
@@ -191,7 +187,6 @@ body {
 
 
     .md-show {
-        overflow: hidden;
         visibility: hidden;
     }
 
@@ -527,6 +522,11 @@ body {
 
         &:where([aria-current="page"]) {
             font-weight: bold;
+            border-image: linear-gradient(to right, #0000 20%, var(--c, var(--system-color-peach)) 0 80%, #0000 0) 0 0 1 / 2px / 0 0 .25em;
+
+            &:is(:focus-visible, :hover) {
+                --c: var(--system-color-black);
+            }
         }
 
         &:not([class]) {
@@ -548,7 +548,6 @@ body {
     }
 
     button,
-    a,
     dt {
         font-weight: 700;
     }
