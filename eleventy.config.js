@@ -69,17 +69,18 @@ async function parseImage(src, alt, sizes="300,600") {
         return acc + ` ${k}="${v}"`;
     }, "")} >`;
 }
-async function parseCss({dir}, src) {
+async function parseCode({dir}, src, filename = "style.css") {
     const blob = await fileReader(path.normalize(
         `${dir.input}/${dir.includes}/${src}`
     ));
     const {code} = transform({
-        filename: "style.css",
+        filename,
         code: blob,
         minify:true
     });
     return code.toString();
 }
+
 
 module.exports = function (config) {
     config.addPassthroughCopy("assets");
@@ -94,7 +95,10 @@ module.exports = function (config) {
         }
     );
     config.addShortcode("cssmin", async function (src) {
-        return parseCss(config, src);
+        return parseCode(config, src);
+    });
+    config.addShortcode("jsmin", async function (src) {
+        return parseCode(config, src, "script.js");
     });
     config.addNunjucksFilter("split", function (value, separator) {
         return (

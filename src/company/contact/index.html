@@ -14,29 +14,57 @@ pageId: "contact"
             line.
         </p>
     </div>
-    <form action="/" method="get">
-        <div class="row">
-            <label for="name">name</label>
-            <input type="text" id="name" name="clientName" aria-describedby="name-error" placeholder="Ex: John Doe" required>
-            <span id="name-error" class="visually-hidden">your name should not be empty</span>
+    <form action="/" class="box" method="get" novalidate>
+        <div class="error-summary box" tabindex="-1" hidden aria-labelledby="error-title">
+            <span id="error-title" class="heading h5 capitalize">Errors found in the current step</span>
+            <ol class="msg-hint" id="error-list"></ol>
         </div>
-        <div class="row">
-            <label for="email">email address</label>
-            <input type="email" required name="clientEmail" id="email " aria-describedby="email-error" placeholder="Ex: hello@me.com" autocomplete="off">
-            <span id="email-error" class="visually-hidden">please enter a valid address</span>
+        <step-by-step class="stack box">
+            <fieldset class="column step">
+                <legend class="visually-hidden">contact information</legend>
+                <span class="heading h3" aria-hidden="true">contact information</span>
+                <div class="row">
+                    <label for="email">Your email address (Required)</label>
+                    <input type="email" name="clientEmail" id="email" aria-describedby="email-error" autocomplete="email" aria-required="true">
+                    <span id="email-error" class="msg-hint i-row" hidden><svg  width="24" height="24" aria-hidden="true"><use href="/assets/sprites.svg#error"/></svg>please enter a valid address</span>
+                </div>
+                <div class="row">
+                    <label for="phone">Your phone number (Required)</label>
+                    <input type="tel" id="phone" name="clientPhone" pattern="^\+\d{1,3} \d{8,12}$" aria-describedby="phone-requirements" autocomplete="tel" aria-required="true">
+                    <span id="phone-error" class="msg-hint i-row" hidden><svg  width="24" height="24" aria-hidden="true"><use href="/assets/sprites.svg#error"/></svg>The phone number is invalid</span>
+                    <div id="phone-requirements" class="msg-hint">
+                        <p>Your phone number should:</p>
+                        <ul>
+                            <li>Have a country code followed by a space e.g +237 for cameroon</li>
+                            <li>Have between 8 and 12 digits excluding the country code</li>
+                        </ul>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="column step">
+                <legend class="visually-hidden">content</legend>
+                <span class="heading h3" aria-hidden="true">content</span>
+                <div class="row">
+                    <label for="name">Your name (Required)</label>
+                    <input type="text" id="name" name="clientName" aria-describedby="name-error" autocomplete="name" aria-required="true">
+                    <span id="name-error" class="msg-hint i-row" hidden><svg  width="24" height="24" aria-hidden="true"><use href="/assets/sprites.svg#error"/></svg> Your name should not be empty</span>
+                </div>
+                <div class="row">
+                    <label for="msg">Your message (Optional)</label>
+                    <textarea name="clientMsg" id="msg" cols="30" rows="6"></textarea>
+                </div>
+            </fieldset>
+        </step-by-step>
+        <div class="segragator">
+            <button class="btn-secondary capitalize" name="prev_step" hidden>previous</button>
+            <div class="stick-end">
+                <button class="btn-secondary capitalize" name="next_step" hidden>next</button>
+                <button class="btn-submit capitalize" name="submit">submit request</button>
+            </div>
         </div>
-        <div class="row">
-            <label for="phone">phone</label>
-            <input type="tel" id="phone" name="clientPhone" placeholder="Ex: +2376xxxxxxxxx" pattern="^\+\d{1,3}\d{8,12}$" aria-describedby="phone-error" required>
-            <span id="phone-error" class="visually-hidden">your phone number should be in an international format</span>
-        </div>
-        <div class="row">
-            <label for="msg">your message</label>
-            <textarea name="clientMsg" id="msg" cols="30" rows="6"></textarea>
-        </div>
-        <button class="btn-primary"> submit</button>
     </form>
 </header>
 <main class="contain mb-xl">
     {% include "includes/locations.html" %}
 </main>
+<script type="module" src="/assets/contact.js"></script>

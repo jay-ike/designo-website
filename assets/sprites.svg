@@ -340,4 +340,7 @@
         <path d="M1.9 11.7C7.9 11.7 14 11.7 21 11.7" style="fill: none;stroke: var(--h-stroke, currentColor);stroke-width: 4;transition: var(--h-transition);stroke-dasharray: var(--m, 0); "/>
         <path d="M1.5 21.5C4.9 21.5 7.9 21.5 10.6 21.5 13.2 21.5 15.1 21.5 16.6 21.5 18.1 21.5 19.3 21.5 20 21.5 20.8 21.5 21.5 21.5 21.9 21.2 22.3 20.8 23.1 20 23.1 18.9 23.4 17.8 23.4 16.6 23.4 15.5 23.4 14.4 23.4 12.9 23.4 11.3 23.4 9.8 23.4 8.7 23.4 7.6 23.4 6.8 23.4 6.4 23.4 5.7 23.4 5.3 23.4 4.5 23.4 3.8 23.4 3 23.4 2.3 23.1 1.9 23.1 1.9 22.3 1.9 18.9 5.3 15.5 8.3 8.7 15.1 1.9 21.9" style="fill: none;stroke: var(--h-stroke, currentcolor);stroke-width: 4;transition: var(--h-transition);stroke-dasharray: var(--c, 20, 55);stroke-dashoffset: var(--so, 0);"/>
     </symbol>
+    <symbol viewBox="0 0 24 24" id="error">
+        <path style="fill:var(--icon-fill, currentColor);stroke-linejoin:round" d="M11.3 7v7h1.4V7Zm0 8.5V17h1.4v-1.5ZM12 1.2a10.8 10.8 0 1 0 0 21.6 10.8 10.8 0 0 0 0-21.6Zm0 1.6a9.2 9.2 0 1 1 0 18.4 9.2 9.2 0 0 1 0-18.4Z"/>
+    </symbol>
 </svg>

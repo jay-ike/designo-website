@@ -585,26 +585,6 @@ body {
         scroll-margin-block-end: 8vh;
     }
 
-    input:where([type="text"], [type="email"], [type="tel"]),
-    textarea {
-        --outline-offset: .05em;
-        padding: 0.75em;
-        line-height: inherit;
-        border-radius: .5rem;
-        border: .1em solid var(--bdr-clr, hsl(0, 0%, 81%));
-        inline-size: 100%;
-        font-weight: 500;
-        font-size: inherit;
-
-        &:hover {
-            --bdr-clr: var(--system-color-paleOrange);
-        }
-
-        &:focus-visible:not(:is(:invalid):not([data-new])) {
-            --bdr-clr: var(--system-color-orange);
-            --outline-clr: var(--system-color-orange);
-        }
-    }
 
     :is(a, button, input):focus:not(:focus-visible) {
         outline: none;
@@ -616,7 +596,7 @@ body {
     }
 
     main:where(body > *) {
-        min-block-size: 71lvb;
+        min-block-size: min(50lvb, 400px);
     }
 }
 
