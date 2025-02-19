@@ -179,15 +179,36 @@ body {
         gap: var(--i-gap, 16px);
     }
 
-    :where(.visually-hidden, .md-show) {
-        max-inline-size: 1px;
-        position: absolute;
-        clip-path: inset(50%);
+    .visually-hidden:not(:focus):not(:active) {
+        inline-size: 1px;
+        block-size: 1px;
+        clip: rect(0 0 0 0); /* IE compatibility */
+        overflow: clip;
+        white-space: nowrap;
+
+        :where(&, .md-show) {
+            position: absolute;
+            clip-path: inset(50%);
+        }
     }
 
+    #skip-link {
+        position: absolute;
+        inset-block-start: -24em;
+        border-radius: .5rem;
+        background-color: var(--system-color-lightOrange);
+        padding: .25em;
+        z-index: 10;
+
+        &:focus-visible {
+            inset-block-start: 1rem;
+            inset-inline-start: 1rem;
+        }
+    }
 
     .md-show {
         visibility: hidden;
+        max-inline-size: 1px;
     }
 
     nav:where(body > *):has(:popover-open) {
@@ -408,6 +429,8 @@ body {
         --c-space: .75rem;
         --p-items: center;
         --icon-fill: var(--system-color-peach);
+        --shadow-clr: var(--system-color-darkBlue);
+        --outline-clr: var(--system-color-white);
         text-align: center;
         position: relative;
         z-index: -1;
@@ -572,9 +595,8 @@ body {
     }
 
     :focus-visible {
-        --outline-size: max(2px, .3em);
-        outline: var(--outline-width, var(--outline-size)) var(--outline-style, solid) var(--outline-clr, currentColor);
-        outline-offset: var(--outline-offset, var(--outline-size));
+        outline: 9px double var(--outline-clr, var(--system-color-black));
+        box-shadow: 0 0 0 6px var(--shadow-clr, var(--system-color-white));
     }
 
     :target {

@@ -93,7 +93,7 @@ a:where(.locations :only-of-type) {
     }
     section:where(main > *) {
         --col-dir: row;
-        &:last-of-type {
+        &:last-of-type:not(main.ct-locations > *) {
             --col-dir: row-reverse;
         }
     }

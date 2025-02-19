@@ -32,7 +32,7 @@ step-by-step>* {
 form:where(.contact-banner *) {
     display: flex;
     flex-flow: column nowrap;
-    gap: .5rem;
+    gap: .75rem;
 
     fieldset:where(& *) {
         --col-dir: column;

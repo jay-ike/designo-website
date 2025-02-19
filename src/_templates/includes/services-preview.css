@@ -1,4 +1,6 @@
  .service_content {
+     --outline-clr: var(--system-color-white);
+     --shadow-clr: var(--system-color-darkBlue);
      background-color: var(--bg-clr, transparent);
      border-image: linear-gradient(#0009, #0009) 1 fill;
  }

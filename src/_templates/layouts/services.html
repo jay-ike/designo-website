@@ -6,8 +6,8 @@ layout: "layouts/base.njk"
 <style>
     {%cssmin "includes/services.css"%}
 </style>
-<main class="xl-stack mt-xl" aria-labelledby="service-title">
-    <h2 class="capitalize" id="service-title">our projects</h2>
+<main class="xl-stack mt-xl" aria-labelledby="service-title" id="main" tabindex="-1">
+    <h2 class="capitalize" id="service-title">{{ serviceTitle }}</h2>
     <div class="responsive-grid contain projects">
         {% for item in getProjects %}
         {% assign projectId= item.title | split: " " | join: "_" %}

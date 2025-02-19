@@ -14,7 +14,7 @@ pageId: "contact"
             line.
         </p>
     </div>
-    <form action="/" class="box" method="get" novalidate>
+    <form action="/" class="box" method="get" novalidate id="main" tabindex="-1">
         <div class="error-summary box" tabindex="-1" hidden aria-labelledby="error-title">
             <span id="error-title" class="heading h5 capitalize">Errors found in the current step</span>
             <ol class="msg-hint" id="error-list"></ol>
@@ -64,7 +64,7 @@ pageId: "contact"
         </div>
     </form>
 </header>
-<main class="contain mb-xl">
+<main class="contain mb-xl ct-locations">
     {% include "includes/locations.html" %}
 </main>
 <script type="module" src="/assets/contact.js"></script>

@@ -11,7 +11,8 @@ pageTitle: "Designo Digital Agency"
     </div>
     {%image hero heading.heroAlt "284" %}
 </header>
-<main class="xl-stack">
+<main class="xl-stack" id="main" tabindex="-1" aria-labelledby="content-desc">
+    <p hidden="hidden" id="content-desc">A quick overview of designo digtal agency</p>
     <section class="responsive-grid contain services mt-xl" aria-labelledby="serv_head">
         <h2 class="visually-hidden capitalize" id="serv_head">our services</h2>
         {% include "includes/services.html" %}
