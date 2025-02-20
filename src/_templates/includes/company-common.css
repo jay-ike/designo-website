@@ -28,7 +28,7 @@ img:where(.img-wrapper > *) {
 a:where(.locations :only-of-type) {
     color: var(--system-color-lightOrange);
     font-weight: 500;
-    text-decoration: none;
+    text-decoration-color: transparent;
     border-radius: .5rem;
     padding: .75rem 1.5rem;
     background-color: var(--system-color-orange);

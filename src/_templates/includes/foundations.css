@@ -173,7 +173,7 @@ body {
     a:where(:is(.decorated, nav, footer) *),
     .links {
         --f-size-fluid: 2.5cqi;
-        text-decoration: none;
+        text-decoration-color: transparent;
         display: inline-flex;
         align-items: center;
         gap: var(--i-gap, 16px);
@@ -565,7 +565,7 @@ body {
         }
 
         &:where([class]) {
-            text-decoration: none;
+            text-decoration-color: transparent;
             color: var(--link-clr, var(--icon-fill, inherit));
         }
     }
@@ -740,5 +740,11 @@ body {
             animation-timeline: view(block);
             animation-range: contain 100% cover 100%;
         }
+    }
+}
+
+@media screen and (forced-colors: active) {
+    svg {
+        --icon-fill: canvas;
     }
 }
