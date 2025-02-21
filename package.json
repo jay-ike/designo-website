@@ -4,9 +4,10 @@
   "description": "a solution to the Designo agency website challenge on Frontend Mentor.",
   "main": "index.js",
   "scripts": {
-    "build": "eleventy",
+    "build": "npm run minify-js && eleventy",
     "lint": "stylelint '**/*.css'",
-    "serve": "eleventy --serve --port 6060"
+    "minify-js": "node cli.js 'js/*js' assets/",
+    "serve": "npm run minify-js && eleventy --serve --port 6060"
   },
   "keywords": [
     "11ty",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "stylelint": "^16.7.0",
-    "stylelint-config-standard": "^36.0.1"
+    "stylelint-config-standard": "^36.0.1",
+    "terser": "^5.39.0"
   }
 }

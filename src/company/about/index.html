@@ -22,7 +22,7 @@ pageId: "about"
             {% image data.talent.path data.talent.alt "375,480" %}
         </div>
         <div class="stack decorated section_content">
-            <h3>{{ data.talent.title }}</h3>
+            <h2 class="h3">{{ data.talent.title }}</h3>
             {% for paragraph in data.talent.paragraphs %}
                 <p>{{ paragraph }}</p>
             {% endfor %}
@@ -35,7 +35,7 @@ pageId: "about"
             {% image data.deal.path data.deal.alt "375,480" %}
         </div>
         <div class="stack decorated section_content">
-            <h3>{{ data.deal.title }}</h3>
+            <h2 class="h3">{{ data.deal.title }}</h2>
             {% for paragraph in data.deal.paragraphs %}
                 <p>{{ paragraph }}</p>
             {% endfor %}

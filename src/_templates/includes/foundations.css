@@ -423,6 +423,7 @@ body {
 
     footer {
         --min-padding: 2em 1.5em 1.5em;
+        --color-fill: var(--system-color-black);
         --color-text: var(--system-color-white);
         --g-template: "area1" "area2" "area3" "area4" "area5";
         --g-gap: 2.5em 1.5em;

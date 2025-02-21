@@ -85,20 +85,8 @@ async function parseCode({dir}, src, filename = "style.css") {
 module.exports = function (config) {
     config.addPassthroughCopy("assets");
     config.addShortcode("image", parseImage);
-    config.addPairedShortcode(
-        "card",
-        function (content, title, headingLevel = 2, style = "center") {
-            return `<div class="${style}">
-                <h${headingLevel}>${title}</h${headingLevel}>
-                ${content}
-            </div>`;
-        }
-    );
     config.addShortcode("cssmin", async function (src) {
         return parseCode(config, src);
-    });
-    config.addShortcode("jsmin", async function (src) {
-        return parseCode(config, src, "script.js");
     });
     config.addNunjucksFilter("split", function (value, separator) {
         return (
