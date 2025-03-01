@@ -5,24 +5,25 @@ pageId: "about"
 ---
 {% assign data = images %}
 <style>{%cssmin "includes/company-common.css"%}</style>
-<header class="contain column no-gap">
+<header class="contain column no-gap" aria-labelledby="head_title">
     <div class="img-wrapper">
         {% image data.hero.path data.hero.alt "375,480" %}
     </div>
     <div class="stack decorated section_content about-deco">
-        <h1>{{ data.hero.title }}</h1>
+        <h1 id="head_title">{{ data.hero.title }}</h1>
         {% for paragraph in data.hero.paragraphs %}
             <p>{{ paragraph }}</p>
         {% endfor %}
     </div>
 </header>
-<main class="contain main-content xl-stack" id="main" tabindex="-1">
-    <section class="column no-gap">
+<main aria-labelledby="main_desc" class="contain main-content xl-stack" id="main" tabindex="-1">
+    <p hidden="hidden" id="main_desc">A look at what define us the best way</p>
+    <section class="column no-gap" aria-labelledby="section1_desc">
         <div class="img-wrapper">
             {% image data.talent.path data.talent.alt "375,480" %}
         </div>
         <div class="stack decorated section_content">
-            <h2 class="h3">{{ data.talent.title }}</h3>
+            <h2 class="h3" id="section1_desc">{{ data.talent.title }}</h3>
             {% for paragraph in data.talent.paragraphs %}
                 <p>{{ paragraph }}</p>
             {% endfor %}
@@ -30,12 +31,12 @@ pageId: "about"
         </div>
     </section>
     {% include "includes/locations.html" %}
-    <section class="column no-gap">
+    <section class="column no-gap" aria-labelledby="section2_desc">
         <div class="img-wrapper">
             {% image data.deal.path data.deal.alt "375,480" %}
         </div>
         <div class="stack decorated section_content">
-            <h2 class="h3">{{ data.deal.title }}</h2>
+            <h2 class="h3" id="section2_desc">{{ data.deal.title }}</h2>
             {% for paragraph in data.deal.paragraphs %}
                 <p>{{ paragraph }}</p>
             {% endfor %}

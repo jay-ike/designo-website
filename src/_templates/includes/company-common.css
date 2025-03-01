@@ -6,6 +6,10 @@ main {
 header {
     --min-padding: 0;
     text-align: start;
+
+}
+header, section {
+    --r: .5rem;
 }
 .about-deco {
     --deco-size: 292px;
@@ -39,10 +43,10 @@ a:where(.locations :only-of-type) {
     }
 }
 
-
 .no-clip {
     --clip: none;
 }
+
 .section_content {
     --p-width: 30em;
     --s-space: 1.5em;
@@ -93,7 +97,11 @@ a:where(.locations :only-of-type) {
     }
     section:where(main > *) {
         --col-dir: row;
-        &:last-of-type:not(main.ct-locations > *) {
+        --img-clip: inset(0 round var(--r) 0 0 var(--r));
+        --ct-clip: inset(0 round 0 var(--r) var(--r) 0);
+        &:last-of-type:not(main.ct-locations > *){
+            --img-clip: inset(0 round 0 var(--r) var(--r) 0);
+            --ct-clip: inset(0 round var(--r) 0 0 var(--r));
             --col-dir: row-reverse;
         }
     }
@@ -104,21 +112,40 @@ a:where(.locations :only-of-type) {
 }
 
 @media screen and (min-width: 480px) {
-    :where(header, main > section) {
-        clip-path: var(--clip, inset(0 round .5rem));
+    .img-wrapper:not(.cpy-locations *) {
+        clip-path: var(--img-clip, inset(0 round var(--r) var(--r) 0 0));
+
+        & ~ .section_content {
+            clip-path: var(--ct-clip, inset(0 round 0 0 var(--r) var(--r)));
+        }
     }
     header + main {
         margin-block-start: 8rem;
+    }
+    @media screen and (forced-colors: active) {
+        .section_content:is(.img-wrapper ~ *):not(.cpy-locations *) {
+            border: none;
+        }
+        :is(header, section):not(.cpy-locations *) {
+            border: 2px solid CanvasText;
+            border-radius: var(--r);
+        }
     }
 }
 
 @media screen and (min-width: 768px) {
     header {
+        --img-clip: inset(0 round 0 var(--r) var(--r) 0);
+        --ct-clip: inset(0 round var(--r) 0 0 var(--r));
         --col-dir: row-reverse;
     }
 
     :where(header, section) {
         max-block-size: 640px;
     }
-
+}
+@media screen and (forced-colors: active) {
+    .section_content:not(.cpy-locations *) {
+        --deco-forced-bdr-radius: 0;
+    }
 }

@@ -17,7 +17,11 @@
     </dl>
     <ul class="row">
         {% for item in site.socials %}
-        <li><a href="{{ item.link }}" aria-label="{{ item.title }}"><svg width="24" height="24"><title>{{ item.title }}</title><use href="/assets/sprites.svg#{{ item.tag }}"></svg></a></li>
+        <li aria-labelledby="social-{{ item.tag }}">
+            <a href="{{ item.link }}" >
+                <svg width="24" height="24"><title id="social-{{ item.tag }}">{{ item.title }}</title><use href="/assets/sprites.svg#{{ item.tag }}"></svg>
+            </a>
+        </li>
         {% endfor %}
     </ul>
 </footer>

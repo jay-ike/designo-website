@@ -61,3 +61,9 @@
          --m-col-w: 12rem;
      }
  }
+ @media screen and (forced-colors: active) {
+     .service_content {
+         border: 2px solid CanvasText;
+         border-radius: .5em;
+     }
+ }

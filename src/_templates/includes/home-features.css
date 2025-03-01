@@ -4,6 +4,10 @@
      --g-gap: 1.5em;
      --container-name: features;
      text-align: center;
+
+     & > article {
+         padding: .75em min(1vmin, 1em);
+     }
  }
  .stack:where(.features *) {
      --s-space: var(--g-gap);

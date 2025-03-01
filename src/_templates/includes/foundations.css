@@ -727,7 +727,7 @@ body {
 
         [data-scroll-view="scale-up"] {
             animation-name: scale-up;
-            animation-range: var(--range, entry 0% contain 10%);
+            animation-range: var(--range, entry 0% contain 5%);
         }
 
         [data-scroll-view="fade-in"] {
@@ -746,6 +746,11 @@ body {
 
 @media screen and (forced-colors: active) {
     svg {
-        --icon-fill: canvas;
+        --icon-fill: SelectedItemText;
+    }
+    .decorated, article {
+        --b-clip: none;
+        border: 2px solid CanvasText;
+        border-radius: var(--deco-forced-bdr-radius, .5em);
     }
 }
