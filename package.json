@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run minify-js && eleventy",
     "lint": "stylelint '**/*.css'",
-    "minify-js": "node cli.js 'js/*js' assets/",
+    "minify-js": "node cli.js 'js/*js' _site/assets/",
     "serve": "npm run minify-js && eleventy --serve --port 6060"
   },
   "keywords": [

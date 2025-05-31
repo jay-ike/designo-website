@@ -31,7 +31,9 @@ async function get_input_files(glob) {
 
 async function minify_files(paths) {
     let ps;
-    const stat = await fs.promises.stat(output_dir);
+    const stat = await fs.promises.stat(output_dir).catch(
+        () => Promise.resolve({isDirectory: () => false})
+    );
     if (!stat.isDirectory()) {
         await fs.promises.mkdir(
             path.join(process.cwd(), output_dir),
@@ -45,7 +47,7 @@ async function minify_files(paths) {
         return write_file(
             path.join(output_dir, path.basename(file_path)),
             minified.code,
-            {encoding: "utf8"}
+            {encoding: "utf8", flag: "w+"}
         );
     });
     await Promise.all(ps);

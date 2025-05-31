@@ -15,7 +15,7 @@ dd:where(.cpy-locations *) {
     overflow: auto;
 }
 .map-view:not(.no-js *) {
-    position: static;
+    position: relative;
     block-size: 380px;
     min-inline-size: min(475px, 100%);
     border-radius: var(--map-radius, 0);

@@ -1,5 +1,3 @@
-/*jslint browser this */
-/*jslint-disable*/
 class Stepper extends HTMLElement {
     #current;
     #outClassIndicator;
@@ -95,7 +93,6 @@ class Stepper extends HTMLElement {
         }
     }
 }
-/*jslint-enable*/
 const component = Object.create(null);
 component.stepper = document.querySelector("step-by-step");
 component.form = document.forms[0];
@@ -108,9 +105,7 @@ function setInitialButtons() {
 }
 function initialize() {
     setInitialButtons();
-/*jslint-disable*/
     Stepper.define();
-/*jslint-enable*/
 }
 component.stepper.addEventListener("indexupdated", function (event) {
     const {current} = event.detail;
