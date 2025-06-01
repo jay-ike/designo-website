@@ -332,9 +332,18 @@ body {
         margin-block-start: var(--s-space, 1.5em);
     }
 
+    .mb-xl {
+        margin-block: 8rem;
+    }
+
+
     .mt-xl,
     .xl-stack {
         --s-space: 8rem;
+    }
+
+    .self-center {
+        place-self: center;
     }
 
     :is(.row, .column, .segragator, .cart-modal) {
@@ -516,7 +525,7 @@ body {
         margin: 0;
     }
 
-    :where(img) {
+    :where(img, svg) {
         max-inline-size: 100%;
         display: block;
     }
@@ -614,7 +623,7 @@ body {
     }
 
     p:where(:not([class])) {
-        text-wrap: balance;
+        text-wrap: pretty;
         max-inline-size: var(--p-width, 50em);
     }
 

@@ -137,10 +137,6 @@ h1:where(header *) {
     color: var(--system-color-orange);
 }
 
-.mb-xl {
-    margin-block: 8rem;
-}
-
 form {
     --min-padding: 1.5em min(3vi, 1.5em);
     --color-fill: var(--system-color-white);
