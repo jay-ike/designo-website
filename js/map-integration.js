@@ -50,15 +50,16 @@ function createMap({lat, lng, id}) {
         anchor: "bottom",
         element: createIcon()
     }).setLngLat([lng, lat]).addTo(map).setPopup(new maplibregl.Popup({
-            offset: [0, 25]
-    }).setHTML("Designo " + id.toUppercase()));
-
+            offset: [0, -25]
+    }).setHTML("Designo " + id.toUpperCase()));
 }
-document.querySelectorAll(".no-js").forEach((function(e){e.classList.remove("no-js")})),
+
+document.querySelectorAll(".no-js").forEach((e) => e.classList.remove("no-js")),
 window.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".map-view").forEach(function (element) {
+    document.querySelectorAll(".map-view").forEach(function mapLoader(element) {
         let copy;
         if (addresses[element.id]) {
+            console.log(element);
             copy = Object.assign({}, addresses[element.id]);
             createMap(Object.assign(copy, {id: element.id}));
         }
