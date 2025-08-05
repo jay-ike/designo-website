@@ -15,13 +15,19 @@
         <dd>P : +1 253-863-8967</dd>
         <dd>M : contact@designo.co</dd>
     </dl>
-    <ul class="row">
-        {% for item in site.socials %}
-        <li aria-labelledby="social-{{ item.tag }}">
-            <a href="{{ item.link }}" >
-                <svg width="24" height="24"><title id="social-{{ item.tag }}">{{ item.title }}</title><use href="/assets/sprites.svg#{{ item.tag }}"></svg>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+    <div class="stack">
+        <svg width="131" height="42" style="--icon-fill: var(--color-text, currentColor)">
+            <title>developed by a human not by AI</title>
+            <use href="/assets/sprites.svg#not-by-ai">
+        </svg>
+        <ul class="row">
+            {% for item in site.socials %}
+            <li aria-labelledby="social-{{ item.tag }}">
+                <a href="{{ item.link }}" >
+                    <svg width="24" height="24"><title id="social-{{ item.tag }}">{{ item.title }}</title><use href="/assets/sprites.svg#{{ item.tag }}"></svg>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </footer>
