@@ -96,10 +96,6 @@ module.exports = function (config) {
         );
     });
     return {
-        dir: {
-            includes: "_templates",
-            input: "src",
-            output: "_site"
-        }
+        dir: {includes: "_templates", input: "src", output: "_site"}
     };
 };

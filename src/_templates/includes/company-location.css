@@ -19,6 +19,7 @@ dd:where(.cpy-locations *) {
     block-size: 380px;
     min-inline-size: min(475px, 100%);
     border-radius: var(--map-radius, 0);
+    isolation: isolate;
 
     & + .img-wrapper {
         display: none;

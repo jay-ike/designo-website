@@ -8,7 +8,7 @@ async function getFilePaths(workingDir, extensions= /(jpg|png|gif|jpeg)/i) {
     const files = await readdir(workingDir, {withFileTypes: true});
     return files.filter(
         (entry) => entry.isFile() && path.extname(entry.name).match(extensions)
-    ).map((entry) => path.normalize(entry.path + "/" + entry.name));
+    ).map((entry) => path.normalize(entry.parentPath + "/" + entry.name));
 }
 function getImages(metadatas) {
     return async function (data) {

@@ -360,13 +360,13 @@ body {
 
     .row {
         --alignment: var(--row-align, center);
-        --spacing: var(--r-space);
+        --spacing: var(--gap, var(--r-space));
         flex-flow: var(--row-dir, row) var(--wrap, nowrap);
     }
 
     .column {
         --alignment: var(--col-align, stretch);
-        --spacing: var(--c-space);
+        --spacing: var(--gap, var(--c-space));
         flex-flow: var(--col-dir, column) var(--wrap, nowrap);
     }
 
@@ -375,6 +375,10 @@ body {
         place-items: center;
         place-content: center;
         gap: var(--c-gap, 1.5em);
+    }
+
+    .gap-sm {
+        --gap: .25em;
     }
 
     :where(header, footer, [class*="box-"], .box, button, .btn) {
