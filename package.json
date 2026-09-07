@@ -18,8 +18,8 @@
   "author": "Ndimah Tchougoua",
   "license": "ISC",
   "dependencies": {
-    "@11ty/eleventy": "^3.0.0",
-    "@11ty/eleventy-img": "^4.0.2",
+    "@11ty/eleventy": "^3.1.6",
+    "@11ty/eleventy-img": "^7.0.0",
     "lightningcss": "^1.25.1"
   },
   "devDependencies": {
