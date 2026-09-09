@@ -1,13 +1,14 @@
 .banner {
     --bg-size: contain;
     --col-align: center;
-    --deco-size: var(--m-height);
+    --deco-size: calc(var(--m-height) - 2em);
+
     overflow-y: clip;
 }
 
 img:where(.banner > *) {
     transform: translateY(2em);
-    filter: drop-shadow(8px -24px 35px oklch(35% 51% 31/ 0.5) );
+    filter: drop-shadow(8px -24px 35px oklch(35% 0.122 31deg / 50%));
     isolation: isolate;
     object-fit: contain;
 }
@@ -17,14 +18,18 @@ img:where(.banner > *) {
         --col-dir: column;
         --col-align: start;
     }
+
     img:where(.banner > *) {
         --bg-size: cover;
+
         transform: translateY(6em);
     }
 }
-@media screen and (min-width: 768px) {
+
+@media screen and (width >= 768px) {
     .banner {
         --i-alignment: space-evenly;
+
         gap: 0;
     }
 

@@ -4,6 +4,7 @@
     --row-align: stretch;
     --r-space: .5em;
     --alignment: stretch;
+
     max-block-size: max-content;
 
 }
@@ -50,17 +51,18 @@ textarea {
 input:where([type="text"], [type="email"], [type="tel"]),
 textarea {
     --outline-offset: .05em;
+
     font-size: inherit;
     line-height: inherit;
     padding: 0.75em;
     border-radius: .5rem;
-    border: .1em solid var(--bdr-clr, hsl(0, 0%, 81%));
+    border: .1em solid var(--bdr-clr, hsl(0deg 0% 81%));
     inline-size: 100%;
     box-shadow: 1px 2px 4px #11070761 inset,
         -1px -2px 4px #11070761 inset;
 
     &:hover {
-        --bdr-clr: var(--system-color-paleOrange);
+        --bdr-clr: var(--system-color-pale-orange);
     }
 
     &:focus-visible:not(:is(:invalid):not([data-new])) {
@@ -78,14 +80,16 @@ textarea {
         text-transform: none;
     }
 }
+
 .stick-end {
     margin-inline-start: auto;
 }
+
 .btn-submit {
     --color-fill: var(--system-color-peach);
 
     &:is(:focus-visible, :hover) {
-        --color-fill: var(--system-color-lightOrange);
+        --color-fill: var(--system-color-light-orange);
         --outline-clr: var(--system-color-orange);
     }
 }
@@ -94,16 +98,17 @@ textarea {
     --clr: var(--c, var(--system-color-orange));
     --radius: .75rem;
     --color-text: var(--clr);
+
     border: 2px solid var(--clr);
 
     &:is(:focus-visible, :hover) {
-        --c: var(--system-color-darkBlue);
+        --c: var(--system-color-dark-blue);
     }
 }
 
 .msg-hint {
     font-size: var(--hint-size, 0.8em);
-    color: var(--hint-clr, hsl(253, 41%, 27%));
+    color: var(--hint-clr, hsl(253deg 41% 27%));
 
     p:is(& > *) {
         font-size: inherit;
@@ -141,11 +146,12 @@ form {
     --min-padding: 1.5em min(3vi, 1.5em);
     --color-fill: var(--system-color-white);
     --radius: .5rem;
+
     min-inline-size: min(80vi, 460px);
 }
 
 
-@media screen and (min-width: 768px) {
+@media screen and (width >= 768px) {
     .contact-banner {
         --col-dir: row;
         --alignment: center;

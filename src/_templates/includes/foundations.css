@@ -1,7 +1,7 @@
 @layer resets, layout, typography, utilities, theme;
 
 @font-face {
-    font-family: "Just";
+    font-family: Just;
     src: url("/assets/just-vf.woff2") format("woff2");
     font-weight: 300 900;
     font-feature-settings: "dlig" on, "ordn" on, "ss02" on, "zero" on;
@@ -9,9 +9,8 @@
 }
 
 body {
-    --primary-clr: var(--system-color-peach);
-    font-family: "Just", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    font-family: Just, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
         sans-serif;
     line-height: 1.5;
     letter-spacing: .035em;
@@ -31,6 +30,10 @@ body {
 
     .ml-max {
         margin-inline-start: auto;
+    }
+
+    .font-medium {
+        font-weight: 500;
     }
 
     .place-end {
@@ -57,7 +60,7 @@ body {
     }
 
     :where(h1, h2):where(:is(header, .contact-grid) *) {
-        color: var(--system-color-darkBlue);
+        color: var(--system-color-dark-blue);
     }
 
     :is(.contact-grid, main:not(.main-content):where(body > *)) {
@@ -65,30 +68,18 @@ body {
         margin-inline: auto;
     }
 
-    :is(.decorated, .logo) {
-        --c1: var(--deco-clr, hsla(0, 95%, 19%, .1));
+    .decorated {
+        --c1: var(--deco-clr, oklch(37% 0.125 21deg / 10%));
         --s: var(--deco-size, 640px);
-        --rounding: radial-gradient(circle, #000 calc(var(--s)/2), #0000 0);
+        --rounding: radial-gradient(circle, #000 calc(var(--s)/2), transparent 0);
 
         &::before {
-            background: var(--bg, linear-gradient(15deg, #0000, var(--c1)) right 0 top 5rem / var(--s) var(--s) no-repeat);
+            background: var(--bg, linear-gradient(15deg, transparent, var(--c1)) right 0 top 5rem / var(--s) var(--s) no-repeat);
             mask: var(--mask, var(--rounding) left 0 top 5rem / var(--s) var(--s) no-repeat);
             z-index: -1;
         }
-    }
 
-    .logo {
-        --deco-size: 24px;
-        --bg: conic-gradient(var(--system-color-peach), #0000) 0 / var(--s) no-repeat;
-        --mask: var(--rounding) 0 / var(--s) no-repeat;
-        letter-spacing: 5px;
-        color: inherit;
-
-        &::before {
-            content: "";
-            inline-size: var(--s);
-            aspect-ratio: 1;
-        }
+        isolation: isolate;
     }
 
     .contact-grid {
@@ -110,11 +101,13 @@ body {
         --color-fill: var(--system-color-peach);
         --radius: .5rem;
         --container-name: contact;
+
         block-size: var(--deco-size);
     }
 
     header.decorated {
         --p-width: 30em;
+
         background-color: var(--system-color-peach);
         max-block-size: var(--m-height, 768px);
         clip-path: var(--b-clip, inset(0 round .5rem));
@@ -131,8 +124,32 @@ body {
         --radius: .5rem;
 
         &:where(:focus-visible, :hover) {
-            --color-text: var(--system-color-darkBlue);
-            --color-fill: oklch(78% 32% 35);
+            --color-text: var(--system-color-dark-blue);
+            --color-fill: var(--system-color-light-orange);
+        }
+    }
+
+    [aria-labelledby="home-link-id"] {
+        --i-gap: .5em;
+        --s-space: 0;
+        --g-template: "area1" "area2" / auto;
+        --g-gap: 0;
+
+        font-weight: 700;
+        text-transform: none;
+
+        & > svg {
+            --icon-fill: var(--logo-clr, currentColor);
+        }
+
+        & > .logo-grid {
+            flex: 1 0 5em;
+        }
+
+        & .logo-desc {
+            font-size: 0.6em;
+            font-weight: 400;
+            text-wrap: nowrap;
         }
     }
 
@@ -150,13 +167,13 @@ body {
     [data-icon-position="start"]:where(:enabled, a):where(:hover, :focus-visible)::before,
     [data-icon-position="end"]:where(a, :enabled):where(:hover, :focus-visible)::after {
         --icon-fill: var(--icon-fill-hover, currentColor);
-        --icon-transform: var(--icon-hoverTransform, inherit);
+        --icon-transform: var(--icon-hover-transform, inherit);
     }
 
     :is([data-icon="arrow_left"], [data-icon="arrow_right"]) {
-        --icon-clip: url(#arrow_left);
+        --icon-clip: url("#arrow_left");
         --icon-transform: var(--i-trans, none);
-        --icon-hoverTransform: var(--i-h-trans, translateX(0.5em));
+        --icon-hover-transform: var(--i-h-trans, translateX(0.5em));
     }
 
     [data-icon="arrow_right"] {
@@ -165,21 +182,22 @@ body {
     }
 
     [data-icon="cross"] {
-        --icon-clip: url(#cross);
+        --icon-clip: url("#cross");
         --icon-size: 2rem;
-        --icon-fill-hover: var(--system-color-softRed);
+        --icon-fill-hover: var(--system-color-soft-red);
     }
 
     a:where(:is(.decorated, nav, footer) *),
     .links {
         --f-size-fluid: 2.5cqi;
+
         text-decoration-color: transparent;
         display: inline-flex;
         align-items: center;
         gap: var(--i-gap, 16px);
     }
 
-    .visually-hidden:not(:focus):not(:active) {
+    .visually-hidden:not(:focus, :active) {
         inline-size: 1px;
         block-size: 1px;
         clip: rect(0 0 0 0); /* IE compatibility */
@@ -196,7 +214,7 @@ body {
         position: absolute;
         inset-block-start: -24em;
         border-radius: .5rem;
-        background-color: var(--system-color-lightOrange);
+        background-color: var(--system-color-light-orange);
         padding: .25em;
         z-index: 10;
 
@@ -231,9 +249,9 @@ body {
         &,
         &::backdrop {
             transition: display .35s allow-discrete,
-                overlay .35s allow-discrete,
-                transform .35s ease-in,
-                opacity .35s;
+            overlay .35s allow-discrete,
+            transform .35s ease-in,
+            opacity .35s;
             opacity: 0;
 
         }
@@ -254,6 +272,7 @@ body {
         --min-padding: 1.5em min(4vi, 1.5em);
         --y: 0;
         --s-space: 2em;
+
         inline-size: 100vi;
     }
 
@@ -262,11 +281,12 @@ body {
     }
 
     button:not(:enabled) {
-        color: hsl(0, 0%, 75%);
+        color: var(--system-color-white);
     }
 
     [role="dialog"] {
         --outline-clr: var(--system-color-black);
+
         inset-block-start: var(--y, auto);
         inset-inline-end: var(--right-x, auto);
     }
@@ -276,11 +296,11 @@ body {
         --c-space: 0;
     }
 
-    @media screen and (min-width: 480px) {
+    @media screen and (width >= 480px) {
         header {
             --x: var(--b-md-x, right calc(-1 * (var(--s) / 4)));
             --y: var(--b-md-y, top 2rem);
-            --bg: var(--b-md-bg, linear-gradient(15deg, #0000, var(--c1)) var(--x) var(--y) / var(--s) no-repeat);
+            --bg: var(--b-md-bg, linear-gradient(15deg, transparent, var(--c1)) var(--x) var(--y) / var(--s) no-repeat);
             --mask: var(--rounding) var(--x) var(--y) / var(--s) no-repeat;
         }
 
@@ -292,8 +312,7 @@ body {
         }
     }
 
-    @media screen and (min-width: 768px) {
-
+    @media screen and (width >= 768px) {
         header,
         .contact-grid {
             text-align: start;
@@ -326,7 +345,6 @@ body {
 }
 
 @layer layout {
-
     :where(.stack, .xl-stack)>*+*,
     .mt-xl {
         margin-block-start: var(--s-space, 1.5em);
@@ -335,7 +353,6 @@ body {
     .mb-xl {
         margin-block: 8rem;
     }
-
 
     .mt-xl,
     .xl-stack {
@@ -355,18 +372,21 @@ body {
 
     .segragator {
         --i-alignment: space-between;
+
         flex-flow: var(--direction, row) var(--wrap, nowrap);
     }
 
     .row {
         --alignment: var(--row-align, center);
         --spacing: var(--gap, var(--r-space));
+
         flex-flow: var(--row-dir, row) var(--wrap, nowrap);
     }
 
     .column {
         --alignment: var(--col-align, stretch);
         --spacing: var(--gap, var(--c-space));
+
         flex-flow: var(--col-dir, column) var(--wrap, nowrap);
     }
 
@@ -395,6 +415,7 @@ body {
 
     :is([class$="grid"], footer) {
         --col-align: center;
+
         display: grid;
         grid-template: var(--g-template);
         container: var(--container-name, grid) / inline-size;
@@ -427,6 +448,7 @@ body {
         --min-row-height: var(--m-row-h, 15rem);
         --max-cols: var(--m-col-s, 3);
         --gap: var(--c-gap, 1rem);
+
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(100%, max(var(--max-col-width), (100% / var(--max-cols)) - var(--gap))),
                     1fr));
@@ -443,8 +465,10 @@ body {
         --c-space: .75rem;
         --p-items: center;
         --icon-fill: var(--system-color-peach);
-        --shadow-clr: var(--system-color-darkBlue);
+        --shadow-clr: var(--system-color-dark-blue);
         --outline-clr: var(--system-color-white);
+        --logo-clr: var(--color-text);
+
         text-align: center;
         position: relative;
         z-index: -1;
@@ -455,13 +479,16 @@ body {
         }
 
         &>a:first-of-type {
-            --c: oklch(95% 1% 10 / 0.15);
+            --c: oklch(95% 0.137 10deg / 35%);
+
             border-image: linear-gradient(var(--c), var(--c)) 0 0 1 / 2px / var(--outset, 0 calc((min(95vi, 1110px) / 2) - 5em) 1.25em);
         }
     }
 
     nav {
         --min-padding: 0 min(4vi, 1.5em);
+        --logo-clr: var(--system-color-peach);
+
         position: sticky;
         inset-block-start: 0;
         z-index: 1;
@@ -470,19 +497,21 @@ body {
 
         &:where(body > *) {
             --block-size: min(15lvb, 96px);
+
             min-block-size: var(--block-size);
             border-image: linear-gradient(canvas, canvas) 1 fill / 1 / 0 50vi;
         }
     }
 
-    @media screen and (min-width: 568px) {
+    @media screen and (width >= 568px) {
         footer {
             --min-padding: 1.5em 0;
             --col-dir: row;
             --g-template: "area1 area1 area2 area2 area2" "area3 area3 area4 area4 area5" / 1fr 1fr 1.5fr 1fr fit-content(9rem);
             --s-space: .75rem;
             --p-items: end start;
-            --outset: 0 calc(min(95vi, 1110px) - 9em) 1.25em 0;
+            --outset: 0 calc(min(95vi, 1110px) - min(2em, 4cqi)) 1.25em 0;
+
             text-align: start;
 
             &>ul {
@@ -491,7 +520,7 @@ body {
         }
     }
 
-    @media screen and (min-width: 480px) {
+    @media screen and (width >= 480px) {
         nav:where(body > *) {
             --min-padding: 0;
         }
@@ -548,18 +577,28 @@ body {
     }
 
     :is(dialog, [popover])::backdrop {
-        background-color: hsla(0, 0%, 0%, 0.8);
+        background-color: hsl(0deg 0% 0% / 80%);
+    }
+
+    button, a {
+        text-transform: uppercase;
     }
 
     a {
         --outline-style: dashed;
+
         display: inline-block;
         text-underline-offset: 0.15em;
         text-decoration: underline;
 
+        &:where([class]) {
+            text-decoration-color: transparent;
+            color: var(--link-clr, var(--icon-fill, inherit));
+        }
+
         &:where([aria-current="page"]) {
             font-weight: bold;
-            border-image: linear-gradient(to right, #0000 20%, var(--c, var(--system-color-peach)) 0 80%, #0000 0) 0 0 1 / 2px / 0 0 .25em;
+            border-image: linear-gradient(to right, transparent 20%, var(--c, var(--system-color-peach)) 0 80%, transparent 0) 0 0 1 / 2px / 0 0 .25em;
 
             &:is(:focus-visible, :hover) {
                 --c: var(--system-color-black);
@@ -568,19 +607,16 @@ body {
 
         &:not([class]) {
             --outline-style: dashed;
+
             text-decoration-thickness: max(0.08em, 1px);
             color: var(--link-clr, inherit);
 
             &:not(:disabled):where(:focus-visible, :hover) {
-                --icon-fill: oklch(92% 48% 35);
-                color: var(--fill-hover, var(--icon-fill));
-                text-decoration: currentColor wavy underline;
-            }
-        }
+                --icon-fill: oklch(80.27% 0.0928 33.65deg);
 
-        &:where([class]) {
-            text-decoration-color: transparent;
-            color: var(--link-clr, var(--icon-fill, inherit));
+                color: var(--fill-hover, var(--icon-fill));
+                text-decoration: currentcolor wavy underline;
+            }
         }
     }
 
@@ -589,13 +625,9 @@ body {
         font-weight: 700;
     }
 
-    button,
-    a {
-        text-transform: uppercase;
-    }
-
     button {
         --min-padding: .75em;
+
         min-inline-size: 3rem;
         min-block-size: 3rem;
         letter-spacing: 1px;
@@ -637,13 +669,16 @@ body {
 }
 
 @layer theme {
-    :root {
-        --system-color-black: oklch(8% 6% 10);
-        --system-color-white: oklch(95% 1% 10);
-        --system-color-darkBlue: hsl(222, 31%, 19%);
-        --system-color-orange: oklch(44% 86% 12);
-        --system-color-lightOrange: oklch(96% 15% 35);
-        --system-color-peach: oklch(75% 51% 31);
+    html {
+        --system-color-black: oklch(8% 0.024 10deg);
+        --system-color-white: oklch(92.43% 0.0115 47.54deg);
+        --system-color-dark-blue: oklch(28.86% 0.041 266deg);
+        --system-color-orange: oklch(50.59% 0.175 33deg);
+        --system-color-light-orange: oklch(86.5% 0.073 31.51deg);
+        --system-color-peach: oklch(68.52% 0.204 31deg);
+        --system-color-soft-red: oklch(71.7% 0.135 16.56deg);
+        --primary-clr: var(--system-color-peach);
+
         color-scheme: light;
     }
 }
@@ -691,7 +726,6 @@ body {
 }
 
 @media screen and (prefers-reduced-motion: no-preference) {
-
     :is(a, img, .transition-all, [popover]),
     [data-icon-position="start"]::before,
     [data-icon-position="end"]::after {
@@ -729,10 +763,7 @@ body {
         }
     }
 
-
-
     @supports (animation-timeline: scroll()) {
-
         [data-scroll-view] {
             animation-timeline: view(block);
             animation-timing-function: var(--timing, ease-in);
@@ -758,12 +789,14 @@ body {
 }
 
 @media screen and (forced-colors: active) {
-    svg {
-        --icon-fill: SelectedItemText;
-    }
     .decorated, article {
         --b-clip: none;
+
         border: 2px solid CanvasText;
         border-radius: var(--deco-forced-bdr-radius, .5em);
+    }
+
+    svg {
+        --icon-fill: SelectedItemText;
     }
 }

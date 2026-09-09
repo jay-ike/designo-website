@@ -9,7 +9,7 @@ pageId: "about"
     <div class="img-wrapper">
         {% image data.hero.path data.hero.alt "375,480" %}
     </div>
-    <div class="stack decorated section_content about-deco">
+    <div class="stack decorated section-content about-deco">
         <h1 id="head_title">{{ data.hero.title }}</h1>
         {% for paragraph in data.hero.paragraphs %}
             <p>{{ paragraph }}</p>
@@ -22,7 +22,7 @@ pageId: "about"
         <div class="img-wrapper">
             {% image data.talent.path data.talent.alt "375,480" %}
         </div>
-        <div class="stack decorated section_content">
+        <div class="stack decorated section-content">
             <h2 class="h3" id="section1_desc">{{ data.talent.title }}</h3>
             {% for paragraph in data.talent.paragraphs %}
                 <p>{{ paragraph }}</p>
@@ -35,7 +35,7 @@ pageId: "about"
         <div class="img-wrapper">
             {% image data.deal.path data.deal.alt "375,480" %}
         </div>
-        <div class="stack decorated section_content">
+        <div class="stack decorated section-content">
             <h2 class="h3" id="section2_desc">{{ data.deal.title }}</h2>
             {% for paragraph in data.deal.paragraphs %}
                 <p>{{ paragraph }}</p>

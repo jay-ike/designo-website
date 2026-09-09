@@ -9,7 +9,7 @@ pageTitle: "Designo Digital Agency"
         <p>{{heading.description}}</p>
         <a href="/company/about" class="btn btn-primary">learn more</a>
     </div>
-    {%image hero site.home.heading.heroAlt "284" %}
+    {%image hero heading.heroAlt "284" %}
 </header>
 <main class="xl-stack" id="main" tabindex="-1" aria-labelledby="content-desc">
     <p hidden="hidden" id="content-desc">A quick overview of designo digtal agency</p>
@@ -20,7 +20,7 @@ pageTitle: "Designo Digital Agency"
     <style>{% cssmin "includes/home-features.css" %}</style>
     <section class="contain features column" aria-labelledby="feat_head">
         <h2 class="visually-hidden capitalize" id="feat_head">our core values</h2>
-        {% for feat in site.home.features %}
+        {% for feat in features %}
         {% assign f_title = feat.title | replace: " ", _ %}
         <article class="grid" data-scroll-view="fade-in" aria-labelledby="val_{{f_title}}">
             <svg width="202" height="202">

@@ -1,5 +1,13 @@
 <nav class="row box contain">
-    <a href="/" class="logo">designo</a>
+    <a href="/" class="row" aria-labelledby="home-link-id">
+        <svg width="32" height="32">
+            <use href="#logo">
+        </svg>
+        <span class="logo-grid">
+            <span>designo</span>
+            <span class="capitalize logo-desc">digital agency</span>
+        </span>
+    </a>
     <ul class="links ml-max md-show">
         {% for item in site.links %}
         {%set link_tag = item.path | split("/") | last %}

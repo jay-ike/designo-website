@@ -1,6 +1,7 @@
- .service_content {
+ .service-content {
      --outline-clr: var(--system-color-white);
-     --shadow-clr: var(--system-color-darkBlue);
+     --shadow-clr: var(--system-color-dark-blue);
+
      background-color: var(--bg-clr, transparent);
      border-image: linear-gradient(#0009, #0009) 1 fill;
  }
@@ -10,13 +11,14 @@
      min-inline-size: 100%;
      object-fit: cover;
      object-position: right 10% bottom 0;
-     transform: var(--_img-transform, none);
-     clip-path: var(--_img-clip, none);
+     transform: var(--srv-img-transform, none);
+     clip-path: var(--srv-img-clip, none);
  }
 
  div:where(.services > *) {
      --icon-fill: var(--system-color-peach);
      --f: 1.3;
+
      display: grid;
      grid-template: "area1";
      container: hero / inline-size;
@@ -24,16 +26,19 @@
      place-items: stretch;
      color: var(--system-color-white);
      overflow: clip;
+
      &>* {
          grid-area: area1;
          isolation: isolate;
      }
+
      &:where(:focus-within, :hover) {
-         --bg-clr: oklch(75% 59% 31 / 0.5);
-         --_img-clip: inset((1 - 1 / var(--f)) * 50%);
-         --_img-transform: scale(var(--f));
+         --bg-clr: oklch(from var(--system-color-peach) l calc(c - 0.01) calc(h + 10) / 50%);
+         --srv-img-clip: inset((1 - 1 / var(--f)) * 50%);
+         --srv-img-transform: scale(var(--f));
      }
  }
+
  .services {
      --i-gap: 0;
      --min-padding: 0;
@@ -42,27 +47,33 @@
      --m-col-s: 2;
      --container-name: services;
  }
- a:where(services *) {
+
+ a:where(.services *) {
      display: inline-flex;
  }
+
  @container (inline-size > 729px) {
      div:first-of-type:nth-last-of-type(3):where( .services > *) {
-         --m-row-h: calc(400px +  var(--gap));
+         --m-row-h: calc(400px + var(--gap));
+
          grid-row: span 2;
      }
  }
- @media screen and (min-width: 480px) {
+
+ @media screen and (width >= 480px) {
      .services {
          --m-row-h: 200px;
      }
  }
- @media screen and (min-width: 768px) {
+
+ @media screen and (width >= 768px) {
      .services {
          --m-col-w: 12rem;
      }
  }
+
  @media screen and (forced-colors: active) {
-     .service_content {
+     .service-content {
          border: 2px solid CanvasText;
          border-radius: .5em;
      }

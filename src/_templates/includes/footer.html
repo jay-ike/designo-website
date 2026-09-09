@@ -1,5 +1,13 @@
 <footer>
-    <a href="/" class="logo" aria-label="go to designo home page" >designo</a>
+    <a href="/" class="row" aria-labelledby="home-link-id">
+        <svg width="32" height="32">
+            <use href="#logo">
+        </svg>
+        <span class="logo-grid">
+            <span>designo</span>
+            <span class="capitalize logo-desc">digital agency</span>
+        </span>
+    </a>
     <ul class="column">
         {% for item in site.links %}
             <li><a href="{{ item.path }}">{{ item.title }}</a></li>

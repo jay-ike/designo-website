@@ -3,19 +3,23 @@
      --p-items: stretch center;
      --g-gap: 1.5em;
      --container-name: features;
+
      text-align: center;
 
      & > article {
          padding: .75em min(1vmin, 1em);
      }
  }
+
  .stack:where(.features *) {
      --s-space: var(--g-gap);
  }
+
  @container features (inline-size > 456px) and (inline-size < 729px) {
      .grid:where(.features > *) {
          --g-template: "area1 area2";
          --p-items: center;
+
          text-align: start;
      }
  }
@@ -26,7 +30,7 @@
      }
  }
 
- @media screen and (min-width: 768px) {
+ @media screen and (width >= 768px) {
      .features {
          --col-dir: row;
      }
