@@ -19,10 +19,11 @@ pageId: "locations"
             <h2>Canada</h2>
             <div class="row">
                 {% for detail in data.canada.details %}
+                {% assign k = forloop.index %}
                 <dl class="stack">
                     <dt>{{detail.term}}</dt>
                     {% for desc in detail.descriptions %}
-                    <dd>{{desc}}</dd>
+                    <dd aria-labelledby="ca-{{k}}-desc-{{forloop.index}}"><span id="ca-{{k}}-desc-{{forloop.index}}">{{desc}}</span></dd>
                     {% endfor %}
                 </dl>
                {% endfor %}
@@ -39,10 +40,11 @@ pageId: "locations"
             <h2>Australia</h2>
             <div class="row">
                 {% for detail in data.australia.details %}
+                {% assign j = forloop.index %}
                 <dl class="stack">
                     <dt>{{detail.term}}</dt>
                     {% for desc in detail.descriptions %}
-                    <dd>{{desc}}</dd>
+                    <dd aria-labelledby="au-{{j}}-desc-{{forloop.index}}"><span id="au-{{j}}-desc-{{forloop.index}}">{{desc}}</span></dd>
                     {% endfor %}
                 </dl>
                {% endfor %}
@@ -59,10 +61,11 @@ pageId: "locations"
             <h2>United Kingdom</h2>
             <div class="row">
                 {% for detail in data.uk.details %}
+                {% assign i = forloop.index %}
                 <dl class="stack">
                     <dt>{{detail.term}}</dt>
                     {% for desc in detail.descriptions %}
-                    <dd>{{desc}}</dd>
+                    <dd aria-labelledby="uk-{{i}}-desc-{{forloop.index}}"><span id="uk-{{i}}-desc-{{forloop.index}}">{{desc}}</span></dd>
                     {% endfor %}
                 </dl>
                {% endfor %}

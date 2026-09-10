@@ -5,40 +5,40 @@ pageId: "about"
 ---
 {% assign data = images %}
 <style>{%cssmin "includes/company-common.css"%}</style>
-<header class="contain column no-gap" aria-labelledby="head_title">
+<p hidden="hidden" id="main_desc">A look at what define us the best way</p>
+<header class="contain column no-gap" aria-labelledby="head_title" aria-describedby="hero-desc-1">
     <div class="img-wrapper">
         {% image data.hero.path data.hero.alt "375,480" %}
     </div>
     <div class="stack decorated section-content about-deco">
         <h1 id="head_title">{{ data.hero.title }}</h1>
         {% for paragraph in data.hero.paragraphs %}
-            <p>{{ paragraph }}</p>
+        <p id="hero-desc-{{forloop.index}}">{{ paragraph }}</p>
         {% endfor %}
     </div>
 </header>
 <main aria-labelledby="main_desc" class="contain main-content xl-stack" id="main" tabindex="-1">
-    <p hidden="hidden" id="main_desc">A look at what define us the best way</p>
-    <section class="column no-gap" aria-labelledby="section1_desc">
+    <section class="column no-gap" aria-labelledby="section-1-title" aria-describedby="section-1-desc-1 section-1-desc-2">
         <div class="img-wrapper">
             {% image data.talent.path data.talent.alt "375,480" %}
         </div>
         <div class="stack decorated section-content">
-            <h2 class="h3" id="section1_desc">{{ data.talent.title }}</h3>
+            <h2 class="h3" id="section-1-title">{{ data.talent.title }}</h3>
             {% for paragraph in data.talent.paragraphs %}
-                <p>{{ paragraph }}</p>
+            <p id="section-1-desc-{{forloop.index}}">{{ paragraph }}</p>
             {% endfor %}
 
         </div>
     </section>
     {% include "includes/locations.html" %}
-    <section class="column no-gap" aria-labelledby="section2_desc">
+    <section class="column no-gap" aria-labelledby="section-2-title" aria-describedby="section-2-desc-1 section-2-desc-2">
         <div class="img-wrapper">
             {% image data.deal.path data.deal.alt "375,480" %}
         </div>
         <div class="stack decorated section-content">
-            <h2 class="h3" id="section2_desc">{{ data.deal.title }}</h2>
+            <h2 class="h3" id="section-2-title">{{ data.deal.title }}</h2>
             {% for paragraph in data.deal.paragraphs %}
-                <p>{{ paragraph }}</p>
+                <p id="section-2-desc-{{forloop.index}}">{{ paragraph }}</p>
             {% endfor %}
         </div>
     </section>

@@ -8,20 +8,20 @@
             <span class="capitalize logo-desc">digital agency</span>
         </span>
     </a>
-    <ul class="column">
+    <ul class="column" aria-labelledby="nav-links">
         {% for item in site.links %}
-            <li><a href="{{ item.path }}">{{ item.title }}</a></li>
+        <li aria-labelledby="foot-link-{{forloop.index}}"><a id="foot-link-{{forloop.index}}" href="{{ item.path }}">{{ item.title }}</a></li>
         {% endfor %}
     </ul>
     <dl class="stack">
         <dt>Designo Central Office </dt>
-        <dd>3886 Wellington Street</dd>
-        <dd>Toronto, Ontario M9C 3J5</dd>
+        <dd aria-labelledby="office-1"><span id="office-1"> 3886 Wellington Street</span></dd>
+        <dd aria-labelledby="office-2"><span id="office-2">Toronto, Ontario M9C 3J5</span></dd>
     </dl>
     <dl class="stack">
         <dt>Contact Us (Central Office)</dt>
-        <dd>P : +1 253-863-8967</dd>
-        <dd>M : contact@designo.co</dd>
+        <dd aria-labelledby="contact-1"><span id="contact-1">Phone : +1 253 863 8967</span></dd>
+        <dd aria-labelledby="contact-2"><span id="contact-2">Email : contact@designo.co</span></dd>
     </dl>
     <div class="stack">
         <svg width="131" height="42" style="--icon-fill: var(--color-text, currentColor)">

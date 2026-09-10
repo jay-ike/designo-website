@@ -129,8 +129,9 @@ body {
         }
     }
 
-    [aria-labelledby="home-link-id"] {
+    :where([aria-labelledby="home-link-id"], [aria-labelledby="home-nav-title"]) {
         --i-gap: .5em;
+        --r-space: .5em;
         --s-space: 0;
         --g-template: "area1" "area2" / auto;
         --g-gap: 0;
@@ -510,7 +511,7 @@ body {
             --g-template: "area1 area1 area2 area2 area2" "area3 area3 area4 area4 area5" / 1fr 1fr 1.5fr 1fr fit-content(9rem);
             --s-space: .75rem;
             --p-items: end start;
-            --outset: 0 calc(min(95vi, 1110px) - min(2em, 4cqi)) 1.25em 0;
+            --outset: 0 calc(min(95vi, 1110px) - 115px) 1.25em 0;
 
             text-align: start;
 

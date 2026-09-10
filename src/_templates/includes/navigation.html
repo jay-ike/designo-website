@@ -8,10 +8,10 @@
             <span class="capitalize logo-desc">digital agency</span>
         </span>
     </a>
-    <ul class="links ml-max md-show">
+    <ul class="links ml-max md-show" aria-labelledby="nav-links">
         {% for item in site.links %}
         {%set link_tag = item.path | split("/") | last %}
-        <li class="fluid-type"><a href="{{item.path}}" {% if pageId == link_tag %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
+        <li class="fluid-type" aria-labelledby="link-{{link_tag}}"><a href="{{item.path}}" id="link-{{link_tag}}" {% if pageId == link_tag %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
         {% endfor %}
     </ul>
     <div class="ml-max md-remove">
@@ -21,9 +21,20 @@
                 <use href="/assets/sprites.svg#hamburger">
             </svg>
         </button>
-        <section id="mobile-menu" role="dialog" aria-label="page menu" popover="manual">
+        <section id="mobile-menu" role="dialog" aria-labelledby="nav-title" popover="manual">
             <div class="segragator box block-box" role="banner" aria-labelledby="menu-title">
-                <h3 class="logo links" id="menu-title">designo</h3>
+                <p id="nav-title" hidden>page menu</p>
+                <h3 id="menu-title" hidden>designo</h3>
+                <div class="row" aria-labelledby="home-nav-title">
+                    <span id="home-nav-title" hidden>designo digital agency</span>
+                    <svg width="32" height="32" aria-hidden="true">
+                        <use href="#logo">
+                    </svg>
+                    <span class="logo-grid">
+                        <span>designo</span>
+                        <span class="capitalize logo-desc">digital agency</span>
+                    </span>
+                </div>
                 <button popovertarget="mobile-menu" aria-labelledby="menu-close">
                     <svg width="24" height="24">
                        <title id="menu-close">close page menu</title>
@@ -31,7 +42,8 @@
                     </svg>
                 </button>
             </div>
-            <ul class="box stack box-dark">
+            <span id="nav-links" hidden>Available links</span>
+            <ul class="box stack box-dark" aria-labelledby="nav-links">
                  {% for item in site.links %}
                     <li><a href="{{item.path}}">{{item.title}}</a></li>
                  {% endfor %}
@@ -39,3 +51,4 @@
         </section>
     </div>
 </nav>
+<script>const d=document;function c(e){return e.querySelectorAll(":is(a:any-link, button, input[type='checkbox'], "+"input[type='radio'], input[type='text'], input[type='password'], "+"input[type='email'], textarea, select):not([disabled])");}function t(e){const f=c(e);const a=f[0];const l=f[f.length-1];e.addEventListener("keydown",function(ev){let u=(ev.key==="Tab"||ev.keyCode===9);if(!u){return;}if(ev.shiftKey){if(d.activeElement===a){l.focus();ev.preventDefault();}}else{if(d.activeElement===l){a.focus();ev.preventDefault();}}});}d.querySelector("button[popovertarget='mobile-menu']").addEventListener("click",function(){t(d.getElementById("mobile-menu"));});</script>

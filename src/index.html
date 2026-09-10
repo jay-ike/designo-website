@@ -21,16 +21,16 @@ pageTitle: "Designo Digital Agency"
     <section class="contain features column" aria-labelledby="feat_head">
         <h2 class="visually-hidden capitalize" id="feat_head">our core values</h2>
         {% for feat in features %}
-        {% assign f_title = feat.title | replace: " ", _ %}
-        <article class="grid" data-scroll-view="fade-in" aria-labelledby="val_{{f_title}}">
+        <article class="grid" data-scroll-view="fade-in" aria-labelledby="feat-{{forloop.index}}-title" aria-describedby="feat-{{forloop.index}}-desc">
             <svg width="202" height="202">
                 <title>{{ feat.alt }}</title>
                 <use href="/assets/sprites.svg#{{ feat.tag }}" />
             </svg>
             <div class="stack">
-                <h3 id="val_{{f_title}}">{{feat.title}}</h3>
-                <p>{{ feat.description }}</p>
+                <h3 id="feat-{{forloop.index}}">{{feat.title}}</h3>
+                <p id="feat-{{forloop.index}}-desc">{{ feat.description }}</p>
             </div>
+            <span id="feat-{{forloop.index}}-title" hidden>{{feat.title}}</span>
         </article>
         {% endfor %}
     </section>
