@@ -7,15 +7,16 @@ layout: "layouts/base.njk"
     {%cssmin "includes/services.css"%}
 </style>
 <main class="xl-stack mt-xl" aria-labelledby="service-title" id="main" tabindex="-1">
-    <h2 class="capitalize" id="service-title">{{ serviceTitle }}</h2>
+    <p id="service-title" hidden>{{serviceTitle}}</p>
+    <h2 class="capitalize" aria-labelledby="service-title">Our Projects</h2>
     <div class="responsive-grid contain projects">
         {% for item in getProjects %}
         {% assign projectId= item.title | split: " " | join: "_" %}
-        <article class="project-grid" aria-labelledby="{{projectId}}">
+        <article class="project-grid" aria-labelledby="project-{{forloop.index}}-title" aria-describedby="project-{{forloop.index}}-desc">
                 {% image item.path item.alt "327" %}
                 <div class="box stack">
-                    <h3 id="{{projectId}}">{{item.title}}</h3>
-                    <p>{{ item.description }}</p>
+                    <h3 id="project-{{forloop.index}}-title">{{item.title}}</h3>
+                    <p id="project-{{forloop.index}}-desc">{{ item.description }}</p>
                 </div>
             </article>
         {% endfor %}

@@ -1,15 +1,19 @@
 ---
 layout: "layouts/base.njk"
 pageTitle: "Designo Digital Agency Locations"
-extraStyles: ["/assets/leaflet.css"]
 pageId: "locations"
+og_title: "Designo Locations | Offices in Canada, UK & Australia"
+og_description: "Discover Designo's digital agency offices in Canada, the United Kingdom, and Australia. Contact our teams for professional digital design services."
+og_image: "https://ike-designo-website.vercel.app/assets/images/screenshots/company-locations-page.jpg"
+og_imageH: 407
+og_imageAlt: "A screenshot of the designo locations page where we can see the Canada office location at 3886 Wellington street"
 ---
 {% assign data = images %}
 
 <style>{%cssmin "includes/company-common.css"%}</style>
 <style>{%cssmin "includes/company-location.css"%}</style>
+<p hidden="hidden" id="content-desc">Our locations around the world</p>
 <main class="contain main-content cpy-locations stack no-js" id="main" aria-labelledby="content-desc" tabindex="-1">
-    <p hidden="hidden" id="content-desc">Our locations around the world</p>
     <section id="canada-infos" class="column content-clip">
         <div id="canada" class="map-view"></div>
         <div class="img-wrapper">

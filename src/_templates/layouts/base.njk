@@ -14,17 +14,19 @@
     <meta name="author" content="Ndimah Tchougoua">
     <meta name="description" content="a Modern digital agency helping their customers to fullfil their digital dreams">
     <meta name="color-scheme" content="only light">
-    <! -- Open Graph -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ike-designo-website.vercel.app/">
-    <meta property="og:site_name" content="Designo">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:title" content="Designo a digital agency for your digital needs">
-    <meta property="og:description" content="With over 10 years in the industry, we are experienced in creating fully responsive websites, app design, and engaging brand experiences. Find out more about our services.">
-    <meta property="og:image" content="https://ike-designo-website.vercel.app/assets/home-og-image.png">
-    <meta property="og:image:width" content="1110">
-    <meta property="og:image:height" content="610">
-    <meta property="og:image:alt" content="the screen shot of the web page at https://ike-designo-website.vercel.app">
+    <meta property="og:url" content="{{site.image.url}}{%if path%}/{{path}}{%endif%}">
+    <meta property="og:site_name" content="{{site.image.name}}">
+    <meta property="og:locale" content="en">
+    <meta property="og:title" content="{%if og_title%}{{og_title}}{%else%}{{pageTitle}}{%endif%}">
+    <meta property="og:description" content="{%if og_description%}{{og_description}}{%else%}{{site.image.description}}{%endif%}">
+    <meta property="og:image" content="{%if og_image%}{{og_image}}{%else%}{{site.image.src}}{%endif%}">
+    <meta property="og:image:width" content="{%if og_imageW%}{{og_imageW}}{%else%}{{site.image.width}}{%endif%}">
+    <meta property="og:image:height" content="{%if og_imageH%}{{og_imageH}}{%else%}{{site.image.height}}{%endif%}">
+    <meta property="og:image:alt" content="{%if og_imageAlt%}{{og_imageAlt}}{%else%}{{site.image.alt}}{%endif%}">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
 </head>
 
 <body>

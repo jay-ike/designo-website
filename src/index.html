@@ -1,13 +1,16 @@
 ---
 layout: "layouts/base.njk"
 pageTitle: "Designo Digital Agency"
+og_title: "Designo | Award-Winning Digital Design & Branding Agency"
+og_description: "With 10+ years in digital design, Designo creates responsive websites, app designs, and engaging brand experiences. Discover our services."
+og_imageAlt: "a screenshot of the designo digital agency home page where we can see a mobile phone with furnitures wallpaper image having the text 'frame'"
 ---
 <style>{% cssmin "includes/home-banner.css" %}</style>
-<header class="column banner decorated" aria-labelledby="heading-title">
+<header class="column banner decorated" aria-labelledby="heading-title" aria-describedby="heading-desc">
     <div class="column">
         <h1 id="heading-title">{{heading.title}}</h1>
-        <p>{{heading.description}}</p>
-        <a href="/company/about" class="btn btn-primary">learn more</a>
+        <p id="heading-desc">{{heading.description}}</p>
+        <a href="/company/about" class="btn btn-primary" aria-labelledby="heading-action cpy-name"><span id="heading-action">learn more</span> <span id="cpy-name" hidden>about Designo digital agency</span></a>
     </div>
     {%image hero heading.heroAlt "284" %}
 </header>

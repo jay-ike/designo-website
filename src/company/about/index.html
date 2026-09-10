@@ -2,10 +2,15 @@
 layout: "layouts/base.njk"
 pageTitle: "About Designo Digital agency"
 pageId: "about"
+og_title: "About Designo | A Creative Agency Crafting Digital Experiences"
+og_description: "Since 2010, Designo has partnered with startups, corporations, and nonprofits to craft impactful brands, products, and digital experiences that connect with audiences."
+og_image: "https://ike-designo-website.vercel.app/assets/images/screenshots/company-about-page.jpg"
+og_imageH: 466
+og_imageAlt: "A screenshot of the designo's about page where we can see a group of people discussing product strategy during a meeting."
 ---
 {% assign data = images %}
 <style>{%cssmin "includes/company-common.css"%}</style>
-<p hidden="hidden" id="main_desc">A look at what define us the best way</p>
+<p hidden id="main_desc">A look at what define us the best way</p>
 <header class="contain column no-gap" aria-labelledby="head_title" aria-describedby="hero-desc-1">
     <div class="img-wrapper">
         {% image data.hero.path data.hero.alt "375,480" %}
