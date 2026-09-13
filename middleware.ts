@@ -13,6 +13,14 @@ const csp = (nonce: string) =>  [
     `frame-ancestors 'none'`,
 ].join("; ");
 
+const compressionKeys = [
+    "Content-Encoding",
+    "Content-Length",
+    "ETag",
+    "Content-Digest",
+    "Digest"
+];
+
 export const config = {
     matcher:  "/((?!_next|assets|favicon.ico).*)",
     runtime: "nodejs"
@@ -40,7 +48,9 @@ export default async function middleware(request: Request) {
     tmp = tmp.replace( /<script(?![^>]*\bnonce=)/g, `<script nonce="${nonce}"`);
     return new Response(tmp, {
         status: response.status,
-        headers: Object.assign(Object.fromEntries(response.headers.entries()), {
+        headers: Object.assign(Object.fromEntries(Array.from(
+            response.headers.entries()
+        ).filter((e) => !compressionKeys.includes(e[0]))), {
             "Content-Security-Policy": csp(nonce),
             "Cache-Control": "private, no-store", // nonce must not be cached
             "Vary": "Accept-Encoding", // ensure proper caching of variants
