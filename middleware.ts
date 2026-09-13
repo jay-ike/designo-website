@@ -13,7 +13,10 @@ const csp = (nonce: string) =>  [
     `frame-ancestors "none"`,
 ].join("; ");
 
-export const config = {matcher:  "/((?!_next|assets|favicon.ico).*)"};
+export const config = {
+    matcher:  "/((?!_next|assets|favicon.ico).*)",
+    runtime: "nodejs"
+};
 
 export default async function middleware(request: Request) {
     const url = new URL(request.url);
@@ -37,7 +40,7 @@ export default async function middleware(request: Request) {
     tmp = tmp.replace( /<script(?![^>]*\bnonce=)/g, `<script nonce="${nonce}"`);
     return new Response(tmp, {
         status: response.status,
-        headers: Object.assign(response.headers, {
+        headers: Object.assign(Object.fromEntries(response.headers.entries()), {
             "Content-Security-Policy": csp(nonce),
             "Cache-Control": "private, no-store", // nonce must not be cached
             "Vary": "Accept-Encoding", // ensure proper caching of variants
