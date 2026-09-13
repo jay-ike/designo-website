@@ -1,9 +1,10 @@
 /*jslint node*/
 const {transform} = require("lightningcss");
-const {readFile} = require("node:fs");
+const {readFile, writeFile} = require("node:fs");
 const {promisify} = require("node:util");
 const path = require("node:path");
-const fileReader = promisify(readFile);
+const {randomBytes} = require("node:crypto");
+const fs = {read: promisify(readFile), write: promisify(writeFile)};
 
 function getSize(width) {
     return (
@@ -71,7 +72,7 @@ async function parseImage(src, alt, sizes = "300,600") {
     return `<img ${tmp}>`;
 }
 async function parseCode({dir}, src, filename = "style.css") {
-    const blob = await fileReader(path.normalize(
+    const blob = await fs.read(path.normalize(
         `${dir.input}/${dir.includes}/${src}`
     ));
     const {code} = transform({code: blob, filename, minify: true});
@@ -80,6 +81,8 @@ async function parseCode({dir}, src, filename = "style.css") {
 
 
 module.exports = function (config) {
+    const nonce = randomBytes(16).toString("base64");
+    config.addGlobalData("nonce", nonce);
     config.addPassthroughCopy("assets");
     config.setDataFileSuffixes([".11tydata"]);
     config.addShortcode("image", parseImage);
@@ -93,6 +96,34 @@ module.exports = function (config) {
             ? value.toString().split(separator ?? "")
             : ""
         );
+    });
+    config.addTransform("csp-nonce", function (content, outputPath) {
+        if (outputPath && outputPath.endsWith(".html")) {
+            return content.replace(
+                /<script(?![^>]*\bnonce=)/g,
+                `<script nonce="${nonce}"`
+            );
+        }
+        return content;
+    });
+    config.on("eleventy.after", async function ({runMode}) {
+        let tmp =  `'self' nonce-${nonce}`;
+        tmp = {
+            headers: [{source: "/(.*)", headers: [
+                {
+                    key: "Content-Security-Policy",
+                    value: `default-src 'self'; script-src ${tmp}; style-src` +
+                    " 'self' 'unsafe-inline'; img-src 'self' data: https:; " +
+                    "font-src 'self' data: https:; connect-src 'self'; " +
+                    "object-src 'none'; base-uri 'self'; form-action 'self'; " +
+                    "frame-ancestors 'none';"
+                }
+            ]}]
+        };
+        if (runMode === "build") {
+            await fs.write("vercel.json", JSON.stringify(tmp, null, 2));
+            console.log("Generated vercel.json with calculated CSP script hashes.");
+        }
     });
     return {
         dir: {includes: "_templates", input: "src", output: "_site"}
