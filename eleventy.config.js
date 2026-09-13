@@ -1,5 +1,4 @@
 /*jslint node*/
-const csp = require('@jackdbd/eleventy-plugin-content-security-policy');
 const {transform} = require("lightningcss");
 const {readFile, writeFile} = require("node:fs");
 const {promisify} = require("node:util");
@@ -79,17 +78,10 @@ async function parseCode({dir}, src, filename = "style.css") {
     return code.toString();
 }
 
-
-module.exports = function(eleventyConfig) {
-
-  return {
-    dir: {
-      input: "src",
-      output: "_site"
-    }
-  };
-};
-module.exports = function (config) {
+module.exports = async function (config) {
+    const csp = await import(
+        "@jackdbd/eleventy-plugin-content-security-policy"
+    );
     config.addPassthroughCopy("assets");
     config.setDataFileSuffixes([".11tydata"]);
     config.addShortcode("image", parseImage);
@@ -117,7 +109,8 @@ module.exports = function (config) {
             'form-action': ["'self'"],
             'frame-ancestors': ["'none'"],
             'upgrade-insecure-requests': true
-        }
+        },
+        hosting: "vercel"
     });
     return {
         dir: {includes: "_templates", input: "src", output: "_site"}
