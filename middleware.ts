@@ -13,16 +13,7 @@ const csp = (nonce: string) =>  [
     `frame-ancestors "none"`,
 ].join("; ");
 
-export const config = {
-  matcher: [
-      {
-          source: "/((?!_next|assets|favicon.ico).*)",
-          missing: [
-              {type: "header", key: "x-middleware-self-fetch"}
-          ]
-      }
-  ]
-};
+export const config = {matcher:  "/((?!_next|assets|favicon.ico).*)"};
 
 export default async function middleware(request: Request) {
     const url = new URL(request.url);
