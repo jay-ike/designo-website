@@ -1,16 +1,16 @@
 import {next} from "@vercel/functions";
 
 const csp = (nonce: string) =>  [
-    `default-src "self"`,
-    `script-src "self" "nonce-${nonce}" "strict-dynamic"`,
-    `style-src "self" "unsafe-inline"`, // adjust if you use inline styles
-    `img-src "self" data: https:`,
-    `font-src "self" data: https:`,
-    `connect-src "self"`,
-    `object-src "none"`,
-    `base-uri "self"`,
-    `form-action "self"`,
-    `frame-ancestors "none"`,
+    `default-src 'self'`,
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
+    `style-src 'self' 'unsafe-inline'`, // adjust if you use inline styles
+    `img-src 'self' data: https:`,
+    `font-src 'self' data: https:`,
+    `connect-src 'self'`,
+    `object-src 'none'`,
+    `base-uri 'self'`,
+    `form-action 'self'`,
+    `frame-ancestors 'none'`,
 ].join("; ");
 
 export const config = {
