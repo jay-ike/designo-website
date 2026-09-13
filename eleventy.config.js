@@ -54,7 +54,8 @@ async function parseImage(src, alt, sizes = "300,600") {
     }).then((res) => res.png[0].buffer);
     const metadata = await img.default(src, {
         formats: ["webp", "auto"],
-        outputDir: "./_site/img",
+        outputDir: "./_site/assets/images/website",
+        urlPath: "/assets/images/website/",
         widths: sizes.split(",").map((val) => parseInt(val, 10)).filter(
             (val) => Number.isFinite(val)
         )
