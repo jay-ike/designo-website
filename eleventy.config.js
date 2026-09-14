@@ -3,7 +3,13 @@ const {transform} = require("lightningcss");
 const {readFile, writeFile} = require("node:fs");
 const {promisify} = require("node:util");
 const path = require("node:path");
+const crypto = require("crypto");
 const fs = {read: promisify(readFile), write: promisify(writeFile)};
+const re = {
+    script: /<script\b[^>]*>([\s\S]*?)<\/script>/gi,
+    style: /<style\b[^>]*>([\s\S]*?)<\/style>/gi
+};
+const sha = (str) => crypto.createHash("sha256").update(str).digest("base64");
 
 function getSize(width) {
     return (
@@ -62,7 +68,7 @@ async function parseImage(src, alt, sizes = "300,600") {
     });
     const attributes = getAttributes(metadata, getSize);
     Object.assign(attributes, {alt, decoding: "async", loading: "lazy"});
-    attributes.style = "background-size: var(--bg-size, cover); ";
+    attributes.style = "background-size: let(--bg-size, cover); ";
     attributes.style += "background-image:url(data:image/jpeg;base64,";
     attributes.style += blob.toString("base64") + ");color:transparent;";
     tmp = Object.entries(attributes).reduce(function (acc, entry) {
@@ -77,11 +83,49 @@ async function parseCode({dir}, src, filename = "style.css") {
     const {code} = transform({code: blob, filename, minify: true});
     return code.toString();
 }
-
-module.exports = async function (config) {
-    const csp = await import(
-        "@jackdbd/eleventy-plugin-content-security-policy"
+function extractHashes(content, regex, isScript) {
+    let body;
+    let hashes = [];
+    let match = regex.exec(content);
+    while (match !== null) {
+        body = match[1].trim();
+        if (body && (!isScript || match[0].indexOf("src=") === -1)) {
+            hashes.push("\"sha256-" + sha(body) + "\"");
+        }
+        match = regex.exec(content);
+    }
+    return hashes;
+}
+function getCspMetaTag(scriptSrc, styleSrc) {
+    let policy = [
+        "default-src \"self\";",
+        "script-src " + scriptSrc + ";",
+        "style-src " + styleSrc + ";",
+        "img-src \"self\" data: https:;",
+        "font-src \"self\";",
+        "object-src \"none\";",
+        "base-uri \"self\";",
+        "form-action \"self\";"
+    ].join(" ");
+    return `<meta http-equiv="Content-Security-Policy" content="${policy}">`;
+}
+function injectCsp(content, outputPath) {
+    let scripts;
+    let styles;
+    let tag;
+    if (!outputPath || outputPath.indexOf(".html") === -1) {
+        return content;
+    }
+    scripts = extractHashes(content, re.script, true);
+    styles = extractHashes(content, re.style, false);
+    tag = getCspMetaTag(
+        ["\"self\""].concat(scripts).join(" "),
+        ["\"self\""].concat(styles).join(" ")
     );
+    return content.replace(/<\/head>/i, tag + "\n</head>");
+}
+
+module.exports = function (config) {
     config.addPassthroughCopy("assets");
     config.setDataFileSuffixes([".11tydata"]);
     config.addShortcode("image", parseImage);
@@ -96,22 +140,7 @@ module.exports = async function (config) {
             : ""
         );
     });
-    config.addPlugin(csp.contentSecurityPolicyPlugin, {
-        deliveryLocations: ['meta-element'],
-        directives: {
-            'default-src': ["'self'"],
-            'script-src': ["'self'"],
-            'style-src': ["'self'"],
-            'img-src': ["'self'", "data:", "https:"],
-            'font-src': ["'self'"],
-            'object-src': ["'none'"],
-            'base-uri': ["'self'"],
-            'form-action': ["'self'"],
-            'frame-ancestors': ["'none'"],
-            'upgrade-insecure-requests': true
-        },
-        hosting: "vercel"
-    });
+    config.addTransform("csp-hash-injector", injectCsp);
     return {
         dir: {includes: "_templates", input: "src", output: "_site"}
     };
