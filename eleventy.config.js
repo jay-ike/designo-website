@@ -68,7 +68,7 @@ async function parseImage(src, alt, sizes = "300,600") {
     });
     const attributes = getAttributes(metadata, getSize);
     Object.assign(attributes, {alt, decoding: "async", loading: "lazy"});
-    attributes.style = "background-size: let(--bg-size, cover); ";
+    attributes.style = "background-size: var(--bg-size, cover); ";
     attributes.style += "background-image:url(data:image/jpeg;base64,";
     attributes.style += blob.toString("base64") + ");color:transparent;";
     tmp = Object.entries(attributes).reduce(function (acc, entry) {
@@ -90,17 +90,17 @@ function extractHashes(content, regex, isScript) {
     while (match !== null) {
         body = match[1].trim();
         if (body && (!isScript || match[0].indexOf("src=") === -1)) {
-            hashes.push(`sha256-${sha(body)}`);
+            hashes.push(`'sha256-${sha(body)}'`);
         }
         match = regex.exec(content);
     }
     return hashes;
 }
-function getCspMetaTag(scriptSrc, styleSrc) {
+function getCspMetaTag(scriptSrc) {
     let policy = [
         "default-src 'self';",
         `script-src ${scriptSrc};`,
-        `style-src ${styleSrc};`,
+        `style-src 'self' 'unsafe-inline';`,
         "img-src 'self' data: https:;",
         "font-src 'self';",
         "object-src 'none';",
@@ -111,17 +111,12 @@ function getCspMetaTag(scriptSrc, styleSrc) {
 }
 function injectCsp(content, outputPath) {
     let scripts;
-    let styles;
     let tag;
     if (!outputPath || outputPath.indexOf(".html") === -1) {
         return content;
     }
     scripts = extractHashes(content, re.script, true);
-    styles = extractHashes(content, re.style, false);
-    tag = getCspMetaTag(
-        ["'self'"].concat(scripts).join(" "),
-        ["'self'"].concat(styles).join(" ")
-    );
+    tag = getCspMetaTag(["'self'"].concat(scripts).join(" "));
     return content.replace(/<\/head>/i, tag + "\n</head>");
 }
 
