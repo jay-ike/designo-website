@@ -90,7 +90,7 @@ function extractHashes(content, regex, isScript) {
     while (match !== null) {
         body = match[1].trim();
         if (body && (!isScript || match[0].indexOf("src=") === -1)) {
-            hashes.push("\"sha256-" + sha(body) + "\"");
+            hashes.push(`sha256-${sha(body)}`);
         }
         match = regex.exec(content);
     }
@@ -98,14 +98,14 @@ function extractHashes(content, regex, isScript) {
 }
 function getCspMetaTag(scriptSrc, styleSrc) {
     let policy = [
-        "default-src \"self\";",
-        "script-src " + scriptSrc + ";",
-        "style-src " + styleSrc + ";",
-        "img-src \"self\" data: https:;",
-        "font-src \"self\";",
-        "object-src \"none\";",
-        "base-uri \"self\";",
-        "form-action \"self\";"
+        "default-src 'self';",
+        `script-src ${scriptSrc};`,
+        `style-src ${styleSrc};`,
+        "img-src 'self' data: https:;",
+        "font-src 'self';",
+        "object-src 'none';",
+        "base-uri 'self';",
+        "form-action 'self';"
     ].join(" ");
     return `<meta http-equiv="Content-Security-Policy" content="${policy}">`;
 }
@@ -119,8 +119,8 @@ function injectCsp(content, outputPath) {
     scripts = extractHashes(content, re.script, true);
     styles = extractHashes(content, re.style, false);
     tag = getCspMetaTag(
-        ["\"self\""].concat(scripts).join(" "),
-        ["\"self\""].concat(styles).join(" ")
+        ["'self'"].concat(scripts).join(" "),
+        ["'self'"].concat(styles).join(" ")
     );
     return content.replace(/<\/head>/i, tag + "\n</head>");
 }
